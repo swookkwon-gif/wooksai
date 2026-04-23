@@ -1,4 +1,4 @@
-import { ArrowRight, BookOpen, Newspaper, BrainCircuit, BookType, Sparkles, Target, Briefcase } from "lucide-react";
+import { ArrowRight, Newspaper, BookType, Sparkles, Briefcase } from "lucide-react";
 import Link from "next/link";
 
 export default function Home() {
@@ -32,7 +32,7 @@ export default function Home() {
           <span>Automated Insights & Curation</span>
         </div>
         <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 font-outfit text-gradient leading-tight">
-          Wook's <br />
+          Wook&apos;s <br />
           <span className="text-violet-500">AI and Marketing</span>
         </h1>
         <p className="text-lg md:text-xl text-neutral-400 mb-10 max-w-2xl mx-auto leading-relaxed">
@@ -72,7 +72,7 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="mt-32 pt-12 border-t border-white/5 text-center text-neutral-600 text-sm">
-        © 2026 Wook's AI and Marketing. Built with Next.js & Automated by AI.
+        © 2026 Wook&apos;s AI and Marketing. Built with Next.js & Automated by AI.
       </footer>
     </main>
   );
