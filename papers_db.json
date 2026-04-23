@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "title": "A Theory of Human Motivation (Maslow's Hierarchy)",
+        "authors": "A.H. Maslow",
+        "year": 1943,
+        "journal": "Psychological Review",
+        "abstract": "인간의 동기를 생리적, 안전, 사회적, 존경, 자아실현의 5단계 욕구로 분류한 기초 이론. 마케터가 고객의 근본적 니즈를 파악하는 프레임워크 제공."
+    },
+    {
+        "id": 2,
+        "title": "Prospect Theory: An Analysis of Decision under Risk",
+        "authors": "Daniel Kahneman, Amos Tversky",
+        "year": 1979,
+        "journal": "Econometrica",
+        "abstract": "사람들은 이익보다 손실을 훨씬 더 크게 느낀다는 '손실 회피(Loss Aversion)'를 수학적으로 증명. 가격 정책, 할인, 카피라이팅에 지대한 영향을 미침."
+    },
+    {
+        "id": 3,
+        "title": "The Long Tail",
+        "authors": "Chris Anderson",
+        "year": 2004,
+        "journal": "Wired",
+        "abstract": "아마존, 넷플릭스 등 디지털 경제에서는 80%의 다수 틈새 상품이 20%의 히트 상품보다 더 큰 가치를 창출한다는 '롱테일 법칙' 제시. 디지털 마케팅의 핵심 철학."
+    },
+    {
+        "id": 4,
+        "title": "Contagious: Why Things Catch On",
+        "authors": "Jonah Berger",
+        "year": 2013,
+        "journal": "Simon & Schuster",
+        "abstract": "입소문(Viral)을 타는 6가지 원칙(STEPPS: Social Currency, Triggers, Emotion, Public, Practical Value, Stories)을 과학적으로 분석. 소셜 미디어 마케팅 필독 이론."
+    },
+    {
+        "id": 5,
+        "title": "Marketing Myopia",
+        "authors": "Theodore Levitt",
+        "year": 1960,
+        "journal": "Harvard Business Review",
+        "abstract": "기업이 '고객의 니즈'가 아닌 '자사 제품'에만 집중할 때 발생하는 마케팅 근시안을 지적. 기차 회사가 실패한 이유는 자신을 운송업이 아닌 기차 산업으로 한정했기 때문."
+    }
+]
