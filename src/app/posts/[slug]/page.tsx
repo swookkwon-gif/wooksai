@@ -42,7 +42,14 @@ export default async function PostPage({
         </div>
       </header>
 
-      <div className="prose prose-lg prose-neutral md:prose-xl max-w-none prose-headings:font-bold prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-p:leading-relaxed prose-img:rounded-2xl">
+      <div className="prose prose-lg prose-neutral max-w-none pb-20
+        prose-headings:font-bold prose-headings:text-neutral-900
+        prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-gray-100 prose-h2:pb-2
+        prose-h3:mt-8 prose-h3:mb-4
+        prose-p:leading-[1.85] prose-p:text-neutral-800 prose-p:mb-8
+        prose-li:leading-[1.85] prose-li:text-neutral-800
+        prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-a:underline-offset-4
+        prose-img:rounded-2xl prose-img:shadow-sm">
         <ReactMarkdown>{post.content}</ReactMarkdown>
       </div>
     </article>
