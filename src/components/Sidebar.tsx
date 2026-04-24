@@ -1,5 +1,4 @@
-import { MapPin, Briefcase, Mail, Link as LinkIcon } from "lucide-react";
-import Image from "next/image";
+import { MapPin, Link as LinkIcon } from "lucide-react";
 
 export default function Sidebar() {
   return (
@@ -17,7 +16,7 @@ export default function Sidebar() {
         <p className="text-neutral-500 text-sm mb-4">Marketer & AI Enthusiast</p>
 
         <p className="text-sm text-neutral-600 mb-6 max-w-xs leading-relaxed">
-          AI와 디지털 마케팅의 융합을 탐구합니다. 업무 자동화와 생산성 향상에 진심입니다.
+          Digital Marketing and Ecommerce expert. Ph.D candidate Data science and AI
         </p>
 
         {/* Info & Social Links */}
@@ -26,19 +25,8 @@ export default function Sidebar() {
             <MapPin size={16} className="text-neutral-400" /> Seoul, KR
           </li>
           <li className="flex justify-center md:justify-start items-center gap-3">
-            <Briefcase size={16} className="text-neutral-400" /> Digital Marketer
-          </li>
-          <li className="flex justify-center md:justify-start items-center gap-3">
-            <Mail size={16} className="text-neutral-400" />
-            <a href="mailto:contact@example.com" className="hover:text-blue-600 hover:underline">Email Me</a>
-          </li>
-          <li className="flex justify-center md:justify-start items-center gap-3">
             <LinkIcon size={16} className="text-neutral-400" />
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 hover:underline">LinkedIn</a>
-          </li>
-          <li className="flex justify-center md:justify-start items-center gap-3">
-            <LinkIcon size={16} className="text-neutral-400" />
-            <a href="https://github.com/swookkwon-gif" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 hover:underline">GitHub</a>
+            <a href="https://www.linkedin.com/in/wook-kwon/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 hover:underline">LinkedIn</a>
           </li>
         </ul>
       </div>
