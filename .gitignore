@@ -42,3 +42,7 @@ next-env.d.ts
 
 # Local Backups
 content/posts/backups/
+
+# Python & Temporary
+.venv/
+job.log
