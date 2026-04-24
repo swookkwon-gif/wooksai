@@ -1,11 +1,11 @@
 ---
 title: "브랜드 키워드 광고는 돈 낭비일까?"
 date: "2026-04-23"
-excerpt: "자사 브랜드 키워드 검색광고(SA)의 득과 실에 대한 Alex Schultz (Meta CMO)의 실증적 분석과 전략적 인사이트"
-category: "하루 1 논문"
+excerpt: "Meta CMO, 브랜드 키워드는 광고 하지 마라, 그러나 예외는 있다"
+category: "마케팅 논문 읽기"
 ---
 
-![Brand Keyword Expansion Strategy](/images/brand_bidding_hero.png)
+![Brand Keyword Expansion Strategy](/wooksai/images/brand_bidding_hero.png)
 
 마케터들, 구글 직원들, 그리고 퍼포먼스 마케팅 업계 관계자들과 브랜드 키워드 검색광고(SA)에 대해 이야기를 나누다 보면, 늘 첨예하게 대립하는 두 가지 주장을 마주하게 됩니다.
 
