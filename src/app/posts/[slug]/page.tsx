@@ -42,14 +42,15 @@ export default async function PostPage({
         </div>
       </header>
 
-      <div className="prose prose-lg prose-neutral max-w-none pb-20
-        prose-headings:font-bold prose-headings:text-neutral-900
-        prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-gray-100 prose-h2:pb-2
-        prose-h3:mt-8 prose-h3:mb-4
-        prose-p:leading-[1.85] prose-p:text-neutral-800 prose-p:mb-8
-        prose-li:leading-[1.85] prose-li:text-neutral-800
+      <div className="prose prose-neutral md:prose-lg max-w-full pb-20
+        prose-headings:font-bold prose-headings:text-neutral-900 prose-headings:tracking-tight
+        prose-h2:mt-12 prose-h2:mb-6 prose-h2:border-b prose-h2:border-gray-200 prose-h2:pb-2 prose-h2:text-2xl
+        prose-h3:mt-8 prose-h3:mb-4 prose-h3:text-xl
+        prose-p:leading-[1.8] prose-p:text-neutral-700 prose-p:mb-6 prose-p:text-lg
+        prose-li:leading-[1.8] prose-li:text-neutral-700 prose-li:text-lg
+        prose-blockquote:border-l-4 prose-blockquote:border-gray-200 prose-blockquote:pl-4 prose-blockquote:italic prose-blockquote:text-neutral-600
         prose-a:text-blue-600 hover:prose-a:text-blue-500 prose-a:underline-offset-4
-        prose-img:rounded-2xl prose-img:shadow-sm">
+        prose-img:rounded-lg prose-img:shadow-md prose-code:text-violet-600 prose-code:bg-neutral-100 prose-code:px-1 prose-code:rounded">
         <ReactMarkdown>{post.content}</ReactMarkdown>
       </div>
     </article>
