@@ -2,7 +2,7 @@
 title: "코딩 에이전트 전쟁"
 date: "2026-04-23"
 excerpt: "Moonshot AI vs Alibaba vs OpenAI의 코딩 에이전트 격전"
-category: "AI News Flood"
+category: "Learning AI"
 ---
 
 AI 뉴스와 트렌드가 너무 홍수라 대응이 어려워서

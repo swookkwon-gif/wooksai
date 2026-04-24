@@ -2,7 +2,7 @@
 title: "브랜드 키워드 광고는 돈 낭비일까?"
 date: "2026-04-23"
 excerpt: "자사 브랜드 키워드 검색광고(SA)의 득과 실에 대한 Alex Schultz (Meta CMO)의 실증적 분석과 전략적 인사이트"
-category: "마케팅 논문"
+category: "하루 1 논문"
 ---
 
 ![Brand Keyword Expansion Strategy](/images/brand_bidding_hero.png)
