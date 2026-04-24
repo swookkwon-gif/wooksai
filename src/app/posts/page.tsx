@@ -1,52 +1,42 @@
-import { getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Tag } from "lucide-react";
+import { getSortedPostsData } from "@/lib/posts";
 
-export default function PostsPage() {
+export default function PostsArchivePage() {
   const posts = getSortedPostsData();
 
   return (
-    <main className="min-h-screen px-6 pt-24 pb-24 max-w-4xl mx-auto font-sans bg-white">
-      <Link
-        href="/"
-        className="inline-flex items-center gap-2 text-neutral-500 hover:text-black mb-12 transition-colors group text-sm font-medium"
-      >
-        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-        홈으로 돌아가기
-      </Link>
+    <div className="font-sans">
+      <h1 className="text-3xl font-extrabold text-neutral-900 mb-2">Archive</h1>
+      <p className="text-neutral-500 mb-8 border-b border-gray-100 pb-4">
+        과거부터 작성된 모든 아티클을 확인하실 수 있습니다.
+      </p>
 
-      <header className="mb-16 border-b border-neutral-100 pb-8">
-        <h1 className="text-4xl md:text-5xl font-extrabold font-outfit mb-4 text-neutral-900 tracking-tight">AI Insight Reports</h1>
-        <p className="text-neutral-500 text-lg">AI가 분석한 최신 트렌드와 인사이트를 확인하세요.</p>
-      </header>
-
-      <div className="space-y-6">
+      {/* Post List */}
+      <div className="flex flex-col">
         {posts.map((post) => (
-          <article key={post.slug} className="clean-card p-8 group">
-            <Link href={`/posts/${post.slug}`}>
-              <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-4 text-xs font-bold uppercase tracking-widest text-blue-600">
-                  <span className="flex items-center gap-1.5">
-                    <Tag size={12} /> {post.category || "Insight"}
-                  </span>
-                  <span className="flex items-center gap-1.5 text-neutral-400 font-medium">
-                    <Calendar size={12} /> {post.date}
-                  </span>
-                </div>
-                <h2 className="text-2xl font-bold text-neutral-900 group-hover:text-blue-600 transition-colors leading-tight">
-                  {post.title}
-                </h2>
-                <p className="text-neutral-500 leading-relaxed text-base">
-                  {post.excerpt}
-                </p>
-                <div className="pt-2 flex items-center gap-2 text-sm font-semibold text-neutral-900 group-hover:text-blue-600">
-                  더 알아보기 <span className="transform group-hover:translate-x-1 transition-transform">→</span>
-                </div>
-              </div>
+          <article key={post.slug} className="mm-post-item group">
+            <h2 className="text-xl md:text-2xl font-bold mb-2">
+              <Link href={`/posts/${post.slug}`} className="text-neutral-900 group-hover:text-blue-600 transition-colors">
+                {post.title}
+              </Link>
+            </h2>
+            <div className="text-sm text-neutral-500 mb-3 space-x-3">
+              <time dateTime={post.date}>{post.date}</time>
+              <span>•</span>
+              <span className="font-medium text-neutral-600">{post.category || "Insight"}</span>
+            </div>
+            <p className="text-neutral-600 leading-relaxed text-sm md:text-base mb-3 max-w-3xl">
+              {post.excerpt}
+            </p>
+            <Link 
+              href={`/posts/${post.slug}`} 
+              className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+            >
+              Read more &rarr;
             </Link>
           </article>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

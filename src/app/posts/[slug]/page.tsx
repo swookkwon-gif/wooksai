@@ -19,10 +19,10 @@ export default async function PostPage({
   const post = getPostData(slug);
 
   return (
-    <article className="min-h-screen px-6 pt-24 pb-32 max-w-3xl mx-auto font-sans bg-white">
+    <article className="font-sans w-full max-w-none">
       <Link
         href="/posts"
-        className="inline-flex items-center gap-2 text-neutral-500 hover:text-black mb-12 transition-colors group text-sm font-medium"
+        className="inline-flex items-center gap-2 text-neutral-500 hover:text-blue-600 mb-8 transition-colors group text-sm font-medium"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
         목록으로 돌아가기

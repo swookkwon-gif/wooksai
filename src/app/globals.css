@@ -2,17 +2,12 @@
 
 @theme {
   --font-sans: "Inter", system-ui, sans-serif;
-  --font-serif: "Georgia", "Cambria", "Times New Roman", serif;
+  --font-serif: "Georgia", "Times New Roman", serif;
 }
-
-/* 
-  Notion/Medium Clean Style (High Minimalism)
-  Wiping out dark mode & gradients.
-*/
 
 html, body {
   background-color: #ffffff;
-  color: #111111;
+  color: #333333; /* Extremely legible dark grey, standard in Minimal Mistakes */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -24,19 +19,25 @@ html, body {
 
 body {
   font-family: var(--font-sans);
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* Subtle border utility instead of glassmorphism */
-.clean-card {
-  background: #ffffff;
-  border: 1px solid #eaeaea;
-  border-radius: 16px;
-  transition: all 0.2s ease-in-out;
+/* Base custom classes mimicking Minimal Mistakes */
+.mm-link {
+  color: #2563eb;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.mm-link:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
 }
 
-.clean-card:hover {
-  border-color: #cccccc;
-  box-shadow: 0 4px 20px -4px rgba(0,0,0,0.05);
-  transform: translateY(-2px);
+/* Post list item layout */
+.mm-post-item {
+  border-bottom: 1px solid #f1f2f3;
+  padding: 1.5rem 0;
+}
+.mm-post-item:last-child {
+  border-bottom: none;
 }
