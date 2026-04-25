@@ -12,8 +12,9 @@ export default function Header() {
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 text-[13px] font-bold text-neutral-500 uppercase tracking-wider">
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">마케팅 논문 읽기</Link>
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">Learning AI</Link>
+          <Link href="/posts" className="hover:text-blue-600 transition-colors">Marketing Insights</Link>
+          <Link href="/posts" className="hover:text-blue-600 transition-colors">AI News</Link>
+          <Link href="/posts" className="hover:text-blue-600 transition-colors">AI Learnings</Link>
           <Link href="/posts" className="hover:text-blue-600 transition-colors">Career</Link>
         </nav>
         

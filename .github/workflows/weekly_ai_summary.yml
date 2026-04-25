@@ -2,8 +2,8 @@ name: Weekly AI Summary
 
 on:
   schedule:
-    # 매주 일요일 UTC 01:00 (한국 일요일 오전 10:00)
-    - cron: '0 1 * * 0'
+    # 매주 토요일 한국 오전 8:00 (UTC 기준 금요일 23:00)
+    - cron: '0 23 * * 5'
   workflow_dispatch:
 
 permissions:
