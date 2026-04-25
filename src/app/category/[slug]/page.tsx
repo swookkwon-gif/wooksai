@@ -3,13 +3,13 @@ import { getSortedPostsData } from "@/lib/posts";
 import { notFound } from "next/navigation";
 
 interface CategoryPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 // Generate static params for all categories
-export function generateStaticParams() {
+export async function generateStaticParams() {
   const posts = getSortedPostsData();
   const categories = Array.from(new Set(posts.map(post => post.category || 'Insight')));
   
@@ -18,13 +18,14 @@ export function generateStaticParams() {
   }));
 }
 
-export default function CategoryPage({ params }: CategoryPageProps) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
+  const { slug } = await params;
   const posts = getSortedPostsData();
   
   // URL 슬러그와 포스트의 카테고리 매칭
   const filteredPosts = posts.filter(post => {
     const postCategorySlug = (post.category || 'Insight').toLowerCase().replace(/\s+/g, '-');
-    return postCategorySlug === params.slug;
+    return postCategorySlug === slug;
   });
 
   if (filteredPosts.length === 0) {
