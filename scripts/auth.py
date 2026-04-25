@@ -15,7 +15,10 @@ def authenticate_gmail(account="mail1"):
     Log in via the browser and save credentials to token_{account}.json.
     """
     creds = None
-    token_file = f'token_{account}.json'
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    token_file = os.path.join(script_dir, f'token_{account}.json')
+    credentials_file = os.path.join(script_dir, 'credentials.json')
+    
     # The file stores the user's access and refresh tokens
     if os.path.exists(token_file):
         creds = Credentials.from_authorized_user_file(token_file, SCOPES)
@@ -28,11 +31,11 @@ def authenticate_gmail(account="mail1"):
         else:
             print("No valid token found. Starting OAuth flow. Please check your browser.")
             # Ensure credentials.json exists in the current directory
-            if not os.path.exists('credentials.json'):
-                raise FileNotFoundError("credentials.json not found. Please download it from GCP Console.")
+            if not os.path.exists(credentials_file):
+                raise FileNotFoundError(f"{credentials_file} not found. Please download it from GCP Console or check Secrets.")
             
             flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
+                credentials_file, SCOPES)
             # Run local server to catch the callback
             creds = flow.run_local_server(port=0)
             

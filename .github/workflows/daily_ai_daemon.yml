@@ -1,0 +1,61 @@
+name: Daily AI Blog Daemon
+
+on:
+  schedule:
+    # 매일 UTC 23:00 (한국 오전 8:00), UTC 11:00 (한국 오후 8:00) 구동
+    - cron: '0 23,11 * * *'
+  workflow_dispatch: # 수동 실행 버튼 활성화
+
+permissions:
+  contents: write # Git 커밋 및 푸시 권한 필요
+
+jobs:
+  run-daemon:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1 # 최신 상태만 빠르게 가져옴
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-genai feedparser python-slugify google-auth-oauthlib google-auth-httplib2 google-api-python-client
+
+      - name: Create Secrets Files
+        run: |
+          mkdir -p scripts
+          # GitHub Secrets에서 가져온 값을 JSON 파일로 복원
+          echo '${{ secrets.GMAIL_CRED_JSON }}' > scripts/credentials.json
+          echo '${{ secrets.GMAIL_TOKEN_JSON }}' > scripts/token_mail1.json
+
+      - name: Run Auto Blog Daemon
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/auto_blog_daemon.py
+          
+      - name: Commit and Push Changes
+        run: |
+          # 봇 계정으로 설정
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          # 새 마크다운 파일들 및 state.json 스테이징
+          git add content/posts/2.\ AI\ News/*.md
+          git add scripts/state.json
+          
+          # 변경사항이 있을 때만 푸시
+          if git diff --staged --quiet; then
+            echo "No new posts or state changes to commit."
+          else
+            git commit -m "auto: daily AI news blog post & update state.json"
+            git push
+          fi

@@ -1,0 +1,50 @@
+name: Weekly AI Summary
+
+on:
+  schedule:
+    # 매주 일요일 UTC 01:00 (한국 일요일 오전 10:00)
+    - cron: '0 1 * * 0'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  run-weekly-summary:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 주간 요약은 지난 7일간의 파일이 필요하여 전체 히스토리를 긁어옵니다.
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install google-genai
+
+      - name: Run Weekly Summary
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scripts/weekly_ai_summary.py
+          
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          
+          git add content/posts/2.\ AI\ News/*weekly-ai-review.md
+          
+          if git diff --staged --quiet; then
+            echo "No new weekly summary to commit."
+          else
+            git commit -m "auto: weekly AI review blog post"
+            git push
+          fi

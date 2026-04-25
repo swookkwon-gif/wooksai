@@ -49,4 +49,3 @@ job.log
 
 scripts/credentials.json
 scripts/token_*.json
-scripts/state.json
