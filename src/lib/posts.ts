@@ -86,7 +86,7 @@ export function getPostData(slug: string): PostData {
   const prevPosts = categoryPosts.slice(catIndex + 1, catIndex + 4).map(p => ({ slug: p.slug, title: p.title, date: p.date }));
   const nextPosts = catIndex > 0 ? categoryPosts.slice(Math.max(0, catIndex - 3), catIndex).reverse().map(p => ({ slug: p.slug, title: p.title, date: p.date })) : [];
 
-  let relatedPosts = [];
+  let relatedPosts: { slug: string; title: string; date: string; category: string; excerpt: string }[] = [];
   if (data.related && Array.isArray(data.related)) {
     relatedPosts = allPosts
       .filter(p => data.related.includes(p.slug))
