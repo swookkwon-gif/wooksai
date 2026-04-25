@@ -55,7 +55,7 @@ def extract_image_url(html_content):
         return img_match.group(1)
     return ""
 
-def parse_recent_rss_items(feed_config, days_limit=1.5):
+def parse_recent_rss_items(feed_config, days_limit=3.0):
     """지정된 피드에서 최근 게시물을 추출합니다."""
     url = feed_config['url']
     keywords = feed_config.get('keywords')
@@ -167,8 +167,8 @@ def process_source_batch_with_llm(source_name, items):
         except Exception as e:
             err_msg = str(e)
             print(f"\nGemini API 에러 ({source_name}) [시도 {attempt+1}/3]: {err_msg}")
-            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
-                time.sleep(20) # wait 20s for rate limit
+            if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                time.sleep(20) # wait 20s for rate limit / temporary server error
             else:
                 return None
     return None
@@ -216,7 +216,7 @@ def main():
     
     for feed in FEEDS:
         print(f"\n🔍 대상 피드: {feed['name']}")
-        items = parse_recent_rss_items(feed, days_limit=1.5)
+        items = parse_recent_rss_items(feed, days_limit=3.0)
         
         if not items:
             print(" └ 새로운 포스팅이 없습니다.")
@@ -236,6 +236,10 @@ def main():
             
         print(" └ [통과: 종합 요약 마크다운 생성 중]")
         create_markdown_post(feed['name'], result)
+        
+        # Free Tier Rate Limit 방어를 위해 소스간 최소 45초 강제 대기
+        print(" └ [Rate Limit 방어: 다음 피드를 위해 45초 대기합니다...]")
+        time.sleep(45)
             
     print("\n🎉 모든 RSS 데이터 수집 및 일일 종합 포스트 생성이 완료되었습니다.")
 
