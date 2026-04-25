@@ -174,12 +174,19 @@ def process_rss_feed(feed):
                 print(f" └ 처리 완료 (AI 기사 아님)")
             break
         except Exception as e:
-            if any(x in str(e) for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                print(f"   [API 에러] {str(e)} -> 20s 대기 후 재시도...")
-                time.sleep(20)
+            err_msg = str(e)
+            if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                import re
+                match = re.search(r'retry in ([\d\.]+)s', err_msg)
+                wait_time = float(match.group(1)) + 5 if match else 60
+                print(f"   [API 에러] Rate Limit 도달. {wait_time:.1f}초 대기 후 재시도... (시도 {attempt+1}/3)")
+                time.sleep(wait_time)
             else:
                 print(f"   [에러] {e}")
                 break
+                
+    # API Pacing
+    time.sleep(5)
 
 # =============== GMAIL PROCESSING ===============
 
@@ -340,15 +347,18 @@ def process_gmail_newsletters():
             except Exception as e:
                 err_msg = str(e)
                 if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                    print(f"      [API 에러] 429/500 Rate Limit 에러 발생. 60초 대기 후 재시도... (시도 {attempt+1}/3)")
-                    time.sleep(60)
+                    import re
+                    match = re.search(r'retry in ([\d\.]+)s', err_msg)
+                    wait_time = float(match.group(1)) + 5 if match else 60
+                    print(f"      [API 에러] Rate Limit 에러 발생. {wait_time:.1f}초 대기 후 재시도... (시도 {attempt+1}/3)")
+                    time.sleep(wait_time)
                 else:
                     print(f"      ❌ API 실패: {e}")
                     break
         
-        # 발신자 간 고정 대기로 Rate Limit 방어
-        print("      (Rate limit 방어 대기 45초...)")
-        time.sleep(45)
+        # 발신자 간 고정 API Pacing 
+        print("      (발신자 간 기본 대기 10초...)")
+        time.sleep(10)
 
 if __name__ == "__main__":
     print("=======================================================")
