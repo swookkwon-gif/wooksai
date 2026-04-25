@@ -31,7 +31,7 @@ if not GEMINI_API_KEY:
     print("⚠️ GEMINI_API_KEY is missing. Export it or add it to .env.local")
     sys.exit(1)
 
-POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'content', 'posts')
+POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'content', 'posts', '2. AI News')
 
 FEEDS = [
     {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml"},

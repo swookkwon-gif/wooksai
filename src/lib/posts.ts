@@ -13,11 +13,27 @@ export interface PostData {
   content: string;
 }
 
+function getAllMarkdownFiles(dirPath: string, arrayOfFiles: string[] = []) {
+  if (!fs.existsSync(dirPath)) return arrayOfFiles;
+  const files = fs.readdirSync(dirPath);
+  files.forEach(function (file) {
+    const fullPath = path.join(dirPath, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      arrayOfFiles = getAllMarkdownFiles(fullPath, arrayOfFiles);
+    } else {
+      if (file.endsWith('.md')) {
+        arrayOfFiles.push(fullPath);
+      }
+    }
+  });
+  return arrayOfFiles;
+}
+
 export function getSortedPostsData(): PostData[] {
-  const fileNames = fs.readdirSync(postsDirectory).filter(fileName => fileName.endsWith('.md'));
-  const allPostsData = fileNames.map((fileName) => {
+  const allFiles = getAllMarkdownFiles(postsDirectory);
+  const allPostsData = allFiles.map((fullPath) => {
+    const fileName = path.basename(fullPath);
     const slug = fileName.replace(/\.md$/, '');
-    const fullPath = path.join(postsDirectory, fileName);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
 
@@ -36,8 +52,14 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getPostData(slug: string): PostData {
-  const fullPath = path.join(postsDirectory, `${slug}.md`);
-  const fileContents = fs.readFileSync(fullPath, 'utf8');
+  const allFiles = getAllMarkdownFiles(postsDirectory);
+  const targetFile = allFiles.find(file => path.basename(file) === `${slug}.md`);
+  
+  if (!targetFile) {
+    throw new Error(`Post not found for slug: ${slug}`);
+  }
+
+  const fileContents = fs.readFileSync(targetFile, 'utf8');
   const { data, content } = matter(fileContents);
 
   return {
