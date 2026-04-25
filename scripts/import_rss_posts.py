@@ -48,10 +48,11 @@ FEEDS = [
     }
 ]
 
-def extract_image_url(html_content):
-    """HTML 본문에서 첫 번째 이미지 URL을 추출합니다."""
-    img_match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', html_content, re.IGNORECASE)
+def extract_image_tag(html_content):
+    """HTML 본문에서 첫 번째 이미지 태그 전체를 원형 그대로 추출합니다."""
+    img_match = re.search(r'(<img[^>]+>)', html_content, re.IGNORECASE)
     if img_match:
+        # 가끔 src만 덜렁 있는 경우 방지 등 기본 처리
         return img_match.group(1)
     return ""
 
@@ -82,7 +83,7 @@ def parse_recent_rss_items(feed_config, days_limit=3.0):
                 if not content: content = entry.get('summary', '')
                 
                 title = entry.get('title', 'No Title')
-                img_url = extract_image_url(content)
+                img_tag = extract_image_tag(content)
                 
                 # 키워드 사전 필터링
                 if keywords:
@@ -96,7 +97,7 @@ def parse_recent_rss_items(feed_config, days_limit=3.0):
                     "title": title,
                     "link": entry.get('link', ''),
                     "content": content,
-                    "img_url": img_url,
+                    "img_tag": img_tag,
                     "published": dt.strftime("%Y-%m-%d %H:%M:%S UTC"),
                     "dt": dt
                 })
@@ -117,9 +118,9 @@ def process_source_batch_with_llm(source_name, items):
         articles_text += f"제목: {item['title']}\n"
         articles_text += f"링크: {item['link']}\n"
         
-        # 이미지가 있다면 URL 정보를 추가로 제공
-        if item.get('img_url'):
-            articles_text += f"이미지 URL: {item['img_url']}\n"
+        # 이미지가 있다면 태그 전체 정보를 추가로 제공
+        if item.get('img_tag'):
+            articles_text += f"원본 이미지 태그: {item['img_tag']}\n"
             
         articles_text += f"내용(HTML포함): {content_snippet}\n"
 
@@ -138,7 +139,7 @@ def process_source_batch_with_llm(source_name, items):
 2. AI 관련 기사가 하나도 없다면 `has_ai_news`를 false로 설정하세요.
 3. AI 관련 기사가 1개 이상 존재한다면, `has_ai_news`를 true로 설정하고 이 기사들을 묶어 가독성 좋은 '하나의 마크다운 포스트' 본문(markdown_content)으로 구성하세요.
 4. 요약 강도 조절 (매우 중요!): 원본 기사가 이미 충실하고 상세하게 설명되어 있다면, 무리하게 분량을 잘라내어 축소하지 마세요. 원래 정보의 깊이와 의미를 보존하면서 한글 표현만 아주 매끄럽게 번역/다듬어 주세요.
-5. 이미지 포함 규칙: 기사의 [원문 정보]에 '이미지 URL' 항목이 존재한다면, 각 기사 당 **최대 1장**까지만 마크다운 문법(`![이미지 설명](이미지 URL)`)을 사용해 해당 기사의 소제목 바로 아래 등 적절한 위치에 삽입하세요.
+5. 이미지 보존 규칙: '원본 이미지 태그' 항목이 주어졌다면, 당신은 마크다운 `![]()` 형식으로 직접 이미지를 포맷팅하거나 바꾸지 마십시오. 대신 기사의 소제목 바로 아래 등 적절한 곳에 제공된 `<img ...>` 태그를 단 한 글자도 바꾸지 말고 **원본 그대로 복사하여 삽입**하세요.
 6. 기사 간의 구분: 각 기사별로 반드시 클릭 가능한 링크가 포함된 소제목(`### [기사 제목](기사 링크)`)을 달아야 합니다.
 
 반드시 아래에 정의된 JSON 스키마 구조로만 순수하게 응답하세요 (백틱(`) 등 포매팅 제외):
