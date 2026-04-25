@@ -306,34 +306,47 @@ def process_gmail_newsletters():
 4. 블로그 포스트의 본문에 들어갈 내용만 순수하게 `markdown_content` 필드에 작성하세요.
 5. JSON 구조 응답 필수: {{"markdown_content": string}}
 """
-        try:
-            response = client.models.generate_content(
-                model='gemini-2.5-flash',
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.3,
-                    response_mime_type="application/json"
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.3,
+                        response_mime_type="application/json"
+                    )
                 )
-            )
-            raw_text = clean_json_response(response.text)
-            data = json.loads(raw_text)
-            
-            result_md = data.get("markdown_content", "")
-            if result_md:
-                slug = slugify(sender) + "-newsletter"
-                now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                title = f"[{sender}] 최신 AI 뉴스레터 동향"
+                raw_text = clean_json_response(response.text)
+                try:
+                    data = json.loads(raw_text)
+                except json.JSONDecodeError as je:
+                    print(f"      ❌ API 실패: JSON 에러 발생. 10초 대기 후 재시도... ({je})")
+                    time.sleep(10)
+                    continue
                 
-                create_markdown_post_file(slug, title, result_md, category="Newsletter")
-                
-                for letter in letters:
-                    mark_processed("gmail", letter["id"])
+                result_md = data.get("markdown_content", "")
+                if result_md:
+                    slug = slugify(sender) + "-newsletter"
+                    now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
+                    title = f"[{sender}] 최신 AI 뉴스레터 동향"
                     
-                print(f"      ✅ 완료 및 저장됨")
-        except Exception as e:
-            print(f"      ❌ API 실패: {e}")
+                    create_markdown_post_file(slug, title, result_md, category="AI News")
+                    
+                    for letter in letters:
+                        mark_processed("gmail", letter["id"])
+                        
+                    print(f"      ✅ 완료 및 저장됨")
+                break
+            except Exception as e:
+                err_msg = str(e)
+                if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                    print(f"      [API 에러] 429/500 Rate Limit 에러 발생. 60초 대기 후 재시도... (시도 {attempt+1}/3)")
+                    time.sleep(60)
+                else:
+                    print(f"      ❌ API 실패: {e}")
+                    break
         
-        # 45초 대기로 Rate Limit 방어
+        # 발신자 간 고정 대기로 Rate Limit 방어
         print("      (Rate limit 방어 대기 45초...)")
         time.sleep(45)
 
