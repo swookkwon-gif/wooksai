@@ -6,12 +6,6 @@ export default function Home() {
 
   return (
     <div className="font-sans">
-      {/* Category or Page Header */}
-      <h1 className="text-3xl font-extrabold text-neutral-900 mb-2">Recent Posts</h1>
-      <p className="text-neutral-500 mb-8 border-b border-gray-100 pb-4">
-        최근 발행된 글과 인사이트를 확인하세요.
-      </p>
-
       {/* Post List */}
       <div className="flex flex-col">
         {posts.map((post) => (

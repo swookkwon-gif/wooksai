@@ -12,10 +12,10 @@ export default function Header() {
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 text-[13px] font-bold text-neutral-500 uppercase tracking-wider">
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">Marketing Insights</Link>
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">AI News</Link>
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">AI Learnings</Link>
-          <Link href="/posts" className="hover:text-blue-600 transition-colors">Career</Link>
+          <Link href="/category/marketing-insights" className="hover:text-blue-600 transition-colors">Marketing Insights</Link>
+          <Link href="/category/ai-news" className="hover:text-blue-600 transition-colors">AI News</Link>
+          <Link href="/category/ai-learnings" className="hover:text-blue-600 transition-colors">AI Learnings</Link>
+          <Link href="/category/career" className="hover:text-blue-600 transition-colors">Career</Link>
         </nav>
         
         {/* Mobile Nav Toggle (Visual Only for now) */}
