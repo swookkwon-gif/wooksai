@@ -106,32 +106,11 @@ export default async function PostPage({
         </ReactMarkdown>
       </div>
 
-      {/* Prev/Next Navigation */}
-      <nav className="flex flex-col sm:flex-row justify-between gap-4 mt-8 pt-8 border-t border-neutral-100">
-        {post.prevPost ? (
-          <Link href={`/posts/${post.prevPost.slug}`} className="flex-1 group flex flex-col p-4 border border-neutral-100 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all">
-            <span className="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider flex items-center gap-1 group-hover:text-blue-600 transition-colors">
-              <ChevronLeft size={14} /> 이전 글
-            </span>
-            <span className="text-[15px] font-semibold text-neutral-800 line-clamp-2">{post.prevPost.title}</span>
-          </Link>
-        ) : <div className="flex-1" />}
-        
-        {post.nextPost ? (
-          <Link href={`/posts/${post.nextPost.slug}`} className="flex-1 group flex flex-col p-4 border border-neutral-100 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all text-right items-end">
-            <span className="text-xs font-bold text-neutral-400 mb-2 uppercase tracking-wider flex items-center gap-1 group-hover:text-blue-600 transition-colors">
-              다음 글 <ChevronRight size={14} />
-            </span>
-            <span className="text-[15px] font-semibold text-neutral-800 line-clamp-2">{post.nextPost.title}</span>
-          </Link>
-        ) : <div className="flex-1" />}
-      </nav>
-
-      {/* Related Posts Section */}
+      {/* Manual Related Posts Section (Only displays if 'related' is specified in frontmatter) */}
       {post.relatedPosts && post.relatedPosts.length > 0 && (
         <section className="mt-16 pt-12 border-t border-neutral-200">
           <h3 className="text-xl font-bold text-neutral-900 mb-6 flex items-center gap-2">
-            💡 함께 읽으면 좋은 글
+            💡 작성자가 추천하는 관련 글
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {post.relatedPosts.map(rel => (
@@ -146,6 +125,41 @@ export default async function PostPage({
           </div>
         </section>
       )}
+
+      {/* Prev/Next Navigation (Up to 3 older, 3 newer) */}
+      <nav className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 pt-8 border-t border-neutral-100">
+        <div>
+          <h4 className="text-sm font-bold text-neutral-400 mb-4 uppercase tracking-wider flex items-center gap-1">
+            <ChevronLeft size={16} /> 이전 글
+          </h4>
+          <ul className="space-y-3">
+            {post.prevPosts && post.prevPosts.length > 0 ? post.prevPosts.map(p => (
+              <li key={p.slug}>
+                <Link href={`/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all">
+                  <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
+                  <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
+                </Link>
+              </li>
+            )) : <li className="text-sm text-neutral-400">이전 글이 없습니다.</li>}
+          </ul>
+        </div>
+        
+        <div>
+          <h4 className="text-sm font-bold text-neutral-400 mb-4 uppercase tracking-wider flex items-center justify-end gap-1 text-right">
+            다음 글 <ChevronRight size={16} />
+          </h4>
+          <ul className="space-y-3">
+             {post.nextPosts && post.nextPosts.length > 0 ? post.nextPosts.map(p => (
+              <li key={p.slug}>
+                <Link href={`/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all text-right items-end">
+                  <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
+                  <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
+                </Link>
+              </li>
+            )) : <li className="text-sm text-neutral-400 text-right">다음 글이 없습니다.</li>}
+          </ul>
+        </div>
+      </nav>
     </article>
   );
 }

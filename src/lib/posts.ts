@@ -12,8 +12,8 @@ export interface PostData {
   category: string;
   content: string;
   related?: string[];
-  prevPost?: { slug: string; title: string } | null;
-  nextPost?: { slug: string; title: string } | null;
+  prevPosts?: { slug: string; title: string; date: string }[];
+  nextPosts?: { slug: string; title: string; date: string }[];
   relatedPosts?: { slug: string; title: string; date: string; category: string; excerpt: string }[];
 }
 
@@ -83,19 +83,13 @@ export function getPostData(slug: string): PostData {
   const catIndex = categoryPosts.findIndex(p => p.slug === slug);
   
   // Prev is older (higher index), Next is newer (lower index)
-  const prevPost = catIndex < categoryPosts.length - 1 ? { slug: categoryPosts[catIndex + 1].slug, title: categoryPosts[catIndex + 1].title } : null;
-  const nextPost = catIndex > 0 ? { slug: categoryPosts[catIndex - 1].slug, title: categoryPosts[catIndex - 1].title } : null;
+  const prevPosts = categoryPosts.slice(catIndex + 1, catIndex + 4).map(p => ({ slug: p.slug, title: p.title, date: p.date }));
+  const nextPosts = catIndex > 0 ? categoryPosts.slice(Math.max(0, catIndex - 3), catIndex).reverse().map(p => ({ slug: p.slug, title: p.title, date: p.date })) : [];
 
   let relatedPosts = [];
   if (data.related && Array.isArray(data.related)) {
     relatedPosts = allPosts
       .filter(p => data.related.includes(p.slug))
-      .map(p => ({ slug: p.slug, title: p.title, date: p.date, category: p.category, excerpt: p.excerpt }));
-  } else {
-    // Fallback: 3 most recent in same category excluding current
-    relatedPosts = categoryPosts
-      .filter(p => p.slug !== slug)
-      .slice(0, 3)
       .map(p => ({ slug: p.slug, title: p.title, date: p.date, category: p.category, excerpt: p.excerpt }));
   }
 
@@ -107,8 +101,8 @@ export function getPostData(slug: string): PostData {
     excerpt: data.excerpt,
     ...data,
     category: derivedCategory,
-    prevPost,
-    nextPost,
+    prevPosts,
+    nextPosts,
     relatedPosts
   } as PostData;
 }

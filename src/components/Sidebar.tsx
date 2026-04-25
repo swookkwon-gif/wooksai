@@ -17,21 +17,7 @@ export default function Sidebar() {
 
   return (
     <aside className="w-full md:w-[280px] shrink-0 mb-10 md:mb-0">
-      <div className="md:sticky md:top-24 md:max-h-[calc(100vh-8rem)] md:overflow-y-auto no-scrollbar flex flex-col md:block items-center md:items-start text-center md:text-left">
-        
-        <h2 className="text-xl font-bold text-neutral-900 mb-1 mt-4">Wook</h2>
-
-        <p className="text-sm text-neutral-600 mb-6 max-w-xs leading-relaxed">
-          Digital Marketing and Ecommerce expert Ph.D candidate Data science and AI
-        </p>
-
-        {/* Info & Social Links */}
-        <ul className="text-sm text-neutral-600 space-y-3 w-full max-w-[200px] mb-12">
-          <li className="flex justify-center md:justify-start items-center gap-3">
-            <LinkIcon size={16} className="text-neutral-400" />
-            <a href="https://www.linkedin.com/in/wook-kwon/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-600 hover:underline">LinkedIn</a>
-          </li>
-        </ul>
+      <div className="md:sticky md:top-24 md:max-h-[calc(100vh-8rem)] md:overflow-y-auto no-scrollbar flex flex-col md:block items-center md:items-start text-center md:text-left pt-2">
 
         {/* Category Navigation (Minimal Mistakes & WikiDocs Style) */}
         <div className="w-full text-left pt-8 border-t border-gray-200 hidden md:block">
