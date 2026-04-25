@@ -149,20 +149,29 @@ def process_source_batch_with_llm(source_name, items):
     "markdown_content": "목차(필요시) 및 각 기사별 세부 내용, 이미지 태그가 모두 병합된 완전한 마크다운 본문"
 }}
 """
-    try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(
-                temperature=0.2,
-                response_mime_type="application/json"
+    import time
+    for attempt in range(3):
+        try:
+            response = client.models.generate_content(
+                model='gemini-2.5-flash',
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    temperature=0.2,
+                    response_mime_type="application/json"
+                )
             )
-        )
-        data = json.loads(response.text)
-        return data
-    except Exception as e:
-        print(f"\nGemini API 에러 ({source_name}): {e}")
-        return None
+            
+            clean_text = response.text.replace('```json', '').replace('```', '').strip()
+            data = json.loads(clean_text)
+            return data
+        except Exception as e:
+            err_msg = str(e)
+            print(f"\nGemini API 에러 ({source_name}) [시도 {attempt+1}/3]: {err_msg}")
+            if "429" in err_msg or "RESOURCE_EXHAUSTED" in err_msg:
+                time.sleep(20) # wait 20s for rate limit
+            else:
+                return None
+    return None
 
 def create_markdown_post(source_name, result_data):
     """조합된 요약을 바탕으로 Booklog 포스팅용 마크다운 파일을 생성합니다."""
