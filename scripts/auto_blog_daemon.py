@@ -151,7 +151,15 @@ def process_rss_feed(feed):
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     temperature=0.3, 
-                    response_mime_type="application/json"
+                    response_mime_type="application/json",
+                    response_schema={
+                        "type": "object",
+                        "properties": {
+                            "has_ai_news": {"type": "boolean"},
+                            "markdown_content": {"type": "string"}
+                        },
+                        "required": ["has_ai_news", "markdown_content"]
+                    }
                 )
             )
             raw_text = clean_json_response(response.text)
@@ -320,7 +328,14 @@ def process_gmail_newsletters():
                     contents=prompt,
                     config=types.GenerateContentConfig(
                         temperature=0.3,
-                        response_mime_type="application/json"
+                        response_mime_type="application/json",
+                        response_schema={
+                            "type": "object",
+                            "properties": {
+                                "markdown_content": {"type": "string"}
+                            },
+                            "required": ["markdown_content"]
+                        }
                     )
                 )
                 raw_text = clean_json_response(response.text)
