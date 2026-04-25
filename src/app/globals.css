@@ -42,3 +42,12 @@ body {
 .mm-post-item:last-child {
   border-bottom: none;
 }
+
+/* Scrollbar hiding helper */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
