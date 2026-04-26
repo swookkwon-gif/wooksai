@@ -47,6 +47,9 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
     date_str = now_kst.strftime("%Y-%m-%d")
     
+    # AI가 본문 최상단에 '# 제목' 형식의 H1을 넣는 경우 강제 삭제하여 중복 노출 방지
+    content = re.sub(r'^#\s+[^\n]+\n*', '', content.lstrip())
+    
     frontmatter = f"""---
 title: "{post_title}"
 date: "{date_str}"
@@ -139,7 +142,7 @@ def process_rss_feed(feed):
 2. AI 기사가 하나라도 있으면 `has_ai_news`를 true로, 아니면 false로 응답하세요.
 3. 기사들을 병합해 가독성 좋은 마크다운 포스트 본문(`markdown_content`)을 구성하세요.
 4. 원문에 <img ...> 태그가 존재하면, 이 태그를 **한 글자도 고치지 말고 그대로 복사해서 삽입**하세요. 마크다운의 `![]()`로 변경하면 안 됩니다.
-5. 각 기사별로 소제목(`### [제목](링크)`)을 추가해 구분하세요.
+5. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목(`### [기사 제목](링크)`)이나 본문으로 시작하세요.
 6. JSON 구조 응답 필수: {{"has_ai_news": bool, "markdown_content": string}}
 """
     client = genai.Client(api_key=GEMINI_API_KEY)
@@ -317,7 +320,7 @@ def process_gmail_newsletters():
    - 지나치게 더 축약하지 말고, 원문의 문맥과 정보를 최대한 유지하면서 번역 투를 매끄러운 한글로만 교정하세요.
 2. 뉴스레터 내용이 **아주 긴 산문형이거나 정보가 난잡하게 섞여있는 형태라면**:
    - 가독성을 위해 불필요한 서술어를 빼고 핵심(도구, 시사점, 링크 등)만 간결한 리스트(개조식) 형태로 깔끔히 요약하세요.
-3. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 적절한 소제목들을 마크다운(`###`)으로 잡아주세요.
+3. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 소제목(`###`) 단위로만 구분하세요. 포스트 최상단에 전체 제목(H1, `# 제목`)을 절대 쓰지 마세요.
 4. 블로그 포스트의 본문에 들어갈 내용만 순수하게 `markdown_content` 필드에 작성하세요.
 5. JSON 구조 응답 필수: {{"markdown_content": string}}
 """
