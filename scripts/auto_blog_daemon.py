@@ -74,13 +74,21 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
     date_str = now_kst.strftime("%Y-%m-%d")
     
-    # AI가 본문 최상단에 '# 제목' 형식의 H1을 넣는 경우 강제 삭제하여 중복 노출 방지
+    # AI가 본문 최상단에 강제 생성하는 제목들(H1, H2) 중복 방지를 위해 삭제
     content = re.sub(r'^#\s+[^\n]+\n*', '', content.lstrip())
+    content = re.sub(r'^##\s+[^\n]+\n*', '', content.lstrip())
+    
+    # 본문 첫 부분을 바탕으로 excerpt(요약문) 자동 생성 (제목 반복 방지)
+    clean_content = re.sub(r'<[^>]+>', '', content)
+    clean_content = re.sub(r'[#*`\[\]\(\)]', '', clean_content)
+    clean_content = re.sub(r'\s+', ' ', clean_content).strip()
+    excerpt_text = clean_content[:120] + "..." if len(clean_content) > 120 else clean_content
+    excerpt_text = excerpt_text.replace('"', "'").replace('\n', ' ')
     
     frontmatter = f"""---
 title: "{post_title}"
 date: "{date_str}"
-excerpt: "{post_title} 요약"
+excerpt: "{excerpt_text}"
 category: "{category}"
 ---
 
