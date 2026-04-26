@@ -66,5 +66,15 @@
         "https://www.aitimes.com/news/articleView.html?idxno=209751",
         "https://www.aitimes.com/news/articleView.html?idxno=209678"
     ],
-    "gmail": []
+    "gmail": [],
+    "evaluations": {
+        "TestSender": [
+            {
+                "target": "Test",
+                "score": 4.5,
+                "reasoning": "Good",
+                "date": "2026-04-26"
+            }
+        ]
+    }
 }
