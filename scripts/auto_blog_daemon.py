@@ -191,39 +191,59 @@ def process_rss_feed(feed):
 """
     client = genai.Client(api_key=GEMINI_API_KEY)
     
+    response = None
+    models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+    
     for attempt in range(3):
-        try:
-            response = client.models.generate_content(
-                model='gemini-1.5-flash',
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    temperature=0.3, 
-                    response_mime_type="application/json",
-                    response_schema={
-                        "type": "object",
-                        "properties": {
-                            "has_ai_news": {"type": "boolean"},
-                            "evaluations": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "target": {"type": "string"},
-                                        "score": {"type": "number"},
-                                        "reasoning": {"type": "string"}
-                                    },
-                                    "required": ["target", "score", "reasoning"]
-                                }
+        for model_name in models_to_try:
+            try:
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.3, 
+                        response_mime_type="application/json",
+                        response_schema={
+                            "type": "object",
+                            "properties": {
+                                "has_ai_news": {"type": "boolean"},
+                                "evaluations": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "target": {"type": "string"},
+                                            "score": {"type": "number"},
+                                            "reasoning": {"type": "string"}
+                                        },
+                                        "required": ["target", "score", "reasoning"]
+                                    }
+                                },
+                                "markdown_content": {"type": "string"}
                             },
-                            "markdown_content": {"type": "string"}
-                        },
-                        "required": ["has_ai_news", "evaluations", "markdown_content"]
-                    }
+                            "required": ["has_ai_news", "evaluations", "markdown_content"]
+                        }
+                    )
                 )
-            )
+                break
+            except Exception as e:
+                err_msg = str(e)
+                if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                    print(f"      [경고] RSS 분석 '{model_name}' 모델 API 제한 발생. 다른 모델 시도...")
+                    continue
+                else:
+                    print(f"   [에러] {e}")
+                    break
+        
+        if response:
             raw_text = clean_json_response(response.text)
-            data = json.loads(raw_text)
-            
+            try:
+                data = json.loads(raw_text)
+            except json.JSONDecodeError as je:
+                print(f"      ❌ API 실패: JSON 에러 발생. 10초 대기 후 재시도... ({je})")
+                time.sleep(10)
+                continue
+                
             if data.get("has_ai_news"):
                 result_md = data.get("markdown_content", "")
                 evals = data.get("evaluations", [])
@@ -244,16 +264,9 @@ def process_rss_feed(feed):
                     mark_processed("rss", item['id'])
                 print(f" └ 처리 완료 (AI 기사 아님)")
             break
-        except Exception as e:
-            err_msg = str(e)
-            if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                match = re.search(r'retry in ([\d\.]+)s', err_msg)
-                wait_time = float(match.group(1)) + 5 if match else 60
-                print(f"   [API 에러] Rate Limit 도달. {wait_time:.1f}초 대기 후 재시도... (시도 {attempt+1}/3)")
-                time.sleep(wait_time)
-            else:
-                print(f"   [에러] {e}")
-                break
+            
+        print(f"      ❌ 모든 모델 실패: 30초 대기 후 재시도... ({attempt+1}/3)")
+        time.sleep(30)
                 
     # API Pacing
     time.sleep(5)
@@ -400,41 +413,57 @@ def process_gmail_newsletters():
 4. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 소제목(`###`) 단위로만 구분하세요. 포스트 최상단에 전체 제목(H1, `# 제목`)을 절대 쓰지 마세요.
 5. JSON 구조 응답 필수: {{"evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
 """
+        response = None
+        models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+        
         for attempt in range(3):
-            try:
-                response = client.models.generate_content(
-                    model='gemini-1.5-flash',
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.3,
-                        response_mime_type="application/json",
-                        response_schema={
-                            "type": "object",
-                            "properties": {
-                                "evaluations": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "target": {"type": "string"},
-                                            "score": {"type": "number"},
-                                            "reasoning": {"type": "string"}
-                                        },
-                                        "required": ["target", "score", "reasoning"]
-                                    }
+            for model_name in models_to_try:
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(
+                            temperature=0.3,
+                            response_mime_type="application/json",
+                            response_schema={
+                                "type": "object",
+                                "properties": {
+                                    "evaluations": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "target": {"type": "string"},
+                                                "score": {"type": "number"},
+                                                "reasoning": {"type": "string"}
+                                            },
+                                            "required": ["target", "score", "reasoning"]
+                                        }
+                                    },
+                                    "markdown_content": {"type": "string"}
                                 },
-                                "markdown_content": {"type": "string"}
-                            },
-                            "required": ["evaluations", "markdown_content"]
-                        }
+                                "required": ["evaluations", "markdown_content"]
+                            }
+                        )
                     )
-                )
+                    break
+                except Exception as e:
+                    err_msg = str(e)
+                    if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                        print(f"      [경고] 뉴스레터 분석 '{model_name}' 모델 API 제한 발생. 다른 모델 시도...")
+                        continue
+                    else:
+                        print(f"      ❌ API 실패: {e}")
+                        break
+                        
+            if response:
                 raw_text = clean_json_response(response.text)
                 try:
                     data = json.loads(raw_text)
                 except json.JSONDecodeError as je:
                     print(f"      ❌ API 실패: JSON 에러 발생. 10초 대기 후 재시도... ({je})")
                     time.sleep(10)
+                    response = None
                     continue
                 
                 result_md = data.get("markdown_content", "")
@@ -458,16 +487,9 @@ def process_gmail_newsletters():
                         mark_processed("gmail", letter["id"])
                     print(f"      ✅ 중요 기사(3점 이상)가 없어 포스트 생략 (처리완료 마킹)")
                 break
-            except Exception as e:
-                err_msg = str(e)
-                if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                    match = re.search(r'retry in ([\d\.]+)s', err_msg)
-                    wait_time = float(match.group(1)) + 5 if match else 60
-                    print(f"      [API 에러] Rate Limit 에러 발생. {wait_time:.1f}초 대기 후 재시도... (시도 {attempt+1}/3)")
-                    time.sleep(wait_time)
-                else:
-                    print(f"      ❌ API 실패: {e}")
-                    break
+                
+            print(f"      ❌ 모든 모델 할당량 초과: 30초 대기 후 재시도... ({attempt+1}/3)")
+            time.sleep(30)
         
         # 발신자 간 고정 API Pacing 
         print("      (발신자 간 기본 대기 10초...)")

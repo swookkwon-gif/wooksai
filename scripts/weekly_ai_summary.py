@@ -139,21 +139,30 @@ def update_eval_rules():
 명확하고 구체적으로 작성하여, 이 텍스트만 읽으면 사용자의 취향에 맞게 높은 점수와 낮은 점수를 줄 수 있도록 하세요. (안정적인 구조화를 위해 불필요한 서문은 생략하세요)
 """
         response = None
+        models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+        
         for attempt in range(5):
-            try:
-                response = client.models.generate_content(
-                    model='gemini-1.5-flash',
-                    contents=prompt,
-                    config=types.GenerateContentConfig(temperature=0.2)
-                )
+            for model_name in models_to_try:
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=0.2)
+                    )
+                    break # Success with this model
+                except Exception as e:
+                    err_str = str(e)
+                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                        print(f"      [룰 생성] '{model_name}' 모델 할당량 초과. 다른 모델 시도...")
+                        continue # Try next model
+                    else:
+                        raise e
+                        
+            if response:
                 break
-            except Exception as e:
-                err_str = str(e)
-                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    print(f"      [룰 생성 대기] 429 에러 발생. 60초 대기 후 재시도... ({attempt+1}/5)")
-                    time.sleep(60)
-                else:
-                    raise e
+                
+            print(f"      [룰 생성 대기] 모든 모델 할당량 초과. 60초 대기 후 재시도... ({attempt+1}/5)")
+            time.sleep(60)
                     
         if not response: return
         
@@ -199,21 +208,30 @@ def run_weekly_summary():
 """
     try:
         response = None
+        models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+        
         for attempt in range(5):
-            try:
-                response = client.models.generate_content(
-                    model='gemini-1.5-flash',
-                    contents=prompt,
-                    config=types.GenerateContentConfig(temperature=0.3)
-                )
+            for model_name in models_to_try:
+                try:
+                    response = client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(temperature=0.3)
+                    )
+                    break
+                except Exception as e:
+                    err_str = str(e)
+                    if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                        print(f"      [주간 요약] '{model_name}' 모델 할당량 초과. 다른 모델 시도...")
+                        continue
+                    else:
+                        raise e
+                        
+            if response:
                 break
-            except Exception as e:
-                err_str = str(e)
-                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    print(f"      [주간 요약 대기] 429 에러 발생. 60초 대기 후 재시도... ({attempt+1}/5)")
-                    time.sleep(60)
-                else:
-                    raise e
+                
+            print(f"      [주간 요약 대기] 모든 모델 할당량 초과. 60초 대기 후 재시도... ({attempt+1}/5)")
+            time.sleep(60)
                     
         if not response:
             raise Exception("API Rate Limit 초과 (최대 재시도 실패)")
