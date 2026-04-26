@@ -194,7 +194,7 @@ def process_rss_feed(feed):
     for attempt in range(3):
         try:
             response = client.models.generate_content(
-                model='gemini-2.5-flash',
+                model='gemini-1.5-flash',
                 contents=prompt,
                 config=types.GenerateContentConfig(
                     temperature=0.3, 
@@ -403,7 +403,7 @@ def process_gmail_newsletters():
         for attempt in range(3):
             try:
                 response = client.models.generate_content(
-                    model='gemini-2.5-flash',
+                    model='gemini-1.5-flash',
                     contents=prompt,
                     config=types.GenerateContentConfig(
                         temperature=0.3,
