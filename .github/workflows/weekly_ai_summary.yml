@@ -43,6 +43,7 @@ jobs:
           
           # 에러 방지: 생성된 파일이 없을 경우 git add가 실패하지 않도록 처리
           git add content/posts/2.\ AI\ News/*weekly-ai-review.md || echo "No weekly review files to stage."
+          git add scripts/custom_eval_rules.txt || true
           
           if git diff --staged --quiet; then
             echo "No new weekly summary to commit."
