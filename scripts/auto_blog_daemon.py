@@ -211,7 +211,15 @@ def get_email_body(payload, max_length=15000):
             if data:
                 text_content += base64.urlsafe_b64decode(data).decode('utf-8', 'ignore') + "\n"
         elif mime_type == 'text/html':
-            pass # html processing if needed
+            data = part.get('body', {}).get('data', '')
+            if data:
+                html_code = base64.urlsafe_b64decode(data).decode('utf-8', 'ignore')
+                import re
+                # Strip HTML tags
+                clean_text = re.sub(r'<[^>]+>', ' ', html_code)
+                # Collapse multiple spaces and newlines
+                clean_text = re.sub(r'\s+', ' ', clean_text).strip()
+                text_content += clean_text + "\n"
         elif 'parts' in part:
             for subpart in part['parts']:
                 extract_text(subpart)
