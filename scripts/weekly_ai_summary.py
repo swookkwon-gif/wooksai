@@ -138,11 +138,25 @@ def update_eval_rules():
 위 피드백을 분석하여, 앞으로 AI 봇이 기사를 수집하고 1~5점 척도로 평가할 때 명심해야 할 [사용자 맞춤형 평가 핵심 룰]을 3~5개 항목의 불릿포인트(`-`)로 정리하세요. 
 명확하고 구체적으로 작성하여, 이 텍스트만 읽으면 사용자의 취향에 맞게 높은 점수와 낮은 점수를 줄 수 있도록 하세요. (안정적인 구조화를 위해 불필요한 서문은 생략하세요)
 """
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(temperature=0.2)
-        )
+        response = None
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=0.2)
+                )
+                break
+            except Exception as e:
+                err_str = str(e)
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    print(f"      [룰 생성 대기] 429 에러 발생. 15초 대기 후 재시도... ({attempt+1}/3)")
+                    time.sleep(15)
+                else:
+                    raise e
+                    
+        if not response: return
+        
         new_rules = response.text.replace("```markdown", "").replace("```", "").strip()
         
         if new_rules:
@@ -184,11 +198,26 @@ def run_weekly_summary():
 5. 블로그 포스트의 '본문 내용'만 순수하게 출력하세요. 백틱(```) 마크다운 코드블록이나 불필요한 메타 데이터는 절대로 쓰지 마세요.
 """
     try:
-        response = client.models.generate_content(
-            model='gemini-2.5-flash',
-            contents=prompt,
-            config=types.GenerateContentConfig(temperature=0.3)
-        )
+        response = None
+        for attempt in range(3):
+            try:
+                response = client.models.generate_content(
+                    model='gemini-2.5-flash',
+                    contents=prompt,
+                    config=types.GenerateContentConfig(temperature=0.3)
+                )
+                break
+            except Exception as e:
+                err_str = str(e)
+                if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
+                    print(f"      [주간 요약 대기] 429 에러 발생. 15초 대기 후 재시도... ({attempt+1}/3)")
+                    time.sleep(15)
+                else:
+                    raise e
+                    
+        if not response:
+            raise Exception("API Rate Limit 초과 (최대 재시도 실패)")
+            
         result_text = response.text.replace("```markdown", "").replace("```", "").strip()
         
         # 발신자 성과 테이블 병합
