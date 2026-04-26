@@ -139,7 +139,7 @@ def update_eval_rules():
 명확하고 구체적으로 작성하여, 이 텍스트만 읽으면 사용자의 취향에 맞게 높은 점수와 낮은 점수를 줄 수 있도록 하세요. (안정적인 구조화를 위해 불필요한 서문은 생략하세요)
 """
         response = None
-        for attempt in range(3):
+        for attempt in range(5):
             try:
                 response = client.models.generate_content(
                     model='gemini-2.5-flash',
@@ -150,8 +150,8 @@ def update_eval_rules():
             except Exception as e:
                 err_str = str(e)
                 if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    print(f"      [룰 생성 대기] 429 에러 발생. 15초 대기 후 재시도... ({attempt+1}/3)")
-                    time.sleep(15)
+                    print(f"      [룰 생성 대기] 429 에러 발생. 60초 대기 후 재시도... ({attempt+1}/5)")
+                    time.sleep(60)
                 else:
                     raise e
                     
@@ -199,7 +199,7 @@ def run_weekly_summary():
 """
     try:
         response = None
-        for attempt in range(3):
+        for attempt in range(5):
             try:
                 response = client.models.generate_content(
                     model='gemini-2.5-flash',
@@ -210,8 +210,8 @@ def run_weekly_summary():
             except Exception as e:
                 err_str = str(e)
                 if "429" in err_str or "RESOURCE_EXHAUSTED" in err_str:
-                    print(f"      [주간 요약 대기] 429 에러 발생. 15초 대기 후 재시도... ({attempt+1}/3)")
-                    time.sleep(15)
+                    print(f"      [주간 요약 대기] 429 에러 발생. 60초 대기 후 재시도... ({attempt+1}/5)")
+                    time.sleep(60)
                 else:
                     raise e
                     
