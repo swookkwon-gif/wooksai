@@ -9,6 +9,12 @@ on:
   push:
     branches: ["main"]
 
+  # Trigger when the daemon jobs finish
+  workflow_run:
+    workflows: ["Daily AI Blog Daemon", "Weekly AI Summary"]
+    types:
+      - completed
+
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
