@@ -2,8 +2,8 @@ name: Daily AI Blog Daemon
 
 on:
   schedule:
-    # 매일 UTC 22:00 (한국 오전 7:00), UTC 08:00 (한국 오후 5:00) 구동
-    - cron: '0 8,22 * * *'
+    # 매일 UTC 21:23 (한국 오전 6:23), UTC 07:23 (한국 오후 4:23) 구동
+    - cron: '23 7,21 * * *'
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 permissions:
