@@ -69,8 +69,8 @@ def run_daily_ai_deep_research():
         run_cmd(["nlm", "notebook", "query", notebook_name, 
                  f"웹 검색을 활용해서 {research_prompt} 결과를 소스로 긁어와줘."], timeout=600)
                  
-    print("⏳ AI가 소스를 분석하고 저장할 시간을 확보합니다 (30초 대기)...")
-    time.sleep(30)
+    print("⏳ AI가 방대한 분량의 웹 소스를 읽고 분석/저장할 시간을 충분히 확보합니다 (2분 대기 중)...")
+    time.sleep(120)
     
     # 3. 마크다운 블로그 포스트 생성 요청
     print(f"\n[Step 3] Top 3 뉴스 기반 심층 마크다운 작성")
