@@ -6,24 +6,26 @@ import { ArrowLeft, Calendar, Tag, ChevronLeft, ChevronRight } from "lucide-reac
 import React from "react";
 
 export async function generateStaticParams() {
-  const posts = getSortedPostsData();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const postsKo = getSortedPostsData('ko');
+  const postsEn = getSortedPostsData('en');
+  return [
+    ...postsKo.map((post) => ({ lang: 'ko', slug: post.slug })),
+    ...postsEn.map((post) => ({ lang: 'en', slug: post.slug }))
+  ];
 }
 
 export default async function PostPage({
   params,
 }: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }) {
-  const { slug } = await params;
-  const post = getPostData(slug);
+  const { lang, slug } = await params;
+  const post = getPostData(slug, lang);
 
   return (
     <article className="font-sans w-full max-w-none">
       <Link
-        href="/posts"
+        href={`/${lang}/posts`}
         className="inline-flex items-center gap-2 text-neutral-500 hover:text-blue-600 mb-8 transition-colors group text-sm font-medium"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
@@ -116,7 +118,7 @@ export default async function PostPage({
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {post.relatedPosts.map(rel => (
-              <Link key={rel.slug} href={`/posts/${rel.slug}`} className="group flex flex-col p-5 bg-neutral-50 rounded-2xl hover:bg-blue-50/50 transition-colors border border-transparent hover:border-blue-100">
+              <Link key={rel.slug} href={`/${lang}/posts/${rel.slug}`} className="group flex flex-col p-5 bg-neutral-50 rounded-2xl hover:bg-blue-50/50 transition-colors border border-transparent hover:border-blue-100">
                 <span className="text-xs font-semibold text-blue-600 mb-2 uppercase tracking-wider">{rel.category}</span>
                 <h4 className="text-[15px] font-bold text-neutral-800 group-hover:text-blue-700 transition-colors line-clamp-2 mb-2 leading-snug">
                   {rel.title}
@@ -137,7 +139,7 @@ export default async function PostPage({
           <ul className="space-y-3">
             {post.prevPosts && post.prevPosts.length > 0 ? post.prevPosts.map(p => (
               <li key={p.slug}>
-                <Link href={`/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all">
+                <Link href={`/${lang}/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all">
                   <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
                   <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
                 </Link>
@@ -153,7 +155,7 @@ export default async function PostPage({
           <ul className="space-y-3">
              {post.nextPosts && post.nextPosts.length > 0 ? post.nextPosts.map(p => (
               <li key={p.slug}>
-                <Link href={`/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all text-right items-end">
+                <Link href={`/${lang}/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all text-right items-end">
                   <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
                   <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
                 </Link>

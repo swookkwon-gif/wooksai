@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
 
@@ -12,19 +12,27 @@ export const metadata: Metadata = {
   description: "AI와 디지털 마케팅의 실무적인 인사이트, 트렌드, 그리고 커리어를 다루는 블로그입니다.",
 };
 
-export default function RootLayout({
+export async function generateStaticParams() {
+  return [{ lang: "ko" }, { lang: "en" }];
+}
+
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: string }>;
 }>) {
+  const { lang } = await params;
+
   return (
-    <html lang="ko" className={`${inter.variable} ${outfit.variable}`}>
+    <html lang={lang} className={`${inter.variable} ${outfit.variable}`}>
       <body className="antialiased overflow-x-hidden min-h-screen bg-white">
-        <Header />
+        <Header lang={lang} />
         
         {/* Minimal Mistakes 2-column Layout */}
         <div className="max-w-[1280px] mx-auto px-6 pt-10 pb-16 md:flex md:gap-12 lg:gap-16">
-          <Sidebar />
+          <Sidebar lang={lang} />
           
           <main className="flex-1 w-full max-w-4xl min-w-0">
             {children}

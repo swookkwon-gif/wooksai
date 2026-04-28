@@ -2,8 +2,8 @@ import { MapPin, Link as LinkIcon } from "lucide-react";
 import { getSortedPostsData } from "@/lib/posts";
 import Link from "next/link";
 
-export default function Sidebar() {
-  const posts = getSortedPostsData();
+export default function Sidebar({ lang }: { lang: string }) {
+  const posts = getSortedPostsData(lang);
   
   // 포스트들을 카테고리별로 그룹핑
   const categories = posts.reduce((acc, post) => {
@@ -38,7 +38,7 @@ export default function Sidebar() {
                     {displayPosts.map(post => (
                       <li key={post.slug}>
                         <Link 
-                          href={`/posts/${post.slug}`}
+                          href={`/${lang}/posts/${post.slug}`}
                           className="text-sm text-neutral-500 hover:text-blue-600 transition-colors line-clamp-2 leading-relaxed"
                           title={post.title}
                         >
@@ -49,7 +49,7 @@ export default function Sidebar() {
                     {hasMore && (
                       <li className="pt-2">
                         <Link 
-                          href={`/category/${catSlug}`} 
+                          href={`/${lang}/category/${catSlug}`} 
                           className="text-xs font-bold text-blue-500 hover:text-blue-700 flex items-center gap-1"
                         >
                           + 전체 보기 ({catPosts.length})

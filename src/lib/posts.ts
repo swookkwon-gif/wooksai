@@ -33,11 +33,17 @@ function getAllMarkdownFiles(dirPath: string, arrayOfFiles: string[] = []) {
   return arrayOfFiles;
 }
 
-export function getSortedPostsData(): PostData[] {
+export function getSortedPostsData(lang: string = 'ko'): PostData[] {
   const allFiles = getAllMarkdownFiles(postsDirectory);
-  const allPostsData = allFiles.map((fullPath) => {
+  
+  const filteredFiles = allFiles.filter(file => {
+    if (lang === 'en') return file.endsWith('.en.md');
+    return file.endsWith('.md') && !file.endsWith('.en.md');
+  });
+
+  const allPostsData = filteredFiles.map((fullPath) => {
     const fileName = path.basename(fullPath);
-    const slug = fileName.replace(/\.md$/, '');
+    const slug = fileName.replace(/\.(en|ko)?\.?md$/, '');
     const fileContents = fs.readFileSync(fullPath, 'utf8');
     const { data, content } = matter(fileContents);
     
@@ -65,9 +71,17 @@ export function getSortedPostsData(): PostData[] {
   return allPostsData.sort((a, b) => (a.date < b.date ? 1 : -1));
 }
 
-export function getPostData(slug: string): PostData {
+export function getPostData(slug: string, lang: string = 'ko'): PostData {
   const allFiles = getAllMarkdownFiles(postsDirectory);
-  const targetFile = allFiles.find(file => path.basename(file) === `${slug}.md`);
+  
+  const targetFile = allFiles.find(file => {
+    const fileName = path.basename(file);
+    const fileSlug = fileName.replace(/\.(en|ko)?\.?md$/, '');
+    if (fileSlug !== slug) return false;
+    
+    if (lang === 'en') return fileName.endsWith('.en.md');
+    return fileName.endsWith('.md') && !fileName.endsWith('.en.md');
+  });
   
   if (!targetFile) {
     throw new Error(`Post not found for slug: ${slug}`);
@@ -82,7 +96,7 @@ export function getPostData(slug: string): PostData {
     : (data.category || 'Insight');
 
   // Related & Navigation Logic
-  const allPosts = getSortedPostsData(); // sorted desc by date
+  const allPosts = getSortedPostsData(lang); // sorted desc by date
   const categoryPosts = allPosts.filter(p => p.category === derivedCategory);
   const catIndex = categoryPosts.findIndex(p => p.slug === slug);
   

@@ -5,22 +5,27 @@ import { notFound } from "next/navigation";
 interface CategoryPageProps {
   params: Promise<{
     slug: string;
+    lang: string;
   }>;
 }
 
 // Generate static params for all categories
 export async function generateStaticParams() {
-  const posts = getSortedPostsData();
-  const categories = Array.from(new Set(posts.map(post => post.category || 'Insight')));
+  const postsKo = getSortedPostsData('ko');
+  const postsEn = getSortedPostsData('en');
   
-  return categories.map(category => ({
-    slug: category.toLowerCase().replace(/\s+/g, '-'),
-  }));
+  const categoriesKo = Array.from(new Set(postsKo.map(post => post.category || 'Insight')));
+  const categoriesEn = Array.from(new Set(postsEn.map(post => post.category || 'Insight')));
+  
+  return [
+    ...categoriesKo.map(category => ({ lang: 'ko', slug: category.toLowerCase().replace(/\s+/g, '-') })),
+    ...categoriesEn.map(category => ({ lang: 'en', slug: category.toLowerCase().replace(/\s+/g, '-') }))
+  ];
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const { slug } = await params;
-  const posts = getSortedPostsData();
+  const { slug, lang } = await params;
+  const posts = getSortedPostsData(lang);
   
   // URL 슬러그와 포스트의 카테고리 매칭
   const filteredPosts = posts.filter(post => {
@@ -46,7 +51,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         {filteredPosts.map((post) => (
           <article key={post.slug} className="mm-post-item group">
             <h2 className="text-xl md:text-2xl font-bold mb-2">
-              <Link href={`/posts/${post.slug}`} className="text-neutral-900 group-hover:text-blue-600 transition-colors">
+              <Link href={`/${lang}/posts/${post.slug}`} className="text-neutral-900 group-hover:text-blue-600 transition-colors">
                 {post.title}
               </Link>
             </h2>
@@ -59,7 +64,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
               {post.excerpt}
             </p>
             <Link 
-              href={`/posts/${post.slug}`} 
+              href={`/${lang}/posts/${post.slug}`} 
               className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
             >
               Read more &rarr;
