@@ -23,15 +23,7 @@ export default async function PostPage({
   const post = getPostData(slug, lang);
 
   return (
-    <article className="font-sans w-full max-w-none">
-      <Link
-        href={`/${lang}/posts`}
-        className="inline-flex items-center gap-2 text-neutral-500 hover:text-blue-600 mb-4 md:mb-6 transition-colors group text-sm font-medium"
-      >
-        <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
-        목록으로 돌아가기
-      </Link>
-
+    <article className="font-sans w-full max-w-none pt-4 md:pt-0">
       <header className="mb-8 md:mb-10">
         <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-neutral-900 tracking-tight leading-[1.3]">
           {post.title}
@@ -145,6 +137,17 @@ export default async function PostPage({
           </div>
         </section>
       )}
+
+      {/* Back to List Link at Bottom */}
+      <div className="mt-12 pt-8 border-t border-neutral-100 flex justify-center">
+        <Link
+          href={`/${lang}/posts`}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-neutral-100 text-neutral-600 hover:bg-blue-50 hover:text-blue-600 transition-colors group text-sm font-bold"
+        >
+          <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
+          목록으로 돌아가기
+        </Link>
+      </div>
     </article>
   );
 }
