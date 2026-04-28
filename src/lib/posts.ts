@@ -52,12 +52,12 @@ export function getSortedPostsData(): PostData[] {
       : (data.date ? String(data.date).split('T')[0] : new Date().toISOString().split('T')[0]);
 
     return {
+      ...data,
       slug,
       content,
       title: data.title,
       date: postDate,
       excerpt: data.excerpt,
-      ...data,
       category: derivedCategory,
     } as PostData;
   });
@@ -102,12 +102,12 @@ export function getPostData(slug: string): PostData {
     : (data.date ? String(data.date).split('T')[0] : new Date().toISOString().split('T')[0]);
 
   return {
+    ...data,
     slug,
     content,
     title: data.title,
     date: postDate,
     excerpt: data.excerpt,
-    ...data,
     category: derivedCategory,
     prevPosts,
     nextPosts,
