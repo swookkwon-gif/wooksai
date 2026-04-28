@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   basePath: "/wooksai",
-  trailingSlash: true,
+  trailingSlash: false,
   images: { unoptimized: true },
 };
 
