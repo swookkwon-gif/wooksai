@@ -34,18 +34,8 @@ if not GEMINI_API_KEY:
 POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'content', 'posts', '2. AI News')
 
 FEEDS = [
-    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml"},
-    {"name": "Google DeepMind", "url": "https://deepmind.google/blog/feed/"},
-    {"name": "Apple Machine Learning", "url": "https://machinelearning.apple.com/feed.xml"},
-    {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml"},
-    {"name": "arXiv cs.AI (AI)", "url": "https://rss.arxiv.org/rss/cs.AI", "limit": 5}, # 논문은 최근 5개만 묶음
-    {"name": "AITimes", "url": "https://cdn.aitimes.com/rss/gn_rss_allArticle.xml", "limit": 7},
-    {
-        "name": "Benzinga Korea", 
-        "url": "https://kr.benzinga.com/feed/", 
-        "keywords": ["ai", "인공지능", "로봇", "llm", "gpt", "엔비디아", "nvidia", "오픈ai", "구글", "테슬라", "자율주행", "반도체"],
-        "limit": 5
-    }
+    {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
+    {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"], "limit": 5}
 ]
 
 def extract_image_tag(html_content):

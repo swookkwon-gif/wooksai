@@ -26,11 +26,6 @@ if not os.path.exists(POSTS_DIR):
 TARGET_LABEL_NAME = "AI News"
 
 FEEDS = [
-    {"name": "OpenAI Blog", "url": "https://openai.com/blog/rss.xml"},
-    {"name": "Google DeepMind", "url": "https://deepmind.google/blog/rss.xml"},
-    {"name": "Apple Machine Learning", "url": "https://machinelearning.apple.com/rss.xml"},
-    {"name": "Hugging Face Blog", "url": "https://huggingface.co/blog/feed.xml"},
-    {"name": "arXiv cs.AI (AI)", "url": "http://export.arxiv.org/rss/cs.AI"},
     {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
     {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"]}
 ]
