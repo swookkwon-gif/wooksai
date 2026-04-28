@@ -1,7 +1,7 @@
 ---
-title: "[swookkwon@gmail.com] 최신 AI 뉴스레터 동향"
+title: "[AI News Digest] 글로벌 AI 시장 및 핵심 기술 동향"
 date: "2026-04-26"
-excerpt: "[swookkwon@gmail.com] 최신 AI 뉴스레터 동향 요약"
+excerpt: "테슬라, 엔비디아, 마이크로소프트 등 글로벌 AI 시장 동향 및 핵심 기술 발전 소식 요약"
 category: "AI News"
 ---
 
