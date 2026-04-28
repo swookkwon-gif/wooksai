@@ -33,7 +33,7 @@ export default async function PostPage({
       </Link>
 
       <header className="mb-12">
-        <h1 className="text-3xl md:text-5xl font-extrabold mb-6 text-neutral-900 tracking-tight leading-tight">
+        <h1 className="text-2xl md:text-4xl font-bold mb-6 text-neutral-900 tracking-tight leading-[1.3]">
           {post.title}
         </h1>
         <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-8 border-b border-neutral-100 pb-8">
