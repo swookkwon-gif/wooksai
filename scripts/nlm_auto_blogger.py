@@ -86,8 +86,9 @@ def run_daily_ai_deep_research():
 위에서 리서치하여 저장한 'Top 10 뉴스 소스'를 바탕으로 아주 상세한 기술 블로그 포스트를 한국어로 작성해줘.
 
 [작성 가이드라인]
-1. 제목: 출력의 첫 번째 줄은 반드시 "TITLE: [제목]" 형식으로 작성할 것.
-   - 제목은 가장 중요한 Top 3 뉴스의 핵심 키워드를 조합하여 50~70자 사이로 작성해. (예: 구글 앤트로픽 400억 달러 투자, MS-오픈AI 파트너십 개편, 메타 AWS CPU 수천만개 도입)
+1. 메타 데이터 생성 (반드시 첫 두 줄에 작성):
+   - 첫 번째 줄은 "TITLE: [제목]" 형식으로 작성하되, 대괄호 `[]`는 빼고 제목 텍스트만 적어. 제목은 가장 중요한 Top 3 뉴스의 핵심 팩트(키워드)만 콤마로 나열해 (예: TITLE: 구글 앤스로픽 400억 달러 투자, MS-오픈AI 계약 변경, 메타 AWS CPU 대규모 도입). '시사하는 바' 같은 주관적 문구는 절대 넣지 마.
+   - 두 번째 줄은 "EXCERPT: [요약문]" 형식으로 전체 포스트를 2~3문장(약 100~150자)으로 요약한 프리뷰 텍스트를 적어.
 2. 본문 서식: 가독성을 높이기 위해 텍스트 단락 구분을 명확히 하고, 적절한 줄바꿈을 사용할 것.
 3. 이미지: 소스에 관련 이미지가 포함되어 있다면 마크다운 형식 `![설명](이미지URL)`으로 적절한 위치에 삽입해.
 4. Top 3 심층 분석:
@@ -123,17 +124,29 @@ def run_daily_ai_deep_research():
     
     os.makedirs(POSTS_DIR, exist_ok=True)
     
-    # 제목 추출
-    display_title = f"[Daily Top 3] {now_kst.strftime('%m월 %d일')} AI 신기술 동향 및 심층 분석"
+    # 메타 데이터(제목, 요약) 추출
+    display_title = f"Daily Top 3: {now_kst.strftime('%m월 %d일')} 주요 AI 뉴스"
+    display_excerpt = "오늘의 핵심 글로벌 AI 및 기술 뉴스 동향을 요약합니다."
+    
     lines = clean_article.split('\\n')
-    if lines and lines[0].startswith("TITLE:"):
-        display_title = lines[0].replace("TITLE:", "").strip()
-        clean_article = '\\n'.join(lines[1:]).strip()
+    content_start_idx = 0
+    
+    for i in range(min(5, len(lines))):
+        line = lines[i].strip()
+        if line.startswith("TITLE:"):
+            display_title = line.replace("TITLE:", "").replace("[", "").replace("]", "").strip()
+            content_start_idx = max(content_start_idx, i + 1)
+        elif line.startswith("EXCERPT:"):
+            display_excerpt = line.replace("EXCERPT:", "").replace("[", "").replace("]", "").strip()
+            content_start_idx = max(content_start_idx, i + 1)
+            
+    clean_article = '\\n'.join(lines[content_start_idx:]).strip()
 
     # 휴먼리더블 포스트 제목 (기본값 대비 우선순위 반영)
     frontmatter = f"""---
 title: "{display_title}"
 date: {now_kst.strftime('%Y-%m-%dT%H:%M:%S+09:00')}
+excerpt: "{display_excerpt}"
 categories:
   - AI News
 tags:
