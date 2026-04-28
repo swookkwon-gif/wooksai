@@ -2,8 +2,9 @@ name: Daily AI Blog Daemon
 
 on:
   schedule:
-    # 매일 UTC 21:30 (한국 오전 6:30), UTC 07:30 (한국 오후 4:30) 구동
-    - cron: '30 7,21 * * *'
+    # 매일 UTC 19:15 (한국 오전 4:15), UTC 08:15 (한국 오후 5:15) 구동
+    # 깃허브 액션 지연을 감안하여 목표 시간(오전 7시, 오후 8시)보다 약 2~3시간 앞당겨 실행
+    - cron: '15 8,19 * * *'
   workflow_dispatch: # 수동 실행 버튼 활성화
 
 permissions:
