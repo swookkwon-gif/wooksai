@@ -51,6 +51,14 @@ def run_daily_ai_deep_research():
     if not success:
         return
         
+    # 출력에서 노트북 UUID 추출
+    notebook_id_match = re.search(r'ID:\s*([a-fA-F0-9\-]{36})', out)
+    if not notebook_id_match:
+        print("❌ 출력에서 노트북 ID를 추출하지 못했습니다.")
+        return
+    notebook_id = notebook_id_match.group(1)
+    print(f"📌 노트북 생성 완료 (UUID: {notebook_id})")
+    
     time.sleep(3)
     
     # 2. 딥 리서치 및 웹 소스 자동 수집 (지난 24시간 트렌드)
@@ -62,11 +70,11 @@ def run_daily_ai_deep_research():
         "Hacker News, TechCrunch, TLDR AI 등 신뢰도 높은 소스에서 딥 리서치하여 소스로 추가해줘."
     )
     # CLI 구조에 따라 명령어가 실패할 경우를 대비해 두 가지 포맷을 순차 시도할 수 있습니다.
-    success, out = run_cmd(["nlm", "research", "start", research_prompt], timeout=600)
+    success, out = run_cmd(["nlm", "research", "start", research_prompt, "--notebook-id", notebook_id, "--auto-import"], timeout=900)
     if not success:
         print("⚠️ 'research start' 실행에 이슈가 발생했습니다. 대체 쿼리(query)로 직접 지시합니다.")
         # 만약 research start 명령어 문법이 구버전이거나 맞지 않다면, 일반 query 로 검색을 지시합니다.
-        run_cmd(["nlm", "notebook", "query", notebook_name, 
+        run_cmd(["nlm", "notebook", "query", notebook_id, 
                  f"웹 검색을 활용해서 {research_prompt} 결과를 소스로 긁어와줘."], timeout=600)
                  
     print("⏳ AI가 방대한 분량의 웹 소스를 읽고 분석/저장할 시간을 충분히 확보합니다 (2분 대기 중)...")
@@ -86,7 +94,7 @@ def run_daily_ai_deep_research():
 4. 내용의 신뢰성을 위해 각 주장의 끝에 참조한 소스(출처)를 간략히 명시할 것.
 5. 해요체/하십시오체를 쓰지 말고 전문적인 테크 저널 목록형 어조(~이다, ~한다)를 사용할 것.
 """
-    success, article_content = run_cmd(["nlm", "notebook", "query", notebook_name, writing_prompt], timeout=600)
+    success, article_content = run_cmd(["nlm", "notebook", "query", notebook_id, writing_prompt], timeout=600)
     if not success:
         print("❌ 포스트 텍스트 생성에 실패했습니다.")
         return
