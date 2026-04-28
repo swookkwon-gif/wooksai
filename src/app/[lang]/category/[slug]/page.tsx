@@ -42,10 +42,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   return (
     <div className="font-sans">
-      <h1 className="text-3xl font-extrabold text-neutral-900 mb-8 border-b border-gray-100 pb-4">
-        Category: {displayCategory}
-      </h1>
-
       {/* Post List */}
       <div className="flex flex-col">
         {filteredPosts.map((post) => (

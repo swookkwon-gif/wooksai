@@ -29,9 +29,12 @@ export default async function PostPage({
           {post.title}
         </h1>
         <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-6 pb-6 border-b border-neutral-100">
-          <span className="flex items-center gap-1.5">
+          <Link 
+            href={`/${lang}/category/${(post.category || "Insight").toLowerCase().replace(/\s+/g, '-')}`}
+            className="flex items-center gap-1.5 hover:text-blue-600 transition-colors"
+          >
             <Tag size={14} /> {post.category || "Insight"}
-          </span>
+          </Link>
           <span className="flex items-center gap-1.5">
             <Calendar size={14} /> {post.date}
           </span>
@@ -107,7 +110,7 @@ export default async function PostPage({
         <section className="mt-16 pt-12 border-t border-neutral-200">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
-              💡 {post.category} 카테고리의 다른 글
+              💡 <Link href={`/${lang}/category/${(post.category || "Insight").toLowerCase().replace(/\s+/g, '-')}`} className="hover:text-blue-600 transition-colors underline decoration-2 underline-offset-4 decoration-blue-100 hover:decoration-blue-400">{post.category}</Link> 카테고리의 다른 글
             </h3>
             {post.categoryTotalCount && post.categoryTotalCount > 7 && (
               <Link 
