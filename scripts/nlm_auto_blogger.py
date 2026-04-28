@@ -5,7 +5,7 @@ import time
 from datetime import datetime, timezone, timedelta
 import re
 
-POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'content', 'posts', '3. Deep Dive')
+POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', 'content', 'posts', '2. AI News')
 
 def run_cmd(cmd_list, timeout=600):
     """서브프로세스로 NLM 명령어를 실행하고 로그를 기록합니다."""
