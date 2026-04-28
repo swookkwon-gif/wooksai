@@ -12,9 +12,8 @@ export interface PostData {
   category: string;
   content: string;
   related?: string[];
-  prevPosts?: { slug: string; title: string; date: string }[];
-  nextPosts?: { slug: string; title: string; date: string }[];
   relatedPosts?: { slug: string; title: string; date: string; category: string; excerpt: string }[];
+  categoryTotalCount?: number;
 }
 
 function getAllMarkdownFiles(dirPath: string, arrayOfFiles: string[] = []) {
@@ -112,16 +111,18 @@ export function getPostData(slug: string, lang: string = 'ko'): PostData {
   // Related & Navigation Logic
   const allPosts = getSortedPostsData(lang); // sorted desc by date
   const categoryPosts = allPosts.filter(p => p.category === derivedCategory);
-  const catIndex = categoryPosts.findIndex(p => p.slug === slug);
   
-  // Prev is older (higher index), Next is newer (lower index)
-  const prevPosts = categoryPosts.slice(catIndex + 1, catIndex + 4).map(p => ({ slug: p.slug, title: p.title, date: p.date }));
-  const nextPosts = catIndex > 0 ? categoryPosts.slice(Math.max(0, catIndex - 3), catIndex).reverse().map(p => ({ slug: p.slug, title: p.title, date: p.date })) : [];
-
   let relatedPosts: { slug: string; title: string; date: string; category: string; excerpt: string }[] = [];
+  
   if (data.related && Array.isArray(data.related)) {
     relatedPosts = allPosts
       .filter(p => data.related.includes(p.slug))
+      .map(p => ({ slug: p.slug, title: p.title, date: p.date, category: p.category, excerpt: p.excerpt }));
+  } else {
+    // 명시된 관련 글이 없으면 같은 카테고리의 최신 글을 최대 7개 추천 (현재 글 제외)
+    relatedPosts = categoryPosts
+      .filter(p => p.slug !== slug)
+      .slice(0, 7)
       .map(p => ({ slug: p.slug, title: p.title, date: p.date, category: p.category, excerpt: p.excerpt }));
   }
 
@@ -137,8 +138,7 @@ export function getPostData(slug: string, lang: string = 'ko'): PostData {
     date: postDate,
     excerpt: data.excerpt || generateExcerpt(content),
     category: derivedCategory,
-    prevPosts,
-    nextPosts,
-    relatedPosts
+    relatedPosts,
+    categoryTotalCount: categoryPosts.length
   } as PostData;
 }

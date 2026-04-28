@@ -110,60 +110,41 @@ export default async function PostPage({
         </ReactMarkdown>
       </div>
 
-      {/* Manual Related Posts Section (Only displays if 'related' is specified in frontmatter) */}
+      {/* Related Posts Section (Up to 7 posts from the same category) */}
       {post.relatedPosts && post.relatedPosts.length > 0 && (
         <section className="mt-16 pt-12 border-t border-neutral-200">
-          <h3 className="text-xl font-bold text-neutral-900 mb-6 flex items-center gap-2">
-            💡 작성자가 추천하는 관련 글
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="flex items-center justify-between mb-8">
+            <h3 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
+              💡 {post.category} 카테고리의 다른 글
+            </h3>
+            {post.categoryTotalCount && post.categoryTotalCount > 7 && (
+              <Link 
+                href={`/${lang}/category/${post.category.toLowerCase().replace(/\s+/g, '-')}`}
+                className="text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
+              >
+                전체보기 &rarr;
+              </Link>
+            )}
+          </div>
+          <div className="flex flex-col gap-4">
             {post.relatedPosts.map(rel => (
-              <Link key={rel.slug} href={`/${lang}/posts/${rel.slug}`} className="group flex flex-col p-5 bg-neutral-50 rounded-2xl hover:bg-blue-50/50 transition-colors border border-transparent hover:border-blue-100">
-                <span className="text-xs font-semibold text-blue-600 mb-2 uppercase tracking-wider">{rel.category}</span>
-                <h4 className="text-[15px] font-bold text-neutral-800 group-hover:text-blue-700 transition-colors line-clamp-2 mb-2 leading-snug">
-                  {rel.title}
-                </h4>
-                <span className="mt-auto text-xs font-medium text-neutral-400">{rel.date}</span>
+              <Link key={rel.slug} href={`/${lang}/posts/${rel.slug}`} className="group flex flex-col sm:flex-row sm:items-center justify-between p-4 bg-white border border-gray-100 rounded-xl hover:border-blue-200 hover:shadow-sm transition-all gap-4">
+                <div className="flex-1">
+                  <h4 className="text-[16px] font-bold text-neutral-800 group-hover:text-blue-700 transition-colors line-clamp-1 mb-1">
+                    {rel.title}
+                  </h4>
+                  {rel.excerpt && (
+                    <p className="text-sm text-neutral-500 line-clamp-1">
+                      {rel.excerpt}
+                    </p>
+                  )}
+                </div>
+                <span className="text-xs font-medium text-neutral-400 shrink-0 sm:text-right">{rel.date}</span>
               </Link>
             ))}
           </div>
         </section>
       )}
-
-      {/* Prev/Next Navigation (Up to 3 older, 3 newer) */}
-      <nav className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-12 pt-8 border-t border-neutral-100">
-        <div>
-          <h4 className="text-sm font-bold text-neutral-400 mb-4 uppercase tracking-wider flex items-center gap-1">
-            <ChevronLeft size={16} /> 이전 글
-          </h4>
-          <ul className="space-y-3">
-            {post.prevPosts && post.prevPosts.length > 0 ? post.prevPosts.map(p => (
-              <li key={p.slug}>
-                <Link href={`/${lang}/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all">
-                  <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
-                  <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
-                </Link>
-              </li>
-            )) : <li className="text-sm text-neutral-400">이전 글이 없습니다.</li>}
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="text-sm font-bold text-neutral-400 mb-4 uppercase tracking-wider flex items-center justify-end gap-1 text-right">
-            다음 글 <ChevronRight size={16} />
-          </h4>
-          <ul className="space-y-3">
-             {post.nextPosts && post.nextPosts.length > 0 ? post.nextPosts.map(p => (
-              <li key={p.slug}>
-                <Link href={`/${lang}/posts/${p.slug}`} className="group flex flex-col border border-neutral-100 p-4 rounded-xl hover:border-blue-500 hover:bg-blue-50/30 transition-all text-right items-end">
-                  <span className="text-[14px] font-semibold text-neutral-800 line-clamp-2 group-hover:text-blue-700">{p.title}</span>
-                  <span className="text-xs text-neutral-400 mt-1">{p.date}</span>
-                </Link>
-              </li>
-            )) : <li className="text-sm text-neutral-400 text-right">다음 글이 없습니다.</li>}
-          </ul>
-        </div>
-      </nav>
     </article>
   );
 }
