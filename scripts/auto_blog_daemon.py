@@ -187,7 +187,7 @@ def process_rss_feed(feed):
     client = genai.Client(api_key=GEMINI_API_KEY)
     
     response = None
-    models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+    models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
     
     for attempt in range(3):
         for model_name in models_to_try:
@@ -409,7 +409,7 @@ def process_gmail_newsletters():
 5. JSON 구조 응답 필수: {{"evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
 """
         response = None
-        models_to_try = ['gemini-2.5-flash', 'gemini-1.5-flash']
+        models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
         
         for attempt in range(3):
             for model_name in models_to_try:
