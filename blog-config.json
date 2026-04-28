@@ -1,0 +1,9 @@
+{
+  "features": {
+    "auto_translation": false,
+    "default_language": "ko",
+    "supported_languages": ["ko", "en"]
+  },
+  "translation_provider": "gemini",
+  "notes": "Set auto_translation to true when Option B (Github Actions Translation) is ready to be implemented."
+}
