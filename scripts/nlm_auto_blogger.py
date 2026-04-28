@@ -65,8 +65,8 @@ def run_daily_ai_deep_research():
     # nlm research start 에 자연어 지시를 전달합니다.
     print(f"\n[Step 2] 자율 딥 리서치 시작 (웹 서칭 및 분석)")
     research_prompt = (
-        "지난 24시간 동안 발생한 전 세계 AI 기술 및 산업 뉴스 중 "
-        "가장 파급력이 크고 중요한 3가지(Top 3) 뉴스를 구글 검색, Google News의 AI/Tech 섹션, "
+        "오늘 발생한 전 세계 AI 기술 및 산업 뉴스 중 "
+        "가장 파급력이 크고 중요한 10가지 뉴스를 구글 검색, Google News의 AI/Tech 섹션, "
         "Hacker News, TechCrunch, TLDR AI 등 신뢰도 높은 소스에서 딥 리서치하여 소스로 추가해줘."
     )
     # CLI 구조에 따라 명령어가 실패할 경우를 대비해 두 가지 포맷을 순차 시도할 수 있습니다.
@@ -83,27 +83,37 @@ def run_daily_ai_deep_research():
     # 3. 마크다운 블로그 포스트 생성 요청
     print(f"\n[Step 3] Top 3 뉴스 기반 심층 마크다운 작성")
     writing_prompt = """
-위에서 리서치하여 저장한 'Top 3 뉴스 소스'를 바탕으로 아주 상세한 기술 블로그 포스트를 한국어로 작성해줘.
+위에서 리서치하여 저장한 'Top 10 뉴스 소스'를 바탕으로 아주 상세한 기술 블로그 포스트를 한국어로 작성해줘.
 
 [작성 가이드라인]
-1. 제목은 출력하지 마. (첫 줄은 바로 본문 도입부가 나오게 할 것)
-2. 가장 중요한 3개의 뉴스를 각각 큰 소제목(##)으로 구분해줘.
-3. 각 뉴스별 작성 체계:
-   - [📍 소식 요약]: 해당 뉴스의 팩트와 핵심 내용을 2~3줄로 요약
-   - [🔬 기술적 및 산업적 시사점]: 이 뉴스가 왜 중요한지, 개발자나 업계에 어떤 영향을 미칠지 깊이 있게 분석
-4. 내용의 신뢰성을 위해 각 주장의 끝에 참조한 소스(출처)를 간략히 명시할 것.
-5. 해요체/하십시오체를 쓰지 말고 전문적인 테크 저널 목록형 어조(~이다, ~한다)를 사용할 것.
+1. 제목: 출력의 첫 번째 줄은 반드시 "TITLE: [제목]" 형식으로 작성할 것.
+   - 제목은 가장 중요한 Top 3 뉴스의 핵심 키워드를 조합하여 50~70자 사이로 작성해. (예: 구글 앤트로픽 400억 달러 투자, MS-오픈AI 파트너십 개편, 메타 AWS CPU 수천만개 도입)
+2. 본문 서식: 가독성을 높이기 위해 텍스트 단락 구분을 명확히 하고, 적절한 줄바꿈을 사용할 것.
+3. 이미지: 소스에 관련 이미지가 포함되어 있다면 마크다운 형식 `![설명](이미지URL)`으로 적절한 위치에 삽입해.
+4. Top 3 심층 분석:
+   - 가장 중요한 3개의 뉴스를 각각 큰 소제목(##)으로 구분해.
+   - 각 뉴스별: [📍 소식 요약] (2~3줄), [🔬 기술적 및 산업적 시사점] (깊이 있는 분석) 작성.
+5. Top 10 주요 뉴스 및 중요도 평가 테이블:
+   - 포스트 하단에 추출된 10개의 뉴스를 나열하고, 이 중 앞서 다룬 3가지가 왜 Top 3로 선정되었는지 중요도를 평가하는 테이블(표)을 추가해.
+6. 레퍼런스: 포스트의 가장 마지막에는 본문에서 사용한 주석 번호([1], [2] 등)에 매칭되는 세부 레퍼런스 정보(기사 제목, 원본 URL 링크 등)를 목록 형태로 모두 포함해.
+7. 어조: 해요체/하십시오체를 쓰지 말고 전문적인 테크 저널 목록형 어조(~이다, ~한다)를 사용할 것.
 """
     success, article_content = run_cmd(["nlm", "notebook", "query", notebook_id, writing_prompt], timeout=600)
     if not success:
         print("❌ 포스트 텍스트 생성에 실패했습니다.")
         return
         
-    # 출력된 텍스트 중 nlm CLI의 안내 텍스트(예: "Answer: ")를 제거하는 클리닝 작업
+    # JSON 응답일 경우 처리
     clean_article = article_content
-    prefix_match = re.search(r'(Answer:|Response:)(.*)', article_content, re.IGNORECASE | re.DOTALL)
-    if prefix_match:
-        clean_article = prefix_match.group(2).strip()
+    import json
+    try:
+        data = json.loads(article_content)
+        if 'value' in data and 'answer' in data['value']:
+            clean_article = data['value']['answer']
+    except json.JSONDecodeError:
+        prefix_match = re.search(r'(Answer:|Response:)(.*)', article_content, re.IGNORECASE | re.DOTALL)
+        if prefix_match:
+            clean_article = prefix_match.group(2).strip()
 
     # 4. 마크다운 파일 저장
     print(f"\n[Step 4] 블로그 업로드용 파일 저장 및 종료")
@@ -113,8 +123,14 @@ def run_daily_ai_deep_research():
     
     os.makedirs(POSTS_DIR, exist_ok=True)
     
-    # 휴먼리더블 포스트 제목 생성
+    # 제목 추출
     display_title = f"[Daily Top 3] {now_kst.strftime('%m월 %d일')} AI 신기술 동향 및 심층 분석"
+    lines = clean_article.split('\\n')
+    if lines and lines[0].startswith("TITLE:"):
+        display_title = lines[0].replace("TITLE:", "").strip()
+        clean_article = '\\n'.join(lines[1:]).strip()
+
+    # 휴먼리더블 포스트 제목 (기본값 대비 우선순위 반영)
     frontmatter = f"""---
 title: "{display_title}"
 date: {now_kst.strftime('%Y-%m-%dT%H:%M:%S+09:00')}
