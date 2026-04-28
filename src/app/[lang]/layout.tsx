@@ -31,7 +31,7 @@ export default async function RootLayout({
         <Header lang={lang} />
         
         {/* Minimal Mistakes 2-column Layout */}
-        <div className="max-w-[1280px] mx-auto px-6 pt-10 pb-16 md:flex md:gap-12 lg:gap-16">
+        <div className="max-w-[1280px] mx-auto px-6 pt-6 md:pt-10 pb-16 md:flex md:gap-12 lg:gap-16">
           <Sidebar lang={lang} />
           
           <main className="flex-1 w-full max-w-4xl min-w-0">

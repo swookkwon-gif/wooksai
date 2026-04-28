@@ -26,17 +26,17 @@ export default async function PostPage({
     <article className="font-sans w-full max-w-none">
       <Link
         href={`/${lang}/posts`}
-        className="inline-flex items-center gap-2 text-neutral-500 hover:text-blue-600 mb-8 transition-colors group text-sm font-medium"
+        className="inline-flex items-center gap-2 text-neutral-500 hover:text-blue-600 mb-4 md:mb-6 transition-colors group text-sm font-medium"
       >
         <ArrowLeft size={16} className="group-hover:-translate-x-1 transition-transform" />
         목록으로 돌아가기
       </Link>
 
-      <header className="mb-12">
-        <h1 className="text-2xl md:text-4xl font-bold mb-6 text-neutral-900 tracking-tight leading-[1.3]">
+      <header className="mb-8 md:mb-10">
+        <h1 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6 text-neutral-900 tracking-tight leading-[1.3]">
           {post.title}
         </h1>
-        <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-8 border-b border-neutral-100 pb-8">
+        <div className="flex items-center gap-4 text-xs font-semibold text-neutral-500 uppercase tracking-widest mb-6 pb-6 border-b border-neutral-100">
           <span className="flex items-center gap-1.5">
             <Tag size={14} /> {post.category || "Insight"}
           </span>
