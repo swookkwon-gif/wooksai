@@ -31,7 +31,7 @@ export default async function RootLayout({
         <Header lang={lang} />
         
         {/* Minimal Mistakes 2-column Layout */}
-        <div className="max-w-[1280px] mx-auto px-6 pt-0 md:pt-5 pb-16 md:flex md:gap-12 lg:gap-16">
+        <div className="max-w-[1280px] mx-auto px-6 pt-2 md:pt-3 pb-8 md:flex md:gap-12 lg:gap-16">
           <Sidebar lang={lang} />
           
           <main className="flex-1 w-full max-w-4xl min-w-0">
@@ -40,7 +40,7 @@ export default async function RootLayout({
         </div>
 
         {/* Global Footer */}
-        <footer className="w-full text-center py-8 border-t border-gray-100 mt-auto bg-gray-50/50">
+        <footer className="w-full text-center py-3 border-t border-gray-100 mt-auto bg-gray-50/50">
           <p className="text-xs text-neutral-500 max-w-2xl mx-auto px-6 leading-relaxed">
             <span className="font-bold text-neutral-800">Wook Kwon</span> — Digital Marketing and Ecommerce expert, Ph.D candidate, Data science and AI.
             <a href="https://www.linkedin.com/in/wook-kwon/" target="_blank" rel="noopener noreferrer" className="ml-2 text-blue-600 hover:text-blue-800 hover:underline">

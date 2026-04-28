@@ -16,7 +16,7 @@ export default function Sidebar({ lang }: { lang: string }) {
   }, {} as Record<string, typeof posts>);
 
   return (
-    <aside className="w-full md:w-[280px] shrink-0 mb-6 md:mb-0">
+    <aside className="hidden md:block w-[280px] shrink-0">
       <div className="md:sticky md:top-24 md:max-h-[calc(100vh-8rem)] md:overflow-y-auto no-scrollbar flex flex-col md:block items-center md:items-start text-center md:text-left pt-2">
 
         {/* Category Navigation (Minimal Mistakes & WikiDocs Style) */}
