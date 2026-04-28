@@ -33,6 +33,20 @@ function getAllMarkdownFiles(dirPath: string, arrayOfFiles: string[] = []) {
   return arrayOfFiles;
 }
 
+function generateExcerpt(content: string, length: number = 150): string {
+  // 마크다운 헤딩, 이미지, 링크 제거 및 줄바꿈을 공백으로 변경하여 순수 텍스트만 추출
+  let text = content
+    .replace(/^#+\s+.*/gm, '') // 헤딩 제거
+    .replace(/!\[.*?\]\(.*?\)/g, '') // 이미지 제거
+    .replace(/\[(.*?)\]\(.*?\)/g, '$1') // 링크는 텍스트만 남김
+    .replace(/<[^>]*>/g, '') // HTML 태그 제거
+    .replace(/[\r\n]+/g, ' ') // 줄바꿈을 공백으로
+    .trim();
+  
+  if (text.length <= length) return text;
+  return text.substring(0, length).trim() + '...';
+}
+
 export function getSortedPostsData(lang: string = 'ko'): PostData[] {
   const allFiles = getAllMarkdownFiles(postsDirectory);
   
@@ -63,7 +77,7 @@ export function getSortedPostsData(lang: string = 'ko'): PostData[] {
       content,
       title: data.title,
       date: postDate,
-      excerpt: data.excerpt,
+      excerpt: data.excerpt || generateExcerpt(content),
       category: derivedCategory,
     } as PostData;
   });
@@ -121,7 +135,7 @@ export function getPostData(slug: string, lang: string = 'ko'): PostData {
     content,
     title: data.title,
     date: postDate,
-    excerpt: data.excerpt,
+    excerpt: data.excerpt || generateExcerpt(content),
     category: derivedCategory,
     prevPosts,
     nextPosts,
