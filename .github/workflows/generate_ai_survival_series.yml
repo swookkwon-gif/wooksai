@@ -1,0 +1,52 @@
+name: Generate AI Survival Series
+
+on:
+  workflow_dispatch: # 수동 실행 전용
+
+permissions:
+  contents: write # Git 커밋 및 푸시 권한
+
+jobs:
+  generate-series:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Install uv (Python Package Installer)
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: false
+
+      - name: Install notebooklm-mcp-cli
+        run: |
+          uv tool install notebooklm-mcp-cli
+          # 경로 추가 (uv tool bin 디렉토리)
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Auth NotebookLM via Github Secrets Cookies
+        env:
+          NLM_COOKIES: ${{ secrets.NLM_AUTH_COOKIES }}
+        run: |
+          if [ -z "$NLM_COOKIES" ]; then
+            echo "Error: NLM_AUTH_COOKIES secret is not set!"
+            exit 1
+          fi
+          # 쿠키 파일 임시 저장
+          echo "$NLM_COOKIES" > temp_cookies.txt
+          # nlm 명령어로 매뉴얼 로그인 (쿠키 이식)
+          nlm login --manual --file temp_cookies.txt
+          # 보안을 위해 즉시 임시 쿠키 파일 삭제
+          rm temp_cookies.txt
+
+      - name: Run Series Generation Script
+        run: |
+          # 깃헙 봇 설정 (커밋을 위해)
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          python3 scripts/generate_ai_survival_series.py
