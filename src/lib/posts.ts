@@ -47,11 +47,15 @@ export function getSortedPostsData(): PostData[] {
       ? parentFolder.replace(/^\d+\.\s*/, '') 
       : (data.category || 'Insight');
 
+    const postDate = data.date instanceof Date 
+      ? data.date.toISOString().split('T')[0]
+      : (data.date ? String(data.date).split('T')[0] : new Date().toISOString().split('T')[0]);
+
     return {
       slug,
       content,
       title: data.title,
-      date: data.date,
+      date: postDate,
       excerpt: data.excerpt,
       ...data,
       category: derivedCategory,
@@ -93,11 +97,15 @@ export function getPostData(slug: string): PostData {
       .map(p => ({ slug: p.slug, title: p.title, date: p.date, category: p.category, excerpt: p.excerpt }));
   }
 
+  const postDate = data.date instanceof Date 
+    ? data.date.toISOString().split('T')[0]
+    : (data.date ? String(data.date).split('T')[0] : new Date().toISOString().split('T')[0]);
+
   return {
     slug,
     content,
     title: data.title,
-    date: data.date,
+    date: postDate,
     excerpt: data.excerpt,
     ...data,
     category: derivedCategory,
