@@ -252,7 +252,7 @@ def process_all_rss_feeds(feeds):
                 
                 slug = "global-ai-news-summary"
                 now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                title = f"[{now_kst.strftime('%m월 %d일')}] 종합 AI 뉴스 요약"
+                title = f"[{now_kst.strftime('%m월 %d일')}] AI times, Benzinga 뉴스 요약"
                 create_markdown_post_file(slug, title, result_md, category="AI News")
                 
                 for item in items_to_process:
