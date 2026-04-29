@@ -82,10 +82,10 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     excerpt_text = excerpt_text.replace('"', "'").replace('\n', ' ')
     
     frontmatter = f"""---
-title: "{post_title}"
-date: "{date_str}"
-excerpt: "{excerpt_text}"
-category: "{category}"
+title: '{post_title.replace("'", "''")}'
+date: '{date_str}'
+excerpt: '{excerpt_text.replace("'", "''")}'
+category: '{category.replace("'", "''")}'
 ---
 
 """

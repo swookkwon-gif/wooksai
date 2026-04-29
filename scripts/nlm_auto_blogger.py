@@ -144,9 +144,9 @@ def run_daily_ai_deep_research():
 
     # 휴먼리더블 포스트 제목 (기본값 대비 우선순위 반영)
     frontmatter = f"""---
-title: "{display_title}"
+title: '{display_title.replace("'", "''")}'
 date: {now_kst.strftime('%Y-%m-%dT%H:%M:%S+09:00')}
-excerpt: "{display_excerpt}"
+excerpt: '{display_excerpt.replace("'", "''")}'
 categories:
   - AI News
 tags:

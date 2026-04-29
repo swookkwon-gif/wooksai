@@ -146,9 +146,9 @@ def run_gemini_search_blogger():
     clean_article = '\n'.join(lines[content_start_idx:]).strip()
 
     frontmatter = f"""---
-title: "{display_title}"
+title: '{display_title.replace("'", "''")}'
 date: {now_kst.strftime('%Y-%m-%dT%H:%M:%S+09:00')}
-excerpt: "{display_excerpt}"
+excerpt: '{display_excerpt.replace("'", "''")}'
 categories:
   - AI News
 tags:
