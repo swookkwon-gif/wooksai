@@ -28,12 +28,6 @@ export default async function PostsArchivePage({
             <p className="text-neutral-600 leading-relaxed text-sm md:text-base mb-3 max-w-3xl">
               {post.excerpt}
             </p>
-            <Link 
-              href={`/${lang}/posts/${post.slug}`} 
-              className="inline-block text-sm font-semibold text-blue-600 hover:text-blue-800 transition-colors"
-            >
-              Read more &rarr;
-            </Link>
           </article>
         ))}
       </div>
