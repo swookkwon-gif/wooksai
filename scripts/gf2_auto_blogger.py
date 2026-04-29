@@ -91,7 +91,8 @@ def run_gemini_search_blogger():
         "contents": [{"parts": [{"text": prompt}]}],
         "tools": [{"googleSearch": {}}],
         "generationConfig": {
-            "temperature": 0.4
+            "temperature": 0.4,
+            "maxOutputTokens": 8192
         }
     }
     
@@ -109,7 +110,6 @@ def run_gemini_search_blogger():
         print(f"❌ Gemini API 호출 에러: {e}")
         return
         
-    article_content = response.text
     if not article_content:
         print("❌ 응답 텍스트가 없습니다.")
         return
