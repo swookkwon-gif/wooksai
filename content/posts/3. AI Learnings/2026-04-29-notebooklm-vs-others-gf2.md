@@ -26,8 +26,8 @@ tags:
 ![AI 도구 비교 스크린샷 가이드](https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=1000)
 *▲ 왼쪽부터 인터넷 검색 기반 AI(ChatGPT/Perplexity), 그리고 철저히 내 소스 기반인 NotebookLM의 차이를 보여주는 인포그래픽 개념도.*
 
-*   **ChatGPT & Claude (범용 AI):** 인터넷 전체에 퍼져 있는 방대한 데이터를 미리 학습(Pre-trained)하여 답변합니다. 세상의 모든 것에 대해 대답할 수 있지만, 학습 데이터에 없는 특정 기업의 내부 문서나 최신 심층 논문에 대해서는 그럴듯하게 거짓말을 지어내는 환각(Hallucination) 현상이 발생할 위험이 있습니다.
-*   **NotebookLM (소스 그라운디드 AI):** 세상을 다 알지는 못합니다. 오직 **'사용자가 업로드한 문서'** 안에서만 정답을 찾습니다. 그 대신 환각이 절대 발생하지 않으며, 모든 문장에 정확한 원문 출처(페이지 번호, 단락)를 클릭 가능한 번호로 달아줍니다. 
+*   **ChatGPT & Claude (범용 AI):** 인터넷 전체에 퍼져 있는 방대한 데이터를 미리 학습(Pre-trained)하여 답변합니다.[^1] 세상의 모든 것에 대해 대답할 수 있지만, 학습 데이터에 없는 특정 기업의 내부 문서나 최신 심층 논문에 대해서는 그럴듯하게 거짓말을 지어내는 환각(Hallucination) 현상이 발생할 위험이 있습니다.
+*   **NotebookLM (소스 그라운디드 AI):** 세상을 다 알지는 못합니다. 오직 **'사용자가 업로드한 문서'** 안에서만 정답을 찾습니다. 그 대신 환각이 절대 발생하지 않으며, 모든 문장에 정확한 원문 출처(페이지 번호, 단락)를 클릭 가능한 번호로 달아줍니다.[^2] 
 
 ---
 
@@ -75,17 +75,8 @@ tags:
 여러분의 업무 특성을 되돌아보세요. 만약 매일 쏟아지는 사내 문서와 전문 자료 더미에서 허우적대고 있다면, 가장 먼저 친해져야 할 도구는 단연코 NotebookLM일 것입니다.
 
 ---
+
+---
 ### 레퍼런스
-[^1]: [NotebookLM adds audio and YouTube support](https://blog.google/technology/ai/notebooklm-audio-youtube-september-2024/)
-[^2]: [NotebookLM Review 2025: AI Tool for Researchers](https://effortlessacademic.com/notebooklm-review-2025/)
-[^3]: [Google NotebookLM's 2025 Transformation](https://automatetodominate.ai/blog/google-notebooklm-2025-transformation/)
-[^4]: [NotebookLM: This AI Is Grounded in Your Documents](https://kzsoftworks.com/notebooklm-ai-grounded-in-documents/)
-[^5]: [NotebookLM Updates: October 2025](https://www.youreverydayai.com/notebooklm-updates-october-2025/)
-[^6]: [The Ultimate AI Assistant Showdown: NotebookLM vs ChatGPT](https://elite.cloud/ai-assistant-showdown-notebooklm-chatgpt/)
-[^7]: [NotebookLM: Document-Grounded AI by Google](https://www.emergentmind.com/notebooklm-document-grounded-ai)
-[^8]: [NotebookLM gets a new look, audio interactivity and a premium version](https://blog.google/technology/ai/notebooklm-update-december-2024/)
-[^9]: [ChatGPT vs Claude vs Gemini vs Perplexity vs NotebookLM (2026 Guide)](https://medium.com/@mohitaggarwal/chatgpt-vs-claude-vs-gemini-vs-perplexity-vs-notebooklm-2026-guide-8f7d3e2b1a5c)
-[^10]: [NotebookLM Audio Overview Use Cases](https://www.youtube.com/watch?v=example_audio_overview)
-[^11]: [Google NotebookLM: Source-Grounded LLM Assistant](https://zenml.io/blog/google-notebooklm-source-grounded-llm)
-[^12]: [Unlocking Real Value with Google's NotebookLM: October 2025 Updates](https://www.youreverydayai.com/notebooklm-october-2025-updates/)
-[^13]: [NotebookLM vs ChatGPT vs Claude: Best AI for Your Notes](https://vertechacademy.com/notebooklm-vs-chatgpt-vs-claude/)
+[^1]: [ChatGPT vs Claude vs Gemini vs Perplexity vs NotebookLM (2026 Guide)](https://medium.com/@mohitaggarwal/chatgpt-vs-claude-vs-gemini-vs-perplexity-vs-notebooklm-2026-guide-8f7d3e2b1a5c)
+[^2]: [NotebookLM: Document-Grounded AI by Google](https://www.emergentmind.com/notebooklm-document-grounded-ai)
