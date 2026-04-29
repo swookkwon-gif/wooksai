@@ -119,7 +119,7 @@ def run_daily_ai_deep_research():
 
     # 4. 마크다운 파일 저장
     print(f"\n[Step 4] 블로그 업로드용 파일 저장 및 종료")
-    slug_name = "today-ai-top3-news"
+    slug_name = "daily-ai-top3-news"
     file_name = f"{now_kst.strftime('%Y-%m-%d')}-{slug_name}.md"
     file_path = os.path.join(POSTS_DIR, file_name)
     

@@ -17,7 +17,7 @@ export default function Sidebar({ lang }: { lang: string }) {
 
   return (
     <aside className="hidden md:block w-[280px] shrink-0">
-      <div className="md:sticky md:top-24 md:max-h-[calc(100vh-8rem)] md:overflow-y-auto no-scrollbar flex flex-col md:block items-center md:items-start text-center md:text-left pt-2">
+      <div className="md:sticky md:top-6 md:max-h-[calc(100vh-3rem)] md:overflow-y-auto no-scrollbar flex flex-col md:block items-center md:items-start text-center md:text-left pt-2">
 
         {/* Category Navigation (Minimal Mistakes & WikiDocs Style) */}
         <div className="w-full text-left pt-2 hidden md:block">

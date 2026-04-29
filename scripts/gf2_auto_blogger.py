@@ -117,7 +117,7 @@ def run_gemini_search_blogger():
         
     # 4. 마크다운 파일 저장
     print(f"\n[Step 3] 블로그 업로드용 파일 저장")
-    slug_name = "today-ai-top3-news-gf2-script"
+    slug_name = "daily-ai-top3-news-gf2"
     file_name = f"{now_kst.strftime('%Y-%m-%d')}-{slug_name}.md"
     file_path = os.path.join(POSTS_DIR, file_name)
     
