@@ -75,6 +75,7 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     
     # 본문 첫 부분을 바탕으로 excerpt(요약문) 자동 생성 (제목 반복 방지)
     clean_content = re.sub(r'<[^>]+>', '', content)
+    clean_content = re.sub(r'https?://[^\s]+', '', clean_content)
     clean_content = re.sub(r'[#*`\[\]\(\)]', '', clean_content)
     clean_content = re.sub(r'\s+', ' ', clean_content).strip()
     excerpt_text = clean_content[:120] + "..." if len(clean_content) > 120 else clean_content
@@ -103,60 +104,63 @@ def extract_image_tag(html_content):
     img_match = re.search(r'(<img[^>]+>)', html_content, re.IGNORECASE)
     return img_match.group(1) if img_match else ""
 
-def process_rss_feed(feed):
-    print(f"\n🔍 대상 RSS: {feed['name']}")
-    parsed_feed = feedparser.parse(feed['url'])
-    
-    now = datetime.now(timezone.utc)
+def process_all_rss_feeds(feeds):
     items_to_process = []
     
-    for entry in parsed_feed.entries:
-        try:
-            url_id = entry.get('link', entry.get('id', ''))
-            if not url_id or is_processed("rss", url_id):
-                continue
-                
-            dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc) if 'published_parsed' in entry and entry.published_parsed else now
-            if (now - dt).days > 2:
-                continue
-            
-            content = ""
-            if 'content' in entry:
-                content = entry.content[0].value
-            elif 'summary' in entry:
-                content = entry.summary
-                
-            title = entry.get('title', 'No Title')
-            img_tag = extract_image_tag(content)
-            
-            # Keywords filtering
-            keywords = feed.get('keywords', [])
-            if keywords:
-                combined_text = (title + " " + content).lower()
-                if not any(k.lower() in combined_text for k in keywords):
+    for feed in feeds:
+        print(f"\n🔍 대상 RSS: {feed['name']}")
+        parsed_feed = feedparser.parse(feed['url'])
+        
+        now = datetime.now(timezone.utc)
+        
+        for entry in parsed_feed.entries:
+            try:
+                url_id = entry.get('link', entry.get('id', ''))
+                if not url_id or is_processed("rss", url_id):
                     continue
-            
-            items_to_process.append({
-                "id": url_id,
-                "title": title,
-                "link": entry.get('link', ''),
-                "content": content,
-                "img_tag": img_tag
-            })
-        except Exception as e:
-            pass
+                    
+                dt = datetime(*entry.published_parsed[:6], tzinfo=timezone.utc) if 'published_parsed' in entry and entry.published_parsed else now
+                if (now - dt).days > 2:
+                    continue
+                
+                content = ""
+                if 'content' in entry:
+                    content = entry.content[0].value
+                elif 'summary' in entry:
+                    content = entry.summary
+                    
+                title = entry.get('title', 'No Title')
+                img_tag = extract_image_tag(content)
+                
+                # Keywords filtering
+                keywords = feed.get('keywords', [])
+                if keywords:
+                    combined_text = (title + " " + content).lower()
+                    if not any(k.lower() in combined_text for k in keywords):
+                        continue
+                
+                items_to_process.append({
+                    "feed_name": feed['name'],
+                    "id": url_id,
+                    "title": title,
+                    "link": entry.get('link', ''),
+                    "content": content,
+                    "img_tag": img_tag
+                })
+            except Exception as e:
+                pass
 
     if not items_to_process:
         print(" └ 처리할 새로운 기사가 없습니다.")
         return
 
-    print(f" └ {len(items_to_process)}개의 새 기사 처리 중...")
+    print(f" └ 총 {len(items_to_process)}개의 새 기사 처리 중...")
     
     # Process batch with LLM
     articles_text = ""
     for idx, item in enumerate(items_to_process, 1):
         snippet = item['content'][:5000]
-        articles_text += f"\n\n--- 기사 {idx} ---\n제목: {item['title']}\n링크: {item['link']}\n"
+        articles_text += f"\n\n--- 기사 {idx} (출처: {item['feed_name']}) ---\n제목: {item['title']}\n링크: {item['link']}\n"
         if item['img_tag']: articles_text += f"원본 이미지 태그: {item['img_tag']}\n"
         articles_text += f"내용(HTML): {snippet}\n"
 
@@ -164,7 +168,7 @@ def process_rss_feed(feed):
 
     prompt = f"""
 당신은 최고 수준의 AI 뉴스 에디터입니다.
-아래 [{feed['name']}] RSS에서 수집된 새 기사들을 바탕으로, 1개의 마크다운 종합 포스트 본문을 작성하세요.
+아래 여러 RSS 소스에서 수집된 새 기사들을 바탕으로, 종합 AI 뉴스 마크다운 포스트 본문을 작성하세요.
 
 [사용자 맞춤형 평가 핵심 룰]
 {custom_rules}
@@ -181,8 +185,9 @@ def process_rss_feed(feed):
 3. 수집된 모든 기사에 대해 1~5점 척도로 중요도를 평가(`evaluations`)하세요. (5점: 핵심 트렌드, 1점: 아주 단순한 단신)
 4. 기사들을 병합해 가독성 좋은 마크다운 포스트 본문(`markdown_content`)을 구성하되, **최소 3점 이상인 고가치 기사들만 골라서 포함**하세요.
 5. 원문에 <img ...> 태그가 존재하면, 이 태그를 **한 글자도 고치지 말고 그대로 복사해서 삽입**하세요. 마크다운의 `![]()`로 변경하면 안 됩니다.
-6. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목(`### [기사 제목](링크)`)이나 본문으로 시작하세요.
-7. JSON 구조 응답 필수: {{"has_ai_news": bool, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
+6. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목으로 시작하세요.
+7. 소제목은 `### [기사 제목](링크)` 형식으로 작성하되, **반드시 그 바로 아래 줄을 한 칸 띄우고(빈 줄 삽입) 본문을 시작**하세요.
+8. JSON 구조 응답 필수: {{"has_ai_news": bool, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
 """
     client = genai.Client(api_key=GEMINI_API_KEY)
     
@@ -243,24 +248,24 @@ def process_rss_feed(feed):
                 result_md = data.get("markdown_content", "")
                 evals = data.get("evaluations", [])
                 if evals:
-                    save_evaluations(feed['name'], evals)
+                    save_evaluations("Global AI News", evals)
                 
-                slug = slugify(feed['name'])
+                slug = "global-ai-news-summary"
                 now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                title = f"[{now_kst.strftime('%m월 %d일')}] {feed['name']} 주요 뉴스 요약"
-                create_markdown_post_file(slug, title, result_md)
+                title = f"[{now_kst.strftime('%m월 %d일')}] 종합 AI 뉴스 요약"
+                create_markdown_post_file(slug, title, result_md, category="AI News")
                 
                 for item in items_to_process:
-                    mark_processed("rss", item['id'])
-                
-                print(f" ✅ {feed['name']} 포스팅 완료.")
+                    mark_processed("rss", item["id"])
+                    
+                print(f"      ✅ 포스트 완료 및 저장됨")
             else:
                 for item in items_to_process:
-                    mark_processed("rss", item['id'])
-                print(f" └ 처리 완료 (AI 기사 아님)")
-            break
+                    mark_processed("rss", item["id"])
+                print(f"      ✅ 중요 기사(3점 이상)가 없어 포스트 생략 (처리완료 마킹)")
+            return
             
-        print(f"      ❌ 모든 모델 실패: 30초 대기 후 재시도... ({attempt+1}/3)")
+        print(f"      ❌ 모든 모델 할당량 초과: 30초 대기 후 재시도... ({attempt+1}/3)")
         time.sleep(30)
                 
     # API Pacing
@@ -496,10 +501,9 @@ if __name__ == "__main__":
     print("=======================================================")
     
     # 1. RSS 처리
-    for feed in FEEDS:
-        process_rss_feed(feed)
-        time.sleep(1)
+    process_all_rss_feeds(FEEDS)
         
+
     print("\n-------------------------------------------------------")
     
     # 2. Gmail 뉴스레터(Sender별) 처리
