@@ -4,7 +4,7 @@ import re
 POSTS_DIR = "/Users/wook/WookAi/Booklog/content/posts"
 
 mapping = {
-    "1. Digital Marketing": "Marketing",
+    "1. Marketing": "Marketing",
     "Digital Marketing": "Marketing",
     "마케팅 논문": "Marketing",
     "2. AI News": "AI News",

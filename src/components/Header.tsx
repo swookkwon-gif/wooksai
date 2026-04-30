@@ -18,7 +18,7 @@ export default function Header({ lang }: { lang: string }) {
         
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8 text-[13px] font-bold text-neutral-500 uppercase tracking-wider">
-          <Link href={`/${lang}/category/digital-marketing`} className="hover:text-blue-600 transition-colors">Digital Marketing</Link>
+          <Link href={`/${lang}/category/marketing`} className="hover:text-blue-600 transition-colors">Marketing</Link>
           <Link href={`/${lang}/category/ai-news`} className="hover:text-blue-600 transition-colors">AI News</Link>
           <Link href={`/${lang}/category/ai-learnings`} className="hover:text-blue-600 transition-colors">AI Learnings</Link>
           <Link href={`/${lang}/category/career`} className="hover:text-blue-600 transition-colors">Career</Link>
@@ -41,7 +41,7 @@ export default function Header({ lang }: { lang: string }) {
       {/* Mobile Nav Dropdown */}
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-gray-100 shadow-lg px-6 py-4 flex flex-col gap-4 text-sm font-bold text-neutral-600 uppercase tracking-wider">
-          <Link href={`/${lang}/category/digital-marketing`} onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 py-2 border-b border-gray-50">Digital Marketing</Link>
+          <Link href={`/${lang}/category/marketing`} onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 py-2 border-b border-gray-50">Marketing</Link>
           <Link href={`/${lang}/category/ai-news`} onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 py-2 border-b border-gray-50">AI News</Link>
           <Link href={`/${lang}/category/ai-learnings`} onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 py-2 border-b border-gray-50">AI Learnings</Link>
           <Link href={`/${lang}/category/career`} onClick={() => setIsMobileMenuOpen(false)} className="hover:text-blue-600 py-2">Career</Link>

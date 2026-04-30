@@ -4,7 +4,7 @@ import re
 POSTS_DIR = "/Users/wook/WookAi/Booklog/content/posts"
 
 dir_to_cat = {
-    "1. Digital Marketing": "Marketing",
+    "Marketing": "Marketing",
     "2. AI News": "AI News",
     "3. AI Learnings": "AI Learnings",
     "4. Career": "Career",

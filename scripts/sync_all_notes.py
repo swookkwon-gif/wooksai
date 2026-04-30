@@ -70,7 +70,7 @@ def analyze_note_with_gemini(title, content):
 
 [규칙]
 - 파일명(slug)은 확장자 .md 없이 영소문자와 하이픈(-)만 사용하여 작성 (예: modern-marketing-strategy)
-- 카테고리는 다음 세 가지 중 하나만 선택: "1. Digital Marketing", "2. AI News", "3. AI Learnings"
+- 카테고리는 다음 네 가지 중 하나만 선택: "Marketing", "AI News", "AI Learnings", "Career"
 - 요약(excerpt)은 150자 내외의 한국어로 작성
 - JSON 형식으로만 응답 (예: {{"slug": "...", "category": "...", "excerpt": "..."}})
 """
