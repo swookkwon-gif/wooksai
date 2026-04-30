@@ -2,7 +2,7 @@
 title: "기네스 맥주 양조장에서 탄생한 현대 통계학의 기적: Student's t-분포 이야기"
 date: 2026-04-30T16:30:00+09:00
 excerpt: "최고의 흑맥주를 만들기 위해 투입된 천재 수학자가 어떻게 가명으로 현대 통계학(t-분포)을 뒤바꿔 놓았는지, 기네스 양조장의 흥미로운 데이터 사이언스 역사를 파헤쳐 봅니다."
-category: AI Learnings
+category: Data
 tags: ["Data Science", "Statistics", "Gosset", "Student t-distribution", "Guinness", "Story"]
 ---
 

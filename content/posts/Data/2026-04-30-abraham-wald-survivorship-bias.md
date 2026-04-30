@@ -2,7 +2,7 @@
 title: "돌아온 전투기에는 장갑을 두르지 마라: 데이터가 만든 치명적 착각, 생존자 편향(Survivorship Bias)"
 date: 2026-04-30T17:00:00+09:00
 excerpt: "2차 세계대전, 폭격기의 생존율을 높이기 위해 군 수뇌부는 총탄 자국이 많은 곳에 장갑을 덧대려 했습니다. 이 어리석은 결정을 막은 천재 통계학자의 이야기를 소개합니다."
-category: AI Learnings
+category: Data
 tags: ["Data Science", "Statistics", "Survivorship Bias", "Abraham Wald", "생존자 편향"]
 ---
 
