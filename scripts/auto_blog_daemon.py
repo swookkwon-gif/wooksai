@@ -286,7 +286,9 @@ def get_email_body(payload, max_length=15000):
             data = part.get('body', {}).get('data', '')
             if data:
                 html_code = base64.urlsafe_b64decode(data).decode('utf-8', 'ignore')
-                # Strip HTML tags
+                # Preserve links: convert <a href="URL">text</a> to "text (Link: URL)"
+                html_code = re.sub(r'<a\s+[^>]*href=["\'](https?://[^"\']+)["\'][^>]*>(.*?)</a>', r'\2 (Link: \1)', html_code, flags=re.IGNORECASE|re.DOTALL)
+                # Strip remaining HTML tags
                 clean_text = re.sub(r'<[^>]+>', ' ', html_code)
                 # Collapse multiple spaces and newlines
                 clean_text = re.sub(r'\s+', ' ', clean_text).strip()
@@ -409,9 +411,11 @@ def process_gmail_newsletters():
 [요구사항]
 1. 뉴스레터 내에서 소개된 각각의 주요 기사나 도구, 단신들에 대해 1~5점 척도로 퀄리티/중요도를 평가(`evaluations`)하세요. (5점: 핵심, 1점: 단순 가십)
 2. 블로그 포스트의 본문(`markdown_content`)에는 평가 점수가 **3점 이상인 핵심 내용만 필터링하여 포함**하세요.
-3. 뉴스레터 내용이 단신 나열 형태라면 원문을 최대한 유지하고 매끄럽게 교정하며, 긴 산문형이나 난잡하게 섞여있다면 개조식 리스트 형태로 깔끔히 요약하세요.
-4. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 소제목(`###`) 단위로만 구분하세요. 포스트 최상단에 전체 제목(H1, `# 제목`)을 절대 쓰지 마세요.
-5. JSON 구조 응답 필수: {{"evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
+3. 각 기사나 소식 끝에는 **반드시 원문에 포함된 출처(Source)와 링크(URL)를 명시**하세요. (예: `[원문 보기](URL)`)
+4. 뉴스레터 내용이 단신 나열 형태라면 원문을 최대한 유지하고 매끄럽게 교정하며, 긴 산문형이나 난잡하게 섞여있다면 개조식 리스트 형태로 깔끔히 요약하세요.
+5. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 소제목(`###`) 단위로만 구분하세요. 포스트 최상단에 전체 제목(H1, `# 제목`)을 절대 쓰지 마세요.
+6. 전체 내용을 관통하는 **매력적이고 구체적인 블로그 포스트 제목(`post_title`)**을 작성하세요. 단순히 "[발신자] 뉴스레터" 같은 제목은 피하세요. (예: "애플의 Vision Pro 개발 중단과 하이퍼스케일러 AI 투자 동향")
+7. JSON 구조 응답 필수: {{"post_title": string, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
 """
         response = None
         models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
@@ -428,6 +432,7 @@ def process_gmail_newsletters():
                             response_schema={
                                 "type": "object",
                                 "properties": {
+                                    "post_title": {"type": "string"},
                                     "evaluations": {
                                         "type": "array",
                                         "items": {
@@ -442,7 +447,7 @@ def process_gmail_newsletters():
                                     },
                                     "markdown_content": {"type": "string"}
                                 },
-                                "required": ["evaluations", "markdown_content"]
+                                "required": ["post_title", "evaluations", "markdown_content"]
                             }
                         )
                     )
@@ -467,6 +472,7 @@ def process_gmail_newsletters():
                     continue
                 
                 result_md = data.get("markdown_content", "")
+                post_title = data.get("post_title", f"최신 AI 뉴스레터 동향")
                 evals = data.get("evaluations", [])
                 if evals:
                     save_evaluations(sender, evals)
@@ -474,7 +480,7 @@ def process_gmail_newsletters():
                 if result_md:
                     slug = slugify(sender) + "-newsletter"
                     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                    title = f"[{sender}] 최신 AI 뉴스레터 동향"
+                    title = f"[{sender}] {post_title}"
                     
                     create_markdown_post_file(slug, title, result_md, category="AI News")
                     
