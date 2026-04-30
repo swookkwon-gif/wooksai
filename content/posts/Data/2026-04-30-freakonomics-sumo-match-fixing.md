@@ -1,6 +1,6 @@
 ---
 title: "데이터는 거짓말을 하지 않는다: 일본 스모의 승부 조작을 밝혀낸 괴짜 통계학 (Freakonomics)"
-date: 2026-04-30T23:55:00+09:00
+date: 2026-04-30T23:31:00+09:00
 excerpt: "신성한 스포츠로 여겨지는 일본의 스모. 과연 그들은 정정당당하게 싸울까요? 스티븐 레빗 교수가 오직 '숫자(데이터)'만을 분석하여 스모계의 은밀한 승부 조작을 증명해 낸 기막힌 통계 스토리를 소개합니다."
 category: Data
 tags: ["Data Science", "Statistics", "Freakonomics", "Correlation", "Data Analysis", "Incentives"]
@@ -81,7 +81,9 @@ tags: ["Data Science", "Statistics", "Freakonomics", "Correlation", "Data Analys
 **인간은 자신의 이익(인센티브)을 위해 거짓말을 하고 조작을 할 수 있습니다. 
 하지만 그들의 행동이 남기는 흔적, 즉 '데이터(Data)'는 절대 거짓말을 하지 않습니다.** 데이터 과학이 어떻게 숨겨진 사회의 민낯을 드러낼 수 있는지 보여주는 가장 짜릿하고 우아한 사례가 아닐까요?
 
+
 ---
 
-**[다음 편 예고]**
-카지노에서 검은색이 26번 연속으로 나올 확률은 얼마일까요? 수많은 사람들을 파산으로 몰고 간 치명적인 확률의 착각, **'도박사의 오류(Gambler's Fallacy)'**에 대해 알아보겠습니다.
+## 📚 참고자료 및 주석
+- Steven Levitt, Stephen J. Dubner, "Freakonomics" (괴짜경제학)
+- 일본 스모 협회 데이터 및 승부 조작 관련 통계적 증명

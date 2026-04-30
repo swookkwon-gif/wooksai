@@ -1,6 +1,6 @@
 ---
 title: "99% 정확한 암 진단 키트가 양성일 때, 진짜 암일 확률은? 기저율 무시의 오류와 베이즈 정리 (False Positive Paradox)"
-date: 2026-05-02T00:00:00+09:00
+date: 2026-04-30T23:34:00+09:00
 excerpt: "병원에서 정확도 99%인 희귀병 테스트를 받았는데 '양성'이 나왔습니다. 절망해야 할까요? 놀랍게도 진짜 병에 걸렸을 확률은 9%밖에 되지 않습니다. 인간의 뇌를 마비시키는 '거짓 양성 패러독스'와 베이즈 정리를 알아봅니다."
 category: Data
 tags: ["Data Science", "Statistics", "Bayes Theorem", "False Positive", "Paradox", "Base Rate Fallacy"]
@@ -83,7 +83,9 @@ tags: ["Data Science", "Statistics", "Bayes Theorem", "False Positive", "Paradox
 
 99%라는 강력한 숫자 앞에서도, 침착하게 전체 모수를 들여다볼 수 있는 냉정함. 그것이 바로 데이터를 다루는 사람에게 필요한 첫 번째 덕목입니다.
 
+
 ---
 
-**[다음 편 예고]**
-만약 검사가 이 통계적 함정을 모른 채 당신을 법정에 세운다면 어떻게 될까요? "이 집에 영아 돌연사가 두 번이나 연속으로 일어날 확률은 7,300만 분의 1입니다! 이 엄마는 살인자입니다!"라며 무고한 엄마를 감옥에 보냈던 끔찍하고 슬픈 재판 사건, **'검사의 오류(Prosecutor's Fallacy)'**에 대해 알아보겠습니다.
+## 📚 참고자료 및 주석
+- 베이즈 정리 (Bayes' Theorem) 및 기저율 무시의 오류 (Base Rate Fallacy)
+- 거짓 양성 패러독스 (False Positive Paradox) 관련 의학 통계 사례

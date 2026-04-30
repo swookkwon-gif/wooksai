@@ -1,6 +1,6 @@
 ---
 title: "방 안에 23명만 모여도 생일이 같은 사람이 있다? 직관을 배신하는 생일 패러독스 (Birthday Paradox)"
-date: 2026-04-30T23:50:00+09:00
+date: 2026-04-30T23:30:00+09:00
 excerpt: "1년은 365일입니다. 그렇다면 생일이 같은 두 사람이 있을 확률이 50%를 넘으려면 몇 명이 모여야 할까요? 인간의 뇌가 기하급수적 조합을 어떻게 오판하는지 보여주는 대표적인 통계 패러독스입니다."
 category: Data
 tags: ["Data Science", "Statistics", "Birthday Paradox", "Probability", "Combinatorics"]
@@ -81,3 +81,10 @@ tags: ["Data Science", "Statistics", "Birthday Paradox", "Probability", "Combina
 
 **[시리즈 10편을 마치며]**
 이것으로 데이터, 통계학에 숨겨진 10편의 흥미로운 시리즈를 일단락합니다. 다음 11편부터는 조금 더 깊이 있는 상관관계, 인과관계, 그리고 빅데이터의 한계에 대한 놀라운 이야기들로 이어가겠습니다. 
+
+
+---
+
+## 📚 참고자료 및 주석
+- Richard von Mises (1939), "Birthday problem"
+- 생일 문제 (Birthday problem) 통계적 확률 계산 기초

@@ -1,6 +1,6 @@
 ---
 title: "넷플릭스 100만 달러 상금과 나폴레옹 다이너마이트: 인공지능도 포기한 인간의 취향 (Napoleon Dynamite Problem)"
-date: 2026-05-05T00:00:00+09:00
+date: 2026-04-30T23:37:00+09:00
 excerpt: "넷플릭스는 영화 추천 알고리즘의 성능을 10% 올리기 위해 100만 달러의 상금을 걸었습니다. 천재 개발자들이 모여 알고리즘을 고도화했지만, '나폴레옹 다이너마이트'라는 영화 한 편이 모든 AI의 예측을 박살 내버립니다. 데이터로도 예측할 수 없는 인간 취향의 역설을 알아봅니다."
 category: Data
 tags: ["Data Science", "Machine Learning", "Recommendation System", "Netflix Prize", "Algorithm", "Outliers"]
@@ -71,7 +71,9 @@ tags: ["Data Science", "Machine Learning", "Recommendation System", "Netflix Pri
 
 "알고리즘이 나를 너무 잘 안다"며 소름 돋아 하던 우리들. 하지만 우리 마음속 아주 깊은 곳에는 최첨단 AI조차 절대 예측할 수 없는 '나폴레옹 다이너마이트' 같은 미지의 영역이 하나씩 자리 잡고 있습니다.
 
+
 ---
 
-**[다음 편 예고]**
-2차 세계대전 당시, 연합군은 독일군 전차가 한 달에 몇 대나 생산되는지 몰라 패닉에 빠졌습니다. 스파이들은 1,000대라고 보고했지만, 통계학자들은 노획한 전차 부품의 '일련번호' 단 몇 개만으로 아주 단순한 수학 공식을 세워 정확한 생산량을 예측해 냅니다. 무작위 표본의 위력을 보여주는 통계학의 전설, **'독일 전차 문제(German Tank Problem)'**에 대해 알아보겠습니다.
+## 📚 참고자료 및 주석
+- Netflix Prize 데이터 알고리즘 논문 및 New York Times 기사
+- 협업 필터링 (Collaborative Filtering)과 나폴레옹 다이너마이트 문제

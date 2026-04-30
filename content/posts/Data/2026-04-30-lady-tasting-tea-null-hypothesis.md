@@ -1,6 +1,6 @@
 ---
 title: "현대 통계학을 탄생시킨 한 잔의 홍차: '밀크티를 맛보는 여인'과 귀무가설 (Null Hypothesis)"
-date: 2026-05-04T00:00:00+09:00
+date: 2026-04-30T23:36:00+09:00
 excerpt: "홍차를 먼저 넣었는지, 우유를 먼저 넣었는지 맛으로 구별할 수 있을까요? 사람들은 비웃었지만, 한 천재 통계학자는 이를 진지하게 검증하기 위해 실험을 설계합니다. 과학적 '가설 검정'의 시초가 된 위대한 홍차 파티 이야기를 들려드립니다."
 category: Data
 tags: ["Data Science", "Statistics", "Null Hypothesis", "p-value", "Ronald Fisher", "Experimental Design"]
@@ -72,7 +72,9 @@ tags: ["Data Science", "Statistics", "Null Hypothesis", "p-value", "Ronald Fishe
 
 오늘날 우리가 당연하게 믿고 있는 수많은 의학적, 과학적, 비즈니스적 사실들은 모두 "어차피 우연일 거야"라는 냉소적인 귀무가설의 공격을 이겨내고 살아남은 진실들입니다.
 
+
 ---
 
-**[다음 편 예고]**
-넷플릭스는 자신의 영화 추천 알고리즘을 10% 개선하는 사람에게 무려 100만 달러(약 13억 원)의 상금을 걸었습니다. 수많은 천재들이 도전했지만, 그들의 앞길을 가로막은 최악의 복병 영화가 하나 있었습니다. 인공지능도 예측을 포기하게 만든 괴짜들의 영화, **'나폴레옹 다이너마이트(Napoleon Dynamite)와 예측 불가능성'**에 대해 알아봅니다.
+## 📚 참고자료 및 주석
+- Ronald A. Fisher, "The Design of Experiments" (실험계획법)
+- 귀무가설 (Null Hypothesis), p-value, 무작위 대조 실험의 기원

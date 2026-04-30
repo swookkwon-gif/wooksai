@@ -1,6 +1,6 @@
 ---
 title: "빅데이터의 오만이 부른 대참사: 구글 독감 트렌드(Google Flu Trends)의 처참한 실패"
-date: 2026-05-08T00:00:00+09:00
+date: 2026-04-30T23:40:00+09:00
 excerpt: "구글은 병원 기록 없이 오직 사람들의 '검색어'만으로 미국 전역의 독감 유행을 예측하는 시스템을 발표하며 세상을 놀라게 했습니다. 하지만 몇 년 뒤, 이 완벽해 보이던 빅데이터 알고리즘은 실제 환자 수보다 2배 이상 부풀려진 쓰레기 데이터를 쏟아내며 처참히 붕괴합니다. 데이터의 '과적합(Overfitting)'과 알고리즘의 오만을 보여주는 대표적인 사례를 알아봅니다."
 category: Data
 tags: ["Data Science", "Big Data", "Google Flu Trends", "Overfitting", "Algorithm Bias", "Statistics"]
@@ -73,3 +73,10 @@ tags: ["Data Science", "Big Data", "Google Flu Trends", "Overfitting", "Algorith
 데이터가 권력이 된 AI 시대, 우리가 진정으로 갖춰야 할 무기는 복잡한 파이썬 코딩 기술이나 수학 공식이 아닙니다. 그것은 바로 숫자의 이면에 숨겨진 맥락과 인간의 행동을 읽어내는 **'데이터 문해력(Data Literacy)'**입니다.
 
 이 기나긴 통계학 시리즈가 여러분의 데이터 문해력을 기르는 데 작은 도움이 되었기를 바랍니다. 감사합니다.
+
+
+---
+
+## 📚 참고자료 및 주석
+- Google Flu Trends (2008) 논문 및 이후 실패 원인 분석 논문 (Lazer et al., 2014)
+- 빅데이터 허브리스 (Big Data Hubris) 및 과적합 (Overfitting) 사례

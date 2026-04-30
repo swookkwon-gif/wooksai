@@ -1,6 +1,6 @@
 ---
 title: "숫자는 완벽하게 똑같은데, 그래프는 완전히 다르다? 요약 데이터의 함정 '앤스컴의 콰르텟 (Anscombe's Quartet)'"
-date: 2026-05-07T00:00:00+09:00
+date: 2026-04-30T23:39:00+09:00
 excerpt: "평균, 분산, 상관계수, 회귀선까지 통계적 수치가 소수점 두 자리까지 완벽하게 일치하는 4개의 데이터 세트가 있습니다. 숫자가 똑같으니 형태도 똑같을까요? 이 질문에 시각화로 던진 충격적인 해답, 앤스컴의 콰르텟을 소개합니다."
 category: Data
 tags: ["Data Science", "Data Visualization", "Statistics", "Anscombe's Quartet", "Correlation"]
@@ -69,7 +69,9 @@ tags: ["Data Science", "Data Visualization", "Statistics", "Anscombe's Quartet",
 
 빅데이터 시대, 숫자에 파묻혀 허우적대고 있다면 잠시 키보드에서 손을 떼고 모니터에 점을 찍어보세요. 숫자가 차마 말하지 못했던 진실이, 때로는 공룡의 모습으로 당신에게 손을 흔들고 있을지도 모릅니다.
 
+
 ---
 
-**[다음 편 예고]**
-"빅데이터는 완벽하다"는 오만에 빠진 구글. 그들은 병원 진료 기록도 없이 오직 사람들의 검색어만으로 미국의 독감 유행을 예측하는 '구글 독감 트렌드'를 발표하며 세상을 놀라게 했습니다. 하지만 몇 년 뒤, 이 완벽해 보이던 시스템은 처참하게 붕괴하고 맙니다. 과대적합(Overfitting)과 데이터의 함정을 보여주는 통계 시리즈의 대단원! **'구글 독감 트렌드의 실패'**가 이어집니다.
+## 📚 참고자료 및 주석
+- Francis Anscombe (1973), "Graphs in Statistical Analysis"
+- 앤스컴의 콰르텟 (Anscombe's Quartet) 및 Datasaurus Dozen
