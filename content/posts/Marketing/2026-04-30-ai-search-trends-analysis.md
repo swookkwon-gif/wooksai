@@ -18,7 +18,7 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
 
 가장 핫한 5개 서비스(ChatGPT, Gemini, Claude, Perplexity, DeepSeek)를 대상으로 구글 검색 관심도를 시각화해 보았습니다.
 
-![월별 AI 서비스 검색량 추이](/images/ai_trends/monthly_ai_trends.png)
+![월별 AI 서비스 검색량 추이](/wooksai/images/ai_trends/monthly_ai_trends.png)
 *(데이터 소스: Google Trends API, 2022.01 ~ 2026.04 기준)*
 
 위 그래프에서 도출할 수 있는 핵심 인사이트는 다음과 같습니다.
@@ -36,7 +36,7 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
 
 ## 📊 분기별 데이터로 보는 2024~2026 시장 안정화
 
-![분기별 AI 서비스 검색량 비교](/images/ai_trends/quarterly_ai_trends.png)
+![분기별 AI 서비스 검색량 비교](/wooksai/images/ai_trends/quarterly_ai_trends.png)
 *(최근 3년 분기별 평균 검색량 비교)*
 
 분기별 데이터를 살펴보면, 초기 시장의 극심한 변동성이 줄어들고 **각 플랫폼이 자신만의 확고한 포지셔닝**을 찾아가고 있음을 알 수 있습니다. 

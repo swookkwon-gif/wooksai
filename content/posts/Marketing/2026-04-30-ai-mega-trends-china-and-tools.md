@@ -18,7 +18,7 @@ tags: ["Google Trends", "AI Market", "Mega Trend", "Chinese AI", "DeepSeek", "Mi
 
 금융위기(2008년), 비트코인 열풍, 코로나19 팬데믹, 그리고 메타버스까지... 지난 20년간 세상을 뒤흔들었던 거대한 토픽들과 'AI'의 검색 관심도를 비교해 보았습니다.
 
-![20년 메가 트렌드 비교](/images/ai_trends/mega_trends.png)
+![20년 메가 트렌드 비교](/wooksai/images/ai_trends/mega_trends.png)
 *(데이터 소스: Google Trends 및 추세 예측 모델링, 2006 ~ 2026 기준)*
 
 ### 💡 인사이트: "일시적 열풍(Hype)인가, 영구적 패러다임 전환인가?"
@@ -32,7 +32,7 @@ tags: ["Google Trends", "AI Market", "Mega Trend", "Chinese AI", "DeepSeek", "Mi
 
 글로벌 시장과 단절된(Firewall) 독자적 생태계를 가진 중국 내부의 AI 경쟁은 그 어느 곳보다 치열합니다. 최근 글로벌 쇼크를 일으킨 DeepSeek를 포함해 중국 내 Top 5 모델을 비교했습니다.
 
-![중국 Top 5 AI 검색량 추이](/images/ai_trends/chinese_ai_trends.png)
+![중국 Top 5 AI 검색량 추이](/wooksai/images/ai_trends/chinese_ai_trends.png)
 
 ### 💡 인사이트: 압도적 1위의 부재, 군웅할거 시대
 *   **DeepSeek의 압도적 반란**: 글로벌뿐만 아니라 중국 내부에서도 DeepSeek의 상승세는 타의 추종을 불허합니다.
@@ -45,7 +45,7 @@ tags: ["Google Trends", "AI Market", "Mega Trend", "Chinese AI", "DeepSeek", "Mi
 
 챗봇을 넘어 영상, 이미지, 코딩, 생산성 분야의 대표적인 AI 서비스들의 성장세도 살펴보았습니다. (Midjourney, GitHub Copilot, Notion AI, Runway, Suno)
 
-![주요 AI 툴 검색량 추이](/images/ai_trends/ai_tools_trends.png)
+![주요 AI 툴 검색량 추이](/wooksai/images/ai_trends/ai_tools_trends.png)
 
 ### 💡 인사이트: B2B 유스케이스의 증명
 *   **미드저니(Midjourney) & 런웨이(Runway)**: 크리에이티브 업계의 표준으로 자리 잡았습니다. 특히 영상 생성 AI인 Runway는 Sora의 등장 이후에도 꾸준히 영상 제작 파이프라인의 핵심 도구로 쓰이고 있습니다.
