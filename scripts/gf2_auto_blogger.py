@@ -47,6 +47,7 @@ def run_gemini_search_blogger():
     recent_news = load_recent_covered_news(days=2)
     negative_prompt = ""
     if recent_news:
+        recent_news = recent_news[:30] # Limit to 30 items to prevent prompt explosion
         print(f"✅ 최근 다룬 뉴스 {len(recent_news)}건 확인 완료 (중복 방지 적용)")
         negative_prompt = "\n\n[중복 방지 지침]\n아래 나열된 뉴스 기사/주제는 어제와 오늘 이미 다른 뉴스레터나 피드에서 다루었으므로, 이번 리서치에서 **절대 중복으로 포함하지 마세요**:\n"
         for idx, news in enumerate(recent_news, 1):
@@ -95,8 +96,7 @@ def run_gemini_search_blogger():
         "contents": [{"parts": [{"text": prompt}]}],
         "tools": [{"googleSearch": {}}],
         "generationConfig": {
-            "temperature": 0.4,
-            "maxOutputTokens": 8192
+            "temperature": 0.4
         }
     }
     
@@ -107,7 +107,14 @@ def run_gemini_search_blogger():
         
         article_content = ""
         if "candidates" in data and len(data["candidates"]) > 0:
-            parts = data["candidates"][0].get("content", {}).get("parts", [])
+            candidate = data["candidates"][0]
+            
+            # 짤림 방지: 비정상 종료 시 에러 처리
+            if candidate.get('finishReason') != 'STOP':
+                print(f"❌ 생성 중단됨 (Finish Reason: {candidate.get('finishReason')})")
+                return
+                
+            parts = candidate.get("content", {}).get("parts", [])
             for part in parts:
                 article_content += part.get("text", "")
     except Exception as e:
