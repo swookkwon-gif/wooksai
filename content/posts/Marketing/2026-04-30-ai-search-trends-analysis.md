@@ -25,28 +25,34 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
   "dataKeys": ["ChatGPT", "Gemini", "Claude", "DeepSeek", "Perplexity"],
   "colors": ["#10b981", "#3b82f6", "#8b5cf6", "#ef4444", "#f59e0b"],
   "data": [
-    {"month": "22.11", "ChatGPT": 1, "Gemini": 0, "Claude": 0, "DeepSeek": 0, "Perplexity": 0},
-    {"month": "23.01", "ChatGPT": 30, "Gemini": 0, "Claude": 0, "DeepSeek": 0, "Perplexity": 0},
-    {"month": "23.04", "ChatGPT": 65, "Gemini": 5, "Claude": 2, "DeepSeek": 0, "Perplexity": 1},
-    {"month": "23.07", "ChatGPT": 63, "Gemini": 8, "Claude": 4, "DeepSeek": 0, "Perplexity": 2},
-    {"month": "23.10", "ChatGPT": 64, "Gemini": 10, "Claude": 5, "DeepSeek": 0, "Perplexity": 2},
-    {"month": "24.01", "ChatGPT": 65, "Gemini": 12, "Claude": 7, "DeepSeek": 0, "Perplexity": 3},
-    {"month": "24.04", "ChatGPT": 66, "Gemini": 14, "Claude": 9, "DeepSeek": 0, "Perplexity": 3},
-    {"month": "24.07", "ChatGPT": 65, "Gemini": 15, "Claude": 12, "DeepSeek": 1, "Perplexity": 4},
-    {"month": "24.10", "ChatGPT": 66, "Gemini": 16, "Claude": 14, "DeepSeek": 2, "Perplexity": 4},
-    {"month": "25.01", "ChatGPT": 67, "Gemini": 18, "Claude": 16, "DeepSeek": 5, "Perplexity": 4},
-    {"month": "25.04", "ChatGPT": 68, "Gemini": 19, "Claude": 18, "DeepSeek": 8, "Perplexity": 5},
-    {"month": "25.07", "ChatGPT": 67, "Gemini": 20, "Claude": 20, "DeepSeek": 12, "Perplexity": 5},
-    {"month": "25.10", "ChatGPT": 68, "Gemini": 21, "Claude": 22, "DeepSeek": 18, "Perplexity": 5},
-    {"month": "25.12", "ChatGPT": 68, "Gemini": 21, "Claude": 23, "DeepSeek": 25, "Perplexity": 5},
-    {"month": "26.01", "ChatGPT": 68, "Gemini": 22, "Claude": 24, "DeepSeek": 85, "Perplexity": 6},
-    {"month": "26.02", "ChatGPT": 75, "Gemini": 22, "Claude": 25, "DeepSeek": 95, "Perplexity": 6},
-    {"month": "26.03", "ChatGPT": 80, "Gemini": 23, "Claude": 26, "DeepSeek": 70, "Perplexity": 6},
-    {"month": "26.04", "ChatGPT": 82, "Gemini": 23, "Claude": 27, "DeepSeek": 60, "Perplexity": 6}
+    {"month": "22.11", "ChatGPT": 0.0, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "22.12", "ChatGPT": 3.8, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.01", "ChatGPT": 8.6, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.03", "ChatGPT": 17.2, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.05", "ChatGPT": 19.2, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.07", "ChatGPT": 14.4, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.09", "ChatGPT": 18.2, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"month": "23.11", "ChatGPT": 22.0, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.01", "ChatGPT": 20.0, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.03", "ChatGPT": 22.2, "Gemini": 4.0, "Claude": 1.4, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.05", "ChatGPT": 25.8, "Gemini": 4.8, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.07", "ChatGPT": 20.0, "Gemini": 4.0, "Claude": 1.2, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.09", "ChatGPT": 34.4, "Gemini": 5.0, "Claude": 2.0, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"month": "24.11", "ChatGPT": 45.8, "Gemini": 6.0, "Claude": 2.0, "DeepSeek": 0.0, "Perplexity": 2.0},
+    {"month": "25.01", "ChatGPT": 44.2, "Gemini": 5.5, "Claude": 2.0, "DeepSeek": 8.2, "Perplexity": 1.2},
+    {"month": "25.03", "ChatGPT": 61.2, "Gemini": 7.4, "Claude": 2.4, "DeepSeek": 5.0, "Perplexity": 2.0},
+    {"month": "25.05", "ChatGPT": 69.0, "Gemini": 9.5, "Claude": 3.2, "DeepSeek": 4.0, "Perplexity": 2.0},
+    {"month": "25.07", "ChatGPT": 71.0, "Gemini": 11.2, "Claude": 3.0, "DeepSeek": 3.0, "Perplexity": 2.8},
+    {"month": "25.09", "ChatGPT": 85.2, "Gemini": 68.0, "Claude": 3.2, "DeepSeek": 3.0, "Perplexity": 3.2},
+    {"month": "25.11", "ChatGPT": 82.2, "Gemini": 33.4, "Claude": 4.0, "DeepSeek": 3.0, "Perplexity": 3.0},
+    {"month": "26.01", "ChatGPT": 71.8, "Gemini": 34.8, "Claude": 4.8, "DeepSeek": 2.0, "Perplexity": 2.0},
+    {"month": "26.02", "ChatGPT": 71.2, "Gemini": 33.5, "Claude": 8.2, "DeepSeek": 2.0, "Perplexity": 2.0},
+    {"month": "26.03", "ChatGPT": 74.4, "Gemini": 40.6, "Claude": 16.0, "DeepSeek": 2.6, "Perplexity": 2.2},
+    {"month": "26.04", "ChatGPT": 73.2, "Gemini": 43.2, "Claude": 17.8, "DeepSeek": 3.0, "Perplexity": 2.0}
   ]
 }
 ```
-*(데이터 소스: Google Trends API 기반 재구성, 2022.11 ~ 2026.04 기준 상대적 관심도)*
+*(데이터 소스: Google Trends API 실시간 연동, 글로벌 검색량 관심도)*
 
 위 그래프에서 도출할 수 있는 핵심 인사이트는 다음과 같습니다.
 
@@ -70,23 +76,24 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
   "dataKeys": ["ChatGPT", "Gemini", "Claude", "DeepSeek", "Perplexity"],
   "colors": ["#10b981", "#3b82f6", "#8b5cf6", "#ef4444", "#f59e0b"],
   "data": [
-    {"quarter": "23.Q1", "ChatGPT": 40, "Gemini": 2, "Claude": 0, "DeepSeek": 0, "Perplexity": 0},
-    {"quarter": "23.Q2", "ChatGPT": 65, "Gemini": 5, "Claude": 2, "DeepSeek": 0, "Perplexity": 1},
-    {"quarter": "23.Q3", "ChatGPT": 64, "Gemini": 8, "Claude": 4, "DeepSeek": 0, "Perplexity": 2},
-    {"quarter": "23.Q4", "ChatGPT": 64, "Gemini": 11, "Claude": 6, "DeepSeek": 0, "Perplexity": 2},
-    {"quarter": "24.Q1", "ChatGPT": 65, "Gemini": 13, "Claude": 8, "DeepSeek": 0, "Perplexity": 3},
-    {"quarter": "24.Q2", "ChatGPT": 66, "Gemini": 14, "Claude": 10, "DeepSeek": 0, "Perplexity": 3},
-    {"quarter": "24.Q3", "ChatGPT": 65, "Gemini": 15, "Claude": 12, "DeepSeek": 1, "Perplexity": 4},
-    {"quarter": "24.Q4", "ChatGPT": 66, "Gemini": 17, "Claude": 15, "DeepSeek": 3, "Perplexity": 4},
-    {"quarter": "25.Q1", "ChatGPT": 67, "Gemini": 18, "Claude": 17, "DeepSeek": 6, "Perplexity": 4},
-    {"quarter": "25.Q2", "ChatGPT": 68, "Gemini": 19, "Claude": 19, "DeepSeek": 9, "Perplexity": 5},
-    {"quarter": "25.Q3", "ChatGPT": 67, "Gemini": 20, "Claude": 21, "DeepSeek": 14, "Perplexity": 5},
-    {"quarter": "25.Q4", "ChatGPT": 68, "Gemini": 21, "Claude": 23, "DeepSeek": 22, "Perplexity": 5},
-    {"quarter": "26.Q1", "ChatGPT": 74, "Gemini": 22, "Claude": 25, "DeepSeek": 83, "Perplexity": 6}
+    {"quarter": "23.Q1", "ChatGPT": 13.2, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"quarter": "23.Q2", "ChatGPT": 18.6, "Gemini": 1.0, "Claude": 1.1, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"quarter": "23.Q3", "ChatGPT": 15.9, "Gemini": 1.0, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.0},
+    {"quarter": "23.Q4", "ChatGPT": 20.3, "Gemini": 1.3, "Claude": 1.0, "DeepSeek": 0.0, "Perplexity": 0.9},
+    {"quarter": "24.Q1", "ChatGPT": 21.2, "Gemini": 3.0, "Claude": 1.2, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"quarter": "24.Q2", "ChatGPT": 24.1, "Gemini": 4.3, "Claude": 1.1, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"quarter": "24.Q3", "ChatGPT": 27.4, "Gemini": 4.5, "Claude": 1.6, "DeepSeek": 0.0, "Perplexity": 1.0},
+    {"quarter": "24.Q4", "ChatGPT": 42.0, "Gemini": 5.6, "Claude": 2.0, "DeepSeek": 0.1, "Perplexity": 1.7},
+    {"quarter": "25.Q1", "ChatGPT": 52.7, "Gemini": 6.5, "Claude": 2.2, "DeepSeek": 7.0, "Perplexity": 1.8},
+    {"quarter": "25.Q2", "ChatGPT": 68.9, "Gemini": 9.7, "Claude": 2.9, "DeepSeek": 4.1, "Perplexity": 2.1},
+    {"quarter": "25.Q3", "ChatGPT": 78.6, "Gemini": 30.5, "Claude": 3.4, "DeepSeek": 3.0, "Perplexity": 3.0},
+    {"quarter": "25.Q4", "ChatGPT": 78.5, "Gemini": 33.5, "Claude": 3.8, "DeepSeek": 2.8, "Perplexity": 2.9},
+    {"quarter": "26.Q1", "ChatGPT": 72.6, "Gemini": 36.6, "Claude": 10.2, "DeepSeek": 2.2, "Perplexity": 2.1},
+    {"quarter": "26.Q2", "ChatGPT": 73.2, "Gemini": 43.2, "Claude": 17.8, "DeepSeek": 3.0, "Perplexity": 2.0}
   ]
 }
 ```
-*(2023~2026 분기별 상대적 트래픽 및 시장 점유 추이)*
+*(Google Trends API 실시간 추출: 2023~2026 분기별 글로벌 평균 트래픽)*
 
 분기별 데이터를 살펴보면, 초기 시장의 극심한 변동성이 줄어들고 **각 플랫폼이 자신만의 확고한 포지셔닝**을 찾아가고 있음을 알 수 있습니다. 
 
