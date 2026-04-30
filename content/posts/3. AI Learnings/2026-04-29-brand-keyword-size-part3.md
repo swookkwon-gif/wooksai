@@ -2,6 +2,7 @@
 title: "[브랜드 검색광고 딜레마 3편] 체급의 차이: 브랜드 규모에 따라 달라지는 광고 생존 공식"
 date: 2026-04-29T13:00:00Z
 description: "eBay의 '광고 무용론'은 대기업만의 배부른 소리일까요? 중소 브랜드와 신규 비즈니스에게 왜 검색 광고가 여전히 폭발적인 성장을 견인하는 필수 생존 공식인지 학술 데이터를 통해 증명합니다."
+category: AI Learnings
 tags: ["Marketing", "SEM", "Academic Research", "SMB", "Growth"]
 ---
 

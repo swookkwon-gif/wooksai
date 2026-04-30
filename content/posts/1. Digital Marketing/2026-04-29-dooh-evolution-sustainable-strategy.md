@@ -2,8 +2,7 @@
 title: '디지털 옥외광고의 진화와 지속 가능한 성장 전략'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '전통 매체 하락 속 유일하게 성장하는 옥외광고의 비결은 디지털 옥외광고(DOOH)로의 성공적인 진화입니다. 데이터/AI 결합, 옴니채널 전략, 참여형 경험 제공을 통해 지속 가능한 성장을 이루고 있습니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

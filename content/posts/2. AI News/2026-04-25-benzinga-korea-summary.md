@@ -2,7 +2,7 @@
 title: "[04월 25일] Benzinga Korea 주요 뉴스 요약"
 date: "2026-04-25"
 excerpt: "오늘 Benzinga Korea는 인공지능이 미국 제조업 부활의 핵심 동력으로 작용하고 AI 관련 반도체 기업들의 실적 호조가 시장을 견인하는 가운데, 스페이스X의 AI 사업 부문과 마이크론 테크놀로지의 AI 메모리 수요 급증이 주목받고 있음을 보도했습니다."
-category: "Learning AI"
+category: AI News
 ---
 
 ### ["관세도 못 한 일을 해냈다" 미국 제조업 부활시킨 일등 공신은 '인공지능'](https://kr.benzinga.com/news/usa/othermarkets/%EA%B4%80%EC%84%B8%EB%8F%84-%EB%AA%BB-%ED%95%9C-%EC%9D%BC%EC%9D%84-%ED%95%B4%EB%83%88%EB%8B%A4-%EB%AF%B8%EA%B5%AD-%EC%A0%9C%EC%A1%B0%EC%97%85-%EB%B6%80%ED%99%9C%EC%8B%9C%ED%82%A8-%EC%9D%BC/)

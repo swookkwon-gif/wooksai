@@ -2,8 +2,7 @@
 title: 'Claude Code 심층 분석: 마우스 없는 코딩 혁명, CLI 기반 에이전트의 충격'
 date: 2026-04-29T19:25:00+09:00
 excerpt: '에디터 창을 띄울 필요도 없습니다. 터미널 명령어 한 줄이면 AI가 내 프로젝트의 전체 코드를 분석하고, 스스로 파일을 열어 수정하고, 테스트까지 마칩니다. 10X 개발자로 이끌어 줄 Anthropic의 야심작 Claude Code를 파헤칩니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - Claude Code
   - Anthropic

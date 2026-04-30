@@ -2,8 +2,7 @@
 title: 'Cursor 에디터 심층 분석: 코딩을 타이핑에서 "대화"로 바꾼 AI 혁명'
 date: 2026-04-29T19:30:00+09:00
 excerpt: 'VS Code의 시대가 저물고 있습니다. 키보드로 타이핑하는 대신 자연어로 대화하며 앱을 뚝딱 만들어내는 전 세계 1위 AI 에디터 Cursor. 비개발자부터 시니어 개발자까지 열광하는 그 압도적인 성능과 실전 사례를 분석합니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - Cursor
   - AI Coding

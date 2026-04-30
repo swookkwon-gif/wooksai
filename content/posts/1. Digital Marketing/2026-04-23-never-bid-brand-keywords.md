@@ -2,7 +2,7 @@
 title: "브랜드 키워드 광고는 돈 낭비일까?"
 date: "2026-04-23"
 excerpt: "Meta CMO - 브랜드 키워드 광고 하지 마라, 그러나 예외는 있다"
-category: "마케팅 논문 읽기"
+category: Marketing
 ---
 
 ![Brand Keyword Expansion Strategy](/wooksai/images/brand_bidding_hero.png)

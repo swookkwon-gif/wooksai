@@ -2,6 +2,7 @@
 title: "[브랜드 검색광고 딜레마 2편] 최선의 방어: 하이에나 같은 경쟁사들로부터 내 영토 지키기"
 date: 2026-04-29T12:00:00Z
 description: "내 키워드 광고를 껐더니 경쟁사가 20%의 트래픽을 빼앗아갔다? '타겟팅 포획(Poaching)'과 '증분 클릭당 비용(CPIC)' 개념을 통해 검색 광고의 필수적인 방어 메커니즘을 알아봅니다."
+category: AI Learnings
 tags: ["Marketing", "SEM", "Academic Research", "Competitive Strategy"]
 ---
 

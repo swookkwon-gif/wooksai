@@ -1,8 +1,7 @@
 ---
 title: "초보자를 위한 4단 프롬프트 공식 (챗GPT 200% 활용법)"
 date: 2026-04-28T16:57:05+09:00
-categories:
-  - AI Learnings
+category: AI Learnings
 tags:
   - Prompt Engineering
   - Beginner

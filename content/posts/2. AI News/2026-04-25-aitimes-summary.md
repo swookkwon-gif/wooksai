@@ -2,7 +2,7 @@
 title: "[04월 25일] AITimes 주요 뉴스 요약"
 date: "2026-04-25"
 excerpt: "중국 정부의 AI 기업 투자 제한, 오픈AI의 총격 사건 관련 사과, xAI와 샤오미의 차세대 음성 AI 모델 공개, 그리고 구글의 앤트로픽 대규모 투자 소식 등 AI 산업의 투자, 기술 개발, 그리고 윤리적 책임에 대한 주요 뉴스가 오늘 전해졌습니다."
-category: "Learning AI"
+category: AI News
 ---
 
 ### [중국, 기술 유출 차단 위해 AI 기업의 미국 투자 유치 제한](https://www.aitimes.com/news/articleView.html?idxno=209739)

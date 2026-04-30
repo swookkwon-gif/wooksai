@@ -2,8 +2,7 @@
 title: '[GF2.0] NotebookLM vs ChatGPT vs Claude: 2026년 리서치 도구 완벽 비교 분석'
 date: 2026-04-29T18:09:12+09:00
 excerpt: '단순한 챗봇의 시대를 넘어 목적에 맞는 AI를 선택해야 하는 시대입니다. 구글의 NotebookLM, OpenAI의 ChatGPT, Anthropic의 Claude 등 3대장의 결정적 차이점을 심층 분석하고, 각 툴이 빛을 발하는 완벽한 실전 활용 사례를 공개합니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - NotebookLM
   - ChatGPT

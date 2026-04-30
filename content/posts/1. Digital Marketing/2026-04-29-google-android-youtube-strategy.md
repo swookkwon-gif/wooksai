@@ -2,8 +2,7 @@
 title: '구글의 제국 건설: 안드로이드와 유튜브 인수 전략'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '구글은 안드로이드와 유튜브 인수를 통해 단순한 검색 엔진을 넘어 모바일과 동영상 생태계 주도권을 장악했습니다. 이는 다중 플랫폼 경쟁 우위를 구축하고, 방대한 사용자 데이터와 광고 파이프라인을 확장하는 결정적인 전략이었습니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

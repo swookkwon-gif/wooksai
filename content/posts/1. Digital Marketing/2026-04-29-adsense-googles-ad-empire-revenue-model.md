@@ -2,8 +2,7 @@
 title: '애드센스: 구글 광고 제국을 세운 혁신적 수익 모델'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '애드센스는 구글이 자사 검색을 넘어 인터넷 전체로 광고 네트워크를 확장하고 수익 공유 모델을 도입하여 매출 성장에 폭발적으로 기여한 혁신적인 광고 플랫폼입니다. 뛰어난 광고 효율성으로 구글의 광고 제국을 세우는 핵심 동력이 되었습니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

@@ -2,8 +2,7 @@
 title: "구글 앤스로픽 400억 달러 투자, MS-오픈AI 계약 변경, 메타 AWS CPU 대규모 도입"
 date: 2026-04-28T15:17:45+09:00
 excerpt: "빅테크의 천문학적인 투자와 파트너십 재편, 그리고 인프라 패러다임의 변화를 보여주는 오늘의 글로벌 AI 핵심 소식 3가지를 심층 분석합니다."
-categories:
-  - AI News
+category: AI News
 tags:
   - Deep Research
   - NotebookLM

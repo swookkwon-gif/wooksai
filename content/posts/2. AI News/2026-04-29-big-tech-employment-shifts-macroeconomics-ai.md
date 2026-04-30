@@ -2,8 +2,7 @@
 title: '빅테크 고용 지형도: 거시경제 위기와 AI 자원 재배치'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '최근 빅테크 고용 둔화는 AI보다 거시경제적 환경 변화가 주원인으로 분석됩니다. 기업들은 단순히 사람을 AI로 대체하기보다, 새로운 기술 환경에 필요한 직무 역량 재편에 집중하며 AI 투자 위한 자원 재배치를 추진합니다.'
-categories:
-  - AI News
+category: AI News
 tags:
   - NotebookLM
   - AI Generated

@@ -2,8 +2,7 @@
 title: 'OTT 광고 시장의 변화와 플랫폼 전략 분석'
 date: 2026-04-29T18:31:40+09:00
 excerpt: 'OTT 광고 시장은 시청 행태 변화와 정밀 타기팅 덕분에 급성장 중입니다. 넷플릭스, 티빙 등 주요 플랫폼의 전략과 쿠팡플레이의 FAST 모델 도입, 몰입형 광고 제작 경향을 분석하여 변화하는 시장의 핵심 동향을 살펴봅니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

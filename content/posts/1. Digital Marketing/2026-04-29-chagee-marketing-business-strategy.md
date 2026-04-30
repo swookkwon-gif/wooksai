@@ -2,8 +2,7 @@
 title: "[비즈니스 분석] 차지(CHAGEE)의 무서운 질주: 혁신적 테크놀로지와 마케팅 전략 해부"
 date: 2026-04-29T14:30:00+09:00
 excerpt: "건강함, 초정밀 자동화 테크, 그리고 영리한 마케팅. 나스닥 상장까지 이뤄낸 글로벌 모던 티 브랜드 차지(CHAGEE)의 성공 방정식을 비즈니스와 마케팅 관점에서 딥리서치합니다."
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - Business Strategy
   - Marketing

@@ -2,8 +2,7 @@
 title: '구글 NotebookLM 심층 분석: 실무와 학습을 혁신하는 AI 리서치 파트너의 모든 것'
 date: '2026-04-29T17:38:48+09:00'
 excerpt: '단순한 챗봇을 넘어 오직 사용자의 문서만을 기반으로 작동하여 환각을 원천 차단하는 구글의 NotebookLM.[^1] 이 글에서는 전체 기능의 상세한 분석부터 실제 실무 현장(로펌, 마케팅, 창작)의 생생한 성공 사례까지 완벽하게 파헤칩니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - NotebookLM
   - AI Research

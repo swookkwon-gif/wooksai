@@ -1,8 +1,7 @@
 ---
 title: "AI의 당당한 거짓말, '할루시네이션(환각)' 대처와 팩트 체크 노하우"
 date: 2026-04-28T16:59:50+09:00
-categories:
-  - AI Learnings
+category: AI Learnings
 tags:
   - Hallucination
   - Fact Check

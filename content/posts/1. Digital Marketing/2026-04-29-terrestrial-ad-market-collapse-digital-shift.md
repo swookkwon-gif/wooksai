@@ -2,8 +2,7 @@
 title: '지상파 광고 시장의 몰락과 디지털 대전환의 파고'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '지상파 광고 시장의 급락 원인과 향후 전망을 분석합니다. 미디어 소비의 디지털 전환과 데이터 기반 맞춤형 광고 선호로 방송 광고 시장은 구조적 조정 국면에 진입했습니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

@@ -2,8 +2,7 @@
 title: 'Codex 기반 자동화: 코딩을 모르는 비개발자가 데이터 봇을 만드는 시대'
 date: 2026-04-29T19:40:00+09:00
 excerpt: '매번 개발팀에 "이번 달 데이터 좀 뽑아주세요"라고 부탁하며 눈치 보셨나요? 자연어를 완벽한 코드로 번역해주는 OpenAI의 Codex 엔진을 활용해, 사내 메신저에서 즉시 데이터를 뽑아내는 무인 봇 구축 사례를 살펴봅니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - Codex
   - OpenAI

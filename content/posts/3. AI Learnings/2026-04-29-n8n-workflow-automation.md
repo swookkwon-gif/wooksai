@@ -2,8 +2,7 @@
 title: 'n8n 심층 분석: AI와 워크플로우 자동화를 결합하는 궁극의 오케스트레이터'
 date: 2026-04-29T19:15:00+09:00
 excerpt: '단순한 업무 자동화를 넘어 AI를 탑재한 무인 파이프라인을 구축하고 싶으신가요? 비용 걱정 없이 복잡한 시스템을 엮어내는 n8n의 핵심 가치와 실제 기업들의 자동화 성공 사례를 완벽히 파헤칩니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - n8n
   - Automation

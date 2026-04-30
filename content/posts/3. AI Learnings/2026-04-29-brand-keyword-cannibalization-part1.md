@@ -2,6 +2,7 @@
 title: "[브랜드 검색광고 딜레마 1편] 자기 잠식의 덫: 당신은 '무료 트래픽'에 돈을 내고 계십니까?"
 date: 2026-04-29T11:00:00Z
 description: "내 브랜드 키워드에 광고비를 태우는 것은 과연 효과적일까요? 2015년 마케팅 업계를 뒤흔든 eBay의 대규모 실험과 최신 학술 논문들을 통해 검색 광고의 '자기 잠식(Cannibalization)' 현상을 파헤칩니다."
+category: AI Learnings
 tags: ["Marketing", "SEM", "Academic Research", "Data Analysis"]
 ---
 

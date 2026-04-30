@@ -2,8 +2,7 @@
 title: 'NotebookLM과 Claude를 결합한 완벽한 논문 리뷰 시리즈 작성 워크플로우'
 date: 2026-04-29T19:45:00+09:00
 excerpt: '20~30편의 방대한 논문을 엮어 심층 블로그 시리즈물을 기획 중이신가요? 환각(거짓말)을 막아주는 NotebookLM과 압도적인 필력을 자랑하는 Claude를 결합한 최적의 하이브리드 학술 글쓰기 전략을 공개합니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - NotebookLM
   - Claude

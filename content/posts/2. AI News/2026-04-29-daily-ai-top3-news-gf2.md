@@ -2,8 +2,7 @@
 title: "[GF2.0] 일론 머스크 vs 오픈AI 재판 개시, 오픈AI-MS 독점 계약 해지, 구글 딥마인드 국방 계약 반대 서명"
 date: 2026-04-29T11:45:00+09:00
 excerpt: "오픈AI를 둘러싼 일론 머스크와의 세기의 재판이 시작되었으며, 마이크로소프트와의 독점 계약이 파기되었습니다. 또한 구글 딥마인드 직원들의 군사 AI 계약 반대 서명이 이어지고 있습니다."
-categories:
-  - AI News
+category: AI News
 tags:
   - Deep Research
   - Gemini 2.0 Flash

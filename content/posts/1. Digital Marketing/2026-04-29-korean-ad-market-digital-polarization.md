@@ -2,8 +2,7 @@
 title: '국내 광고 시장의 디지털 전환과 매체 양극화 분석'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '국내 광고 시장은 디지털 전환과 함께 매체 양극화가 심화되고 있습니다. 온라인 광고가 시장의 59%를 차지하며 독주하고, 전통 매체는 쇠퇴 중입니다. 이는 소비자 미디어 소비 변화에 기인합니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

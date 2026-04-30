@@ -2,8 +2,7 @@
 title: 'Perplexity AI 심층 분석: 구글 검색을 위협하는 차세대 답변 엔진의 모든 것'
 date: 2026-04-29T19:35:00+09:00
 excerpt: '파란색 링크 10개를 일일이 클릭하며 정보를 찾던 구글링의 시대는 끝났습니다. 질문 즉시 수십 개의 최신 웹 문서를 읽고 완벽한 출처와 함께 완성된 요약 보고서를 내놓는 답변 엔진(Answer Engine), 퍼플렉시티의 위력을 알아봅니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - Perplexity
   - AI Search

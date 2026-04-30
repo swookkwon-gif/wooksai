@@ -2,8 +2,7 @@
 title: '팩트풀니스: 침팬지보다 정확하게 세상을 읽는 법'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '한스 로슬링의 ''팩트풀니스''와 ''침팬지 테스트''로 세상을 바라보는 우리의 관점이 얼마나 왜곡되었는지 탐구합니다. 데이터에 기반한 사실적 세계관을 갖기 위한 그의 통찰과 메시지를 파헤쳐봅니다.'
-categories:
-  - AI Learnings
+category: AI Learnings
 tags:
   - NotebookLM
   - AI Generated

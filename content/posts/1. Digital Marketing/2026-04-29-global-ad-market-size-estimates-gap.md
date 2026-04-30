@@ -2,8 +2,7 @@
 title: '글로벌 광고 시장 규모 추정치와 기관별 분석 격차'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '이 글은 2020-2026년 글로벌 광고 시장 규모 추정치를 주요 기관별로 비교 분석합니다. 동일 연도에도 수백억에서 수천억 달러에 이르는 추정치 격차의 원인과 각 기관의 분석 특징을 조명합니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

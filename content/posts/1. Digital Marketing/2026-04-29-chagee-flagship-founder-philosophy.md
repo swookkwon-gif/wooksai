@@ -2,8 +2,7 @@
 title: "[브랜드 탐구] 차지(CHAGEE) 강남 플래그십 스토어: 공간에 담긴 진정성과 창업자의 기업가 정신"
 date: 2026-04-29T13:30:00+09:00
 excerpt: "한국에 상륙한 글로벌 티 브랜드 차지(CHAGEE) 강남 플래그십 스토어. 단순한 카페를 넘어선 압도적이고 고급스러운 디자인 컨셉과 그 이면에 담긴 창업자 장쥔제의 철학을 딥리서치합니다."
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - Brand Strategy
   - Space Marketing

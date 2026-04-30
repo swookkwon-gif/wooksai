@@ -1,8 +1,7 @@
 ---
 title: "나대신 일하는 AI 비서, '일머리'의 비밀 (MCP, Skill, Workflow)"
 date: 2026-04-28T15:28:55+09:00
-categories:
-  - AI Learnings
+category: AI Learnings
 tags:
   - Agentic AI
   - MCP

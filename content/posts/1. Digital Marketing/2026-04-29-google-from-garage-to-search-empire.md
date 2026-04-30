@@ -2,8 +2,7 @@
 title: '구글: 차고에서 시작된 검색 제국의 탄생과 혁신'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '구글은 래리 페이지와 세르게이 브린이 ''백럽'' 프로젝트에서 개발한 ''페이지랭크'' 알고리즘을 기반으로 시작되었습니다. 초기 어려움 속에서 앤디 벡톨샤임의 투자를 받아 멘로파크 차고에서 법인을 설립했으며, 이후 애드워즈 도입과 함께 검색 제국으로 성장했습니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

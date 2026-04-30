@@ -2,8 +2,7 @@
 title: '글쓰기로 월 2천만 원 버는 1인 기업 전략 가이드'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '글쓰기로 월 2천만 원을 버는 1인 기업가 조쉬의 실전 전략을 공개합니다. 뉴스레터, OSMU, 단계별 수익화 파이프라인 구축 비법을 통해 당신도 솔로프리너로 성공할 수 있는 길을 찾아보세요.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

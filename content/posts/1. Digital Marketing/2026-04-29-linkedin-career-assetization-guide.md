@@ -2,8 +2,7 @@
 title: '링크드인: 커리어 자산화와 퍼스널 브랜딩 전략 가이드'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '링크드인을 무기로 커리어를 자산화하고 퍼스널 브랜딩을 구축하는 전략을 소개합니다. 변화하는 채용 시장과 AI 시대, 링크드인을 활용해 블루오션을 선점하고 당신의 가치를 높이세요.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

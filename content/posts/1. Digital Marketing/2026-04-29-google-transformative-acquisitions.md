@@ -2,8 +2,7 @@
 title: '구글의 미래를 바꾼 결정적 인수합병 비화'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '구글의 미래를 바꾼 안드로이드와 유튜브 인수 비화를 탐구합니다. 모바일 생태계 방어, 자체 서비스의 한계를 인정하며 시장을 선점한 구글의 전략적 결정과 그 배경을 알아봅니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated

@@ -2,8 +2,7 @@
 title: 'OpenClaw 심층 분석: 내 PC 안에서 스스로 움직이는 오픈소스 자율 AI 에이전트'
 date: 2026-04-29T19:20:00+09:00
 excerpt: '클라우드 유출 걱정 없이 내 컴퓨터 안에서 파일을 정리하고, 메신저로 고객을 응대하는 로컬 자율 에이전트 OpenClaw. 프라이버시와 강력한 파일 시스템 제어 권한을 모두 잡은 이 차세대 AI의 실무 활용법을 완벽 해부합니다.'
-categories:
-  - 3. AI Learnings
+category: AI Learnings
 tags:
   - OpenClaw
   - Local AI

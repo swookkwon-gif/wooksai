@@ -2,8 +2,7 @@
 title: '차지 강남: 도심 속 차 숲과 혁신적 공간 미학'
 date: 2026-04-29T18:31:40+09:00
 excerpt: '글로벌 티 브랜드 차지 강남 플래그십 스토어는 ''도심 속 차 숲'' 컨셉으로 혁신적 공간 미학을 선보입니다. 한국적 예술과 최첨단 자동화 시스템이 융합된 몰입형 매장 디자인으로 특별한 브랜드 경험을 제공하며, 글로벌 시장 확장의 교두보 역할을 합니다.'
-categories:
-  - Digital Marketing
+category: Marketing
 tags:
   - NotebookLM
   - AI Generated
