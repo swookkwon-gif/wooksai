@@ -38,8 +38,11 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
     {"month": "25.04", "ChatGPT": 68, "Gemini": 19, "Claude": 18, "DeepSeek": 8, "Perplexity": 5},
     {"month": "25.07", "ChatGPT": 67, "Gemini": 20, "Claude": 20, "DeepSeek": 12, "Perplexity": 5},
     {"month": "25.10", "ChatGPT": 68, "Gemini": 21, "Claude": 22, "DeepSeek": 18, "Perplexity": 5},
-    {"month": "26.01", "ChatGPT": 68, "Gemini": 22, "Claude": 24, "DeepSeek": 45, "Perplexity": 6},
-    {"month": "26.04", "ChatGPT": 69, "Gemini": 23, "Claude": 26, "DeepSeek": 60, "Perplexity": 6}
+    {"month": "25.12", "ChatGPT": 68, "Gemini": 21, "Claude": 23, "DeepSeek": 25, "Perplexity": 5},
+    {"month": "26.01", "ChatGPT": 68, "Gemini": 22, "Claude": 24, "DeepSeek": 85, "Perplexity": 6},
+    {"month": "26.02", "ChatGPT": 75, "Gemini": 22, "Claude": 25, "DeepSeek": 95, "Perplexity": 6},
+    {"month": "26.03", "ChatGPT": 80, "Gemini": 23, "Claude": 26, "DeepSeek": 70, "Perplexity": 6},
+    {"month": "26.04", "ChatGPT": 82, "Gemini": 23, "Claude": 27, "DeepSeek": 60, "Perplexity": 6}
   ]
 }
 ```
@@ -58,7 +61,7 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
 
 ---
 
-## 📊 분기별 데이터로 보는 2024~2026 시장 안정화
+## 📊 분기별 데이터로 보는 2023~2026 시장 안정화
 
 ```chart
 {
@@ -67,15 +70,23 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
   "dataKeys": ["ChatGPT", "Gemini", "Claude", "DeepSeek", "Perplexity"],
   "colors": ["#10b981", "#3b82f6", "#8b5cf6", "#ef4444", "#f59e0b"],
   "data": [
-    {"quarter": "24.Q1", "ChatGPT": 65, "Gemini": 12, "Claude": 7, "DeepSeek": 0, "Perplexity": 3},
+    {"quarter": "23.Q1", "ChatGPT": 40, "Gemini": 2, "Claude": 0, "DeepSeek": 0, "Perplexity": 0},
+    {"quarter": "23.Q2", "ChatGPT": 65, "Gemini": 5, "Claude": 2, "DeepSeek": 0, "Perplexity": 1},
+    {"quarter": "23.Q3", "ChatGPT": 64, "Gemini": 8, "Claude": 4, "DeepSeek": 0, "Perplexity": 2},
+    {"quarter": "23.Q4", "ChatGPT": 64, "Gemini": 11, "Claude": 6, "DeepSeek": 0, "Perplexity": 2},
+    {"quarter": "24.Q1", "ChatGPT": 65, "Gemini": 13, "Claude": 8, "DeepSeek": 0, "Perplexity": 3},
+    {"quarter": "24.Q2", "ChatGPT": 66, "Gemini": 14, "Claude": 10, "DeepSeek": 0, "Perplexity": 3},
     {"quarter": "24.Q3", "ChatGPT": 65, "Gemini": 15, "Claude": 12, "DeepSeek": 1, "Perplexity": 4},
-    {"quarter": "25.Q1", "ChatGPT": 67, "Gemini": 18, "Claude": 16, "DeepSeek": 5, "Perplexity": 4},
-    {"quarter": "25.Q3", "ChatGPT": 67, "Gemini": 20, "Claude": 20, "DeepSeek": 12, "Perplexity": 5},
-    {"quarter": "26.Q1", "ChatGPT": 68, "Gemini": 22, "Claude": 24, "DeepSeek": 45, "Perplexity": 6}
+    {"quarter": "24.Q4", "ChatGPT": 66, "Gemini": 17, "Claude": 15, "DeepSeek": 3, "Perplexity": 4},
+    {"quarter": "25.Q1", "ChatGPT": 67, "Gemini": 18, "Claude": 17, "DeepSeek": 6, "Perplexity": 4},
+    {"quarter": "25.Q2", "ChatGPT": 68, "Gemini": 19, "Claude": 19, "DeepSeek": 9, "Perplexity": 5},
+    {"quarter": "25.Q3", "ChatGPT": 67, "Gemini": 20, "Claude": 21, "DeepSeek": 14, "Perplexity": 5},
+    {"quarter": "25.Q4", "ChatGPT": 68, "Gemini": 21, "Claude": 23, "DeepSeek": 22, "Perplexity": 5},
+    {"quarter": "26.Q1", "ChatGPT": 74, "Gemini": 22, "Claude": 25, "DeepSeek": 83, "Perplexity": 6}
   ]
 }
 ```
-*(최근 분기별 상대적 트래픽 및 시장 점유 안정화 추이)*
+*(2023~2026 분기별 상대적 트래픽 및 시장 점유 추이)*
 
 분기별 데이터를 살펴보면, 초기 시장의 극심한 변동성이 줄어들고 **각 플랫폼이 자신만의 확고한 포지셔닝**을 찾아가고 있음을 알 수 있습니다. 
 
