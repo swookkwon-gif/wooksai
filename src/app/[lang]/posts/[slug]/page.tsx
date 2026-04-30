@@ -5,6 +5,7 @@ import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import React from "react";
+import ChartRenderer from "@/components/ChartRenderer";
 
 export async function generateStaticParams() {
   const postsKo = getSortedPostsData('ko');
@@ -100,6 +101,13 @@ export default async function PostPage({
                  );
               }
               return <p {...props}>{children}</p>;
+            },
+            code: ({ node, inline, className, children, ...props }: any) => {
+              const match = /language-(\w+)/.exec(className || '');
+              if (!inline && match && match[1] === 'chart') {
+                return <ChartRenderer dataStr={String(children).replace(/\n$/, '')} />;
+              }
+              return <code className={className} {...props}>{children}</code>;
             }
           }}
         >
