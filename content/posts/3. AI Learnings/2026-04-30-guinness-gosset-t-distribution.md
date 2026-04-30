@@ -12,6 +12,9 @@ tags: ["Data Science", "Statistics", "Gosset", "Student t-distribution", "Guinne
 
 오늘은 세계 최초의 '데이터 사이언티스트' 중 한 명이라 불려도 손색없는, 기네스 맥주의 양조학자 **윌리엄 실리 고셋(William Sealy Gosset)**의 드라마틱한 이야기를 들려드리겠습니다.
 
+![윌리엄 실리 고셋(William Sealy Gosset)](/wooksai/images/gosset_portrait.jpg)
+*(현대 통계학의 근간을 마련한 기네스의 수석 양조학자 윌리엄 실리 고셋. 출처: Wikimedia Commons)*
+
 ---
 
 ## 🍺 1. 최고의 맥주를 향한 기네스의 집념과 천재의 영입
@@ -20,6 +23,9 @@ tags: ["Data Science", "Statistics", "Gosset", "Student t-distribution", "Guinne
 
 맥주 제조를 장인들의 '감'에만 의존하지 않고 **'철저한 과학과 데이터'**로 통제하겠다는 것이었죠. 
 
+![기네스 흑맥주](/wooksai/images/guinness_glass.jpg)
+*(퍼펙트 파인트(Perfect Pint)를 위한 기네스 흑맥주. 출처: Wikimedia Commons)*
+
 이를 위해 기네스는 옥스퍼드와 케임브리지 대학을 갓 졸업한 최고의 화학자, 수학자, 통계학자들을 대거 영입합니다. 1899년, 옥스퍼드에서 화학과 수학을 전공하고 수석 졸업한 23세의 청년 **윌리엄 실리 고셋(William Sealy Gosset)**도 이 엘리트 연구진의 일원으로 기네스에 입사하게 됩니다.
 
 ---
@@ -27,6 +33,9 @@ tags: ["Data Science", "Statistics", "Gosset", "Student t-distribution", "Guinne
 ## 📊 2. 고셋이 마주한 현실적인 한계: "데이터가 너무 적다!"
 
 고셋에게 주어진 임무는 명확했습니다. **"효모의 수, 보리의 품질, 홉의 양을 분석해서 매번 완벽하게 똑같은 맛을 내는 기네스 흑맥주를 만들어라."**
+
+![맥주 양조장의 실험실](/wooksai/images/brewery_laboratory.jpg)
+*(맥주 양조장의 실험실 전경. 고셋은 이곳에서 소량의 샘플만으로 최고의 품질을 통계적으로 입증해야 했다. 출처: Wikimedia Commons)*
 
 이를 위해 고셋은 들판에서 자라는 보리의 품종을 비교하고 효모를 배양하며 실험을 거듭했습니다. 하지만 치명적인 문제가 하나 발생했습니다.
 
