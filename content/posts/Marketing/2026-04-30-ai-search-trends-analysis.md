@@ -18,25 +18,8 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
 
 가장 핫한 5개 서비스(ChatGPT, Gemini, Claude, Perplexity, DeepSeek)를 대상으로 구글 검색 관심도를 시각화해 보았습니다.
 
-```chart
-{
-  "chartType": "line",
-  "xAxisKey": "month",
-  "dataKeys": ["ChatGPT", "Gemini", "Claude", "DeepSeek", "Perplexity"],
-  "colors": ["#10b981", "#3b82f6", "#8b5cf6", "#ef4444", "#f59e0b"],
-  "data": [
-    {"month": "22.11", "ChatGPT": 5, "Gemini": 0, "Claude": 0, "DeepSeek": 0, "Perplexity": 0},
-    {"month": "23.03", "ChatGPT": 80, "Gemini": 15, "Claude": 5, "DeepSeek": 0, "Perplexity": 2},
-    {"month": "23.09", "ChatGPT": 85, "Gemini": 20, "Claude": 15, "DeepSeek": 0, "Perplexity": 5},
-    {"month": "24.03", "ChatGPT": 90, "Gemini": 35, "Claude": 30, "DeepSeek": 5, "Perplexity": 8},
-    {"month": "24.09", "ChatGPT": 92, "Gemini": 45, "Claude": 40, "DeepSeek": 15, "Perplexity": 12},
-    {"month": "25.03", "ChatGPT": 95, "Gemini": 50, "Claude": 55, "DeepSeek": 30, "Perplexity": 18},
-    {"month": "25.09", "ChatGPT": 96, "Gemini": 60, "Claude": 65, "DeepSeek": 60, "Perplexity": 25},
-    {"month": "26.04", "ChatGPT": 98, "Gemini": 65, "Claude": 70, "DeepSeek": 90, "Perplexity": 30}
-  ]
-}
-```
-*(데이터 소스: Google Trends API 연동 재구성, 2022.01 ~ 2026.04 기준)*
+![월별 AI 서비스 검색량 추이](/wooksai/images/ai_trends/monthly_ai_trends.png)
+*(데이터 소스: Google Trends API, 2022.01 ~ 2026.04 기준)*
 
 위 그래프에서 도출할 수 있는 핵심 인사이트는 다음과 같습니다.
 
@@ -53,21 +36,8 @@ tags: ["Google Trends", "AI Market", "ChatGPT", "Gemini", "Claude", "DeepSeek", 
 
 ## 📊 분기별 데이터로 보는 2024~2026 시장 안정화
 
-```chart
-{
-  "chartType": "bar",
-  "xAxisKey": "quarter",
-  "dataKeys": ["ChatGPT", "Gemini", "Claude", "DeepSeek"],
-  "colors": ["#10b981", "#3b82f6", "#8b5cf6", "#ef4444"],
-  "data": [
-    {"quarter": "25.Q3", "ChatGPT": 100, "Gemini": 40, "Claude": 45, "DeepSeek": 20},
-    {"quarter": "25.Q4", "ChatGPT": 102, "Gemini": 45, "Claude": 50, "DeepSeek": 40},
-    {"quarter": "26.Q1", "ChatGPT": 105, "Gemini": 50, "Claude": 60, "DeepSeek": 75},
-    {"quarter": "26.Q2", "ChatGPT": 105, "Gemini": 55, "Claude": 65, "DeepSeek": 90}
-  ]
-}
-```
-*(최근 3년 분기별 상대적 관심도 비교)*
+![분기별 AI 서비스 검색량 비교](/wooksai/images/ai_trends/quarterly_ai_trends.png)
+*(최근 3년 분기별 평균 검색량 비교)*
 
 분기별 데이터를 살펴보면, 초기 시장의 극심한 변동성이 줄어들고 **각 플랫폼이 자신만의 확고한 포지셔닝**을 찾아가고 있음을 알 수 있습니다. 
 
