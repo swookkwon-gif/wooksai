@@ -40,7 +40,7 @@ def load_recent_covered_news(days=2):
 
 def run_gemini_search_blogger():
     print(f"==================================================")
-    print(f"🚀 [Gemini 2.0 Auto Blogger] 자동 생성 파이프라인 시작")
+    print(f"🚀 [Gemini 2.5 Auto Blogger] 자동 생성 파이프라인 시작")
     print(f"==================================================")
     
     # 1. 최근에 다룬 뉴스 리스트업 (중복 방지 메모리)
@@ -86,10 +86,10 @@ def run_gemini_search_blogger():
     if not api_key:
         print("❌ GEMINI_API_KEY 환경 변수가 설정되지 않았습니다.")
         return
-    api_key = api_key.strip('"').strip("'")
+    api_key = api_key.strip().strip('"').strip("'")
         
     import requests
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     
     payload = {
         "contents": [{"parts": [{"text": prompt}]}],
@@ -120,7 +120,7 @@ def run_gemini_search_blogger():
         
     # 4. 마크다운 파일 저장
     print(f"\n[Step 3] 블로그 업로드용 파일 저장")
-    slug_name = "daily-ai-top3-news-gf2"
+    slug_name = "daily-ai-top3-news"
     file_name = f"{now_kst.strftime('%Y-%m-%d')}-{slug_name}.md"
     file_path = os.path.join(POSTS_DIR, file_name)
     
@@ -136,16 +136,10 @@ def run_gemini_search_blogger():
         line = lines[i].strip()
         if line.startswith("TITLE:"):
             display_title = line.replace("TITLE:", "").replace("[", "").replace("]", "").strip()
-            # 파일구분자 추가
-            display_title = f"[GF2.0] {display_title}"
             content_start_idx = max(content_start_idx, i + 1)
         elif line.startswith("EXCERPT:"):
             display_excerpt = line.replace("EXCERPT:", "").replace("[", "").replace("]", "").strip()
             content_start_idx = max(content_start_idx, i + 1)
-            
-    # 제목 못찾았을때 기본 파일구분자 추가
-    if "[GF2.0]" not in display_title:
-        display_title = f"[GF2.0] {display_title}"
             
     clean_article = '\n'.join(lines[content_start_idx:]).strip()
 
@@ -168,7 +162,7 @@ tags:
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(final_content)
         
-    print(f"🎉 성공적으로 Gemini 2.0 무인 블로그 포스트가 생성되었습니다!")
+    print(f"🎉 성공적으로 Gemini 2.5 무인 블로그 포스트가 생성되었습니다!")
     print(f"📁 위치: {file_path}")
 
 if __name__ == "__main__":
