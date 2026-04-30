@@ -100,9 +100,6 @@ category: '{category.replace("'", "''")}'
 
 # =============== RSS PROCESSING ===============
 
-def extract_image_tag(html_content):
-    img_match = re.search(r'(<img[^>]+>)', html_content, re.IGNORECASE)
-    return img_match.group(1) if img_match else ""
 
 def process_all_rss_feeds(feeds):
     items_to_process = []
@@ -130,7 +127,6 @@ def process_all_rss_feeds(feeds):
                     content = entry.summary
                     
                 title = entry.get('title', 'No Title')
-                img_tag = extract_image_tag(content)
                 
                 # Keywords filtering
                 keywords = feed.get('keywords', [])
@@ -144,8 +140,7 @@ def process_all_rss_feeds(feeds):
                     "id": url_id,
                     "title": title,
                     "link": entry.get('link', ''),
-                    "content": content,
-                    "img_tag": img_tag
+                    "content": content
                 })
             except Exception as e:
                 pass
@@ -161,7 +156,6 @@ def process_all_rss_feeds(feeds):
     for idx, item in enumerate(items_to_process, 1):
         snippet = item['content'][:5000]
         articles_text += f"\n\n--- 기사 {idx} (출처: {item['feed_name']}) ---\n제목: {item['title']}\n링크: {item['link']}\n"
-        if item['img_tag']: articles_text += f"원본 이미지 태그: {item['img_tag']}\n"
         articles_text += f"내용(HTML): {snippet}\n"
 
     custom_rules, custom_feedback = load_guidelines_and_feedback()
@@ -184,10 +178,11 @@ def process_all_rss_feeds(feeds):
 2. AI 기사가 하나라도 있으면 `has_ai_news`를 true로, 아니면 false로 응답하세요.
 3. 수집된 모든 기사에 대해 1~5점 척도로 중요도를 평가(`evaluations`)하세요. (5점: 핵심 트렌드, 1점: 아주 단순한 단신)
 4. 기사들을 병합해 가독성 좋은 마크다운 포스트 본문(`markdown_content`)을 구성하되, **최소 3점 이상인 고가치 기사들만 골라서 포함**하세요.
-5. 원문에 <img ...> 태그가 존재하면, 이 태그를 **한 글자도 고치지 말고 그대로 복사해서 삽입**하세요. 마크다운의 `![]()`로 변경하면 안 됩니다.
-6. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목으로 시작하세요.
-7. 소제목은 `### [기사 제목](링크)` 형식으로 작성하되, **반드시 그 바로 아래 줄을 한 칸 띄우고(빈 줄 삽입) 본문을 시작**하세요.
-8. JSON 구조 응답 필수: {{"has_ai_news": bool, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
+5. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목으로 시작하세요.
+6. 소제목은 `### [기사 제목](링크)` 형식으로 작성하되, **반드시 그 바로 아래 줄을 한 칸 띄우고(빈 줄 삽입) 본문을 시작**하세요.
+7. **가독성을 위해 본문 내에 절대로 원시 URL(http...) 텍스트를 그대로 노출하지 마세요.** 링크가 필요할 경우 반드시 `[텍스트](URL)` 형식의 마크다운 링크로 깔끔하게 처리하세요.
+8. 접속 에러(404)가 발생하지 않도록 제공된 원문 링크를 임의로 조작하거나 축약하지 말고 반드시 원본 그대로 사용하세요.
+9. JSON 구조 응답 필수: {{"has_ai_news": bool, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
 """
     client = genai.Client(api_key=GEMINI_API_KEY)
     
