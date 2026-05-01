@@ -16,7 +16,7 @@ tags: ["Claude Mythos", "Anthropic", "Cybersecurity", "Hacking", "Bitcoin", "Fin
 
 ## 1. 기존 보안 시스템의 붕괴: 해킹 패러다임의 전환
 
-![클로드 미토스와 레거시 보안 시스템의 붕괴](/Users/wook/.gemini/antigravity/brain/c3254527-5ed5-45c0-a030-90738a95eff6/claude_mythos_cybersecurity_1777596830484.png)
+![클로드 미토스와 레거시 보안 시스템의 붕괴](/images/claude_mythos_cybersecurity.png)
 *(그림 1: 초인적인 속도로 레거시 보안망의 취약점을 분석하고 해체하는 AI의 시각화)*
 
 과거의 해킹은 뛰어난 해커가 오랜 시간 코드의 맹점을 찾아내고(Zero-day), 이를 뚫기 위한 맞춤형 익스플로잇(Exploit)을 작성하는 '수공업'에 가까웠습니다. 그러나 클로드 미토스는 이 과정을 **초자동화(Hyper-Automation)**합니다.
@@ -29,7 +29,7 @@ tags: ["Claude Mythos", "Anthropic", "Cybersecurity", "Hacking", "Bitcoin", "Fin
 
 ## 2. 개인 뱅킹과 비트코인: 금융 암호화 체계의 위기
 
-![AI 망에 의해 해제되는 금융 보안 암호](/Users/wook/.gemini/antigravity/brain/c3254527-5ed5-45c0-a030-90738a95eff6/ai_financial_encryption_1777596844997.png)
+![AI 망에 의해 해제되는 금융 보안 암호](/images/ai_financial_encryption.png)
 *(그림 2: 현대 금융 기관의 금고를 지키는 디지털 암호가 다중 AI 네트워크에 의해 우회되는 개념도)*
 
 가장 큰 공포가 도사리는 곳은 바로 **금융(Finance)과 자본**입니다. 현대의 개인 뱅킹과 암호화폐는 RSA, ECC 등 고도의 수학적 암호화 기술에 의존하고 있습니다.
@@ -47,7 +47,7 @@ tags: ["Claude Mythos", "Anthropic", "Cybersecurity", "Hacking", "Bitcoin", "Fin
 
 ## 3. 글로벌 거시 경제 및 IT 비즈니스에 미치는 파장
 
-![글로벌 사이버 보안 패러다임 전환](/Users/wook/.gemini/antigravity/brain/c3254527-5ed5-45c0-a030-90738a95eff6/global_cyber_impact_1777596856551.png)
+![글로벌 사이버 보안 패러다임 전환](/images/global_cyber_impact.png)
 *(그림 3: 전 지구적인 인터넷망이 새로운 보안 락(Lock)과 방어적 AI 노드로 덮이는 사이버 보안 패러다임의 전환)*
 
 클로드 미토스의 성능은 단순한 IT 문제를 넘어, **세계 경제와 지정학적 패권**의 문제로 직결됩니다.
