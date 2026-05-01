@@ -14,7 +14,7 @@ tags: ["Anthropic", "Claude", "OpenAI", "Dario Amodei", "AI Startup", "Investmen
 
 ## 1. 앤스로픽의 창업자와 핵심 멤버: 아모데이 남매의 비전
 
-![앤스로픽의 비전을 상징하는 AI 콘셉트 아트](/images/anthropic_history_hero.png)
+![앤스로픽의 비전을 상징하는 AI 콘셉트 아트](/wooksai/images/anthropic_history_hero.png)
 
 앤스로픽은 2021년 초, 이탈리아계 미국인 남매인 **다리오 아모데이(Dario Amodei)**와 **다니엘라 아모데이(Daniela Amodei)**를 주축으로 설립되었습니다. 
 
