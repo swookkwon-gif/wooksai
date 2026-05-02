@@ -1,6 +1,7 @@
 import { getSortedPostsData, getPostData } from "@/lib/posts";
 import ReactMarkdown from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import rehypeExternalLinks from "rehype-external-links";
 import remarkGfm from "remark-gfm";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Tag, ChevronLeft, ChevronRight } from "lucide-react";
@@ -54,7 +55,7 @@ export default async function PostPage({
         prose-img:rounded-lg prose-img:shadow-md prose-code:text-violet-600 prose-code:bg-neutral-100 prose-code:px-1 prose-code:rounded">
         <ReactMarkdown
           remarkPlugins={[remarkGfm]}
-          rehypePlugins={[rehypeRaw]}
+          rehypePlugins={[rehypeRaw, [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }]]}
           components={{
             blockquote: ({ children, ...props }: any) => {
               // Custom blockquotes (GitHub Alerts)
