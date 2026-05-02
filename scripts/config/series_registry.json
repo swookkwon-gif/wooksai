@@ -1,0 +1,70 @@
+{
+  "series": [
+    {
+      "id": "ai-survival-guide",
+      "title": "AI 생존 가이드 2026",
+      "description": "AI 초보자를 위한 실전 활용 가이드. 챗봇 활용법부터 에이전트 사고까지.",
+      "category": "AI Learnings",
+      "notebook_id": "56829e2f-fd47-4d20-be9f-f54a1c585deb",
+      "status": "in_progress",
+      "chapters": [
+        {"number": 1, "slug": "ai-survival-guide-for-beginners", "title": "AI 시대 생존법: 비전공자를 위한 필수 가이드", "status": "published"},
+        {"number": 2, "slug": "how-to-deal-with-ai-hallucination", "title": "AI 환각(Hallucination)에 대처하는 법", "status": "published"},
+        {"number": 3, "slug": "3-chatgpt-claude-gemini-guide", "title": "핵심 3대 챗봇 100% 활용법: ChatGPT vs Claude vs Gemini", "status": "draft"},
+        {"number": 4, "slug": "4-perplexity-search-revolution", "title": "정보 검색의 세대교체, 퍼플렉시티(Perplexity) 활용법", "status": "draft"},
+        {"number": 5, "slug": "5-shadow-ai-and-security", "title": "섀도 AI(Shadow AI)의 위험성과 필수 보안 수칙", "status": "draft"},
+        {"number": 6, "slug": "6-notebooklm-custom-assistant", "title": "나만의 맞춤형 지식 비서 구축: NotebookLM 완벽 가이드", "status": "draft"},
+        {"number": 7, "slug": "7-meeting-minutes-daglo-granola", "title": "회의록 지옥 탈출: 다글로(daglo) & Granola 활용법", "status": "draft"},
+        {"number": 8, "slug": "8-design-canva-gamma", "title": "디자인 비전공자의 구세주: Canva & Gamma 꿀팁", "status": "draft"},
+        {"number": 9, "slug": "9-workflow-automation-relay-zapier", "title": "자연어로 만드는 업무 자동화: Relay.app & Zapier", "status": "draft"},
+        {"number": 10, "slug": "10-native-multimodal-practice", "title": "네이티브 멀티모달의 실무 적용 완벽 가이드", "status": "draft"},
+        {"number": 11, "slug": "11-agentic-thinking", "title": "에이전트 중심 사고(Agentic Thinking) 장착하기", "status": "draft"},
+        {"number": 12, "slug": "12-no-code-app-dev-cursor-antigravity", "title": "코드 0줄로 나만의 앱 만들기: Cursor & Antigravity", "status": "draft"},
+        {"number": 13, "slug": "13-content-factory-daven-heygen", "title": "콘텐츠 자동 생성 공장: Daven AI & HeyGen", "status": "draft"},
+        {"number": 14, "slug": "14-ai-copyright-fair-use", "title": "AI 저작권과 공정이용의 딜레마 극복하기", "status": "draft"},
+        {"number": 15, "slug": "15-environmental-impact-slm", "title": "AI의 환경 영향과 올바른 모델 최적화(SLM) 전략", "status": "draft"}
+      ],
+      "book": {
+        "target_title": "AI 시대 생존 가이드 2026",
+        "target_format": ["markdown", "pdf"],
+        "estimated_chapters": 15
+      }
+    },
+    {
+      "id": "data-statistics",
+      "title": "숫자의 거짓말: 데이터로 읽는 세상",
+      "description": "통계의 재미와 함정을 파헤치는 21가지 이야기. 생존자 편향부터 심슨 역설까지.",
+      "category": "Data",
+      "notebook_id": null,
+      "status": "in_progress",
+      "chapters": [
+        {"number": 1, "slug": "abraham-wald-survivorship-bias", "title": "에이브러햄 월드의 생존자 편향", "status": "published"},
+        {"number": 2, "slug": "anscombes-quartet-visualization", "title": "앤스컴 사중주와 시각화의 힘", "status": "published"},
+        {"number": 3, "slug": "birthday-paradox", "title": "생일 패러독스", "status": "published"},
+        {"number": 4, "slug": "challenger-oring-selection-bias", "title": "챌린저호와 선택 편향", "status": "published"},
+        {"number": 5, "slug": "false-positive-paradox-bayes-theorem", "title": "거짓 양성 역설과 베이즈 정리", "status": "published"},
+        {"number": 6, "slug": "florence-nightingale-rose-diagram", "title": "나이팅게일의 장미 다이어그램", "status": "published"},
+        {"number": 7, "slug": "freakonomics-sumo-match-fixing", "title": "괴짜경제학: 스모 승부조작", "status": "published"},
+        {"number": 8, "slug": "gamblers-fallacy-monte-carlo", "title": "도박사의 오류: 몬테카를로", "status": "published"},
+        {"number": 9, "slug": "german-tank-problem-estimation", "title": "독일 전차 문제와 추정", "status": "published"},
+        {"number": 10, "slug": "google-flu-trends-overfitting", "title": "구글 독감 트렌드와 과적합", "status": "published"},
+        {"number": 11, "slug": "guinness-gosset-t-distribution", "title": "기네스의 고셋과 t-분포", "status": "published"},
+        {"number": 12, "slug": "john-snow-cholera-map", "title": "존 스노우의 콜레라 지도", "status": "published"},
+        {"number": 13, "slug": "lady-tasting-tea-null-hypothesis", "title": "차를 맛보는 여인과 귀무가설", "status": "published"},
+        {"number": 14, "slug": "literary-digest-sampling-bias", "title": "리터러리 다이제스트의 표본 편향", "status": "published"},
+        {"number": 15, "slug": "monty-hall-conditional-probability", "title": "몬티 홀과 조건부 확률", "status": "published"},
+        {"number": 16, "slug": "napoleon-dynamite-problem", "title": "나폴레옹 다이너마이트 문제", "status": "published"},
+        {"number": 17, "slug": "prosecutors-fallacy-sally-clark", "title": "검사의 오류: 샐리 클라크 사건", "status": "published"},
+        {"number": 18, "slug": "simpsons-paradox-uc-berkeley", "title": "심슨 역설: UC 버클리", "status": "published"},
+        {"number": 19, "slug": "spurious-correlation-nicolas-cage", "title": "허위 상관: 니콜라스 케이지", "status": "published"},
+        {"number": 20, "slug": "target-pregnancy-prediction-data-mining", "title": "타겟의 임신 예측: 데이터 마이닝", "status": "published"},
+        {"number": 21, "slug": "will-rogers-phenomenon-stage-migration", "title": "윌 로저스 현상: 단계 이동", "status": "published"}
+      ],
+      "book": {
+        "target_title": "숫자의 거짓말: 통계적 사고의 힘",
+        "target_format": ["markdown", "pdf"],
+        "estimated_chapters": 21
+      }
+    }
+  ]
+}
