@@ -49,3 +49,7 @@ job.log
 
 scripts/credentials.json
 scripts/token_*.json
+
+# Python cache
+__pycache__/
+*.pyc
