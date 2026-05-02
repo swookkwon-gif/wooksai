@@ -38,11 +38,11 @@ jobs:
           echo '${{ secrets.GMAIL_CRED_JSON }}' > scripts/credentials.json
           echo '${{ secrets.GMAIL_TOKEN_JSON }}' > scripts/token_mail1.json
 
-      - name: Run Auto Blog Daemon
+      - name: Run Multi-Agent Pipeline
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          python scripts/auto_blog_daemon.py
+          python scripts/pipeline.py
           
       - name: Commit and Push Changes
         run: |
@@ -52,8 +52,9 @@ jobs:
           
           # 새 마크다운 파일들 및 상태/설정 파일 스테이징
           git add content/posts/2.\ AI\ News/*.md
-          git add scripts/state.json
-          git add scripts/config/
+          git add scripts/state/state.json || true
+          git add scripts/state.json || true
+          git add scripts/config/ || true
           
           # 변경사항이 있을 때만 푸시
           if git diff --staged --quiet; then
@@ -63,3 +64,4 @@ jobs:
             git pull --rebase origin main
             git push
           fi
+

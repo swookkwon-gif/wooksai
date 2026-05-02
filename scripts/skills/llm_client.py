@@ -1,152 +1,132 @@
 #!/usr/bin/env python3
-"""통합 LLM 클라이언트 — 모든 에이전트가 공유하는 Gemini API 호출 인터페이스
-
-중복되어 있던 3중 루프(재시도 × 모델 폴백) 로직을 하나로 통합합니다.
+"""
+skills/llm_client.py — 통합 LLM 클라이언트
+모든 에이전트가 공유하는 Gemini API 호출 인터페이스.
+모델 폴백, 재시도, JSON 파싱을 자동 처리한다.
 """
 import os
-import time
 import json
-
+import time
 from google import genai
 from google.genai import types
 
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY")
+class LLMClient:
+    """Gemini API 통합 호출 클라이언트."""
 
-# 모델 폴백 순서 (비용/성능 기준)
-DEFAULT_MODELS = [
-    'gemini-2.5-flash',
-    'gemini-2.0-flash',
-    'gemini-1.5-flash-latest',
-    'gemini-1.5-flash-8b',
-]
+    DEFAULT_MODELS = [
+        'gemini-2.5-flash',
+        'gemini-2.0-flash',
+        'gemini-1.5-flash-latest',
+        'gemini-1.5-flash-8b',
+    ]
 
-RETRIABLE_ERRORS = ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]
+    RETRYABLE_ERRORS = ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]
 
+    def __init__(self, api_key: str | None = None, models: list[str] | None = None):
+        self.api_key = api_key or os.environ.get("GEMINI_API_KEY")
+        if not self.api_key:
+            raise ValueError("GEMINI_API_KEY is required")
+        self.client = genai.Client(api_key=self.api_key)
+        self.models = models or self.DEFAULT_MODELS
 
-def clean_json_response(text):
-    """API 응답에서 마크다운 코드블록 래핑을 제거"""
-    text = text.strip()
-    if text.startswith("```json"):
-        text = text[len("```json"):].strip()
-    if text.startswith("```"):
-        text = text[len("```"):].strip()
-    if text.endswith("```"):
-        text = text[:-len("```")].strip()
-    return text
+    # ── 핵심 API 호출 ──────────────────────────────────────────
+    def call(
+        self,
+        prompt: str,
+        schema: dict | None = None,
+        temperature: float = 0.3,
+        max_retries: int = 3,
+    ) -> dict | str | None:
+        """
+        프롬프트를 전송하고 결과를 반환한다.
+        - schema가 주어지면 JSON 응답을 dict로 파싱하여 반환
+        - schema가 없으면 raw text 반환
+        - 모든 모델 폴백 × 재시도를 자동 처리
+        """
+        config_kwargs = {"temperature": temperature}
+        if schema:
+            config_kwargs["response_mime_type"] = "application/json"
+            config_kwargs["response_schema"] = schema
 
+        for attempt in range(max_retries):
+            for model_name in self.models:
+                try:
+                    response = self.client.models.generate_content(
+                        model=model_name,
+                        contents=prompt,
+                        config=types.GenerateContentConfig(**config_kwargs),
+                    )
+                    raw_text = self._clean_json(response.text)
 
-def call_llm(
-    prompt: str,
-    response_schema: dict = None,
-    temperature: float = 0.3,
-    max_retries: int = 3,
-    models: list = None,
-    retry_delay: int = 30,
-    label: str = "LLM",
-) -> dict | str | None:
-    """Gemini API를 호출하고, 모델 폴백 + 재시도 + JSON 파싱을 자동 처리합니다.
-
-    Args:
-        prompt: LLM에 전달할 프롬프트
-        response_schema: JSON 스키마 (없으면 텍스트로 반환)
-        temperature: 생성 온도
-        max_retries: 전체 재시도 횟수
-        models: 시도할 모델 목록 (기본: DEFAULT_MODELS)
-        retry_delay: 모든 모델 실패 시 대기 시간(초)
-        label: 로그에 표시할 작업명
-
-    Returns:
-        response_schema가 있으면 파싱된 dict, 없으면 텍스트 str.
-        완전히 실패하면 None.
-    """
-    if not GEMINI_API_KEY:
-        print("⚠️ GEMINI_API_KEY is missing.")
-        return None
-
-    client = genai.Client(api_key=GEMINI_API_KEY)
-    models = models or DEFAULT_MODELS
-
-    config_kwargs = {"temperature": temperature}
-    if response_schema:
-        config_kwargs["response_mime_type"] = "application/json"
-        config_kwargs["response_schema"] = response_schema
-
-    for attempt in range(max_retries):
-        for model_name in models:
-            try:
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(**config_kwargs),
-                )
-
-                raw_text = clean_json_response(response.text)
-
-                if response_schema:
-                    try:
+                    if schema:
                         return json.loads(raw_text)
-                    except json.JSONDecodeError as je:
-                        print(f"      ❌ [{label}] JSON 파싱 실패 ({model_name}): {je}")
-                        # JSON 파싱 실패 시 다음 모델로
-                        continue
-                else:
                     return raw_text
 
-            except Exception as e:
-                err_msg = str(e)
-                if any(x in err_msg for x in RETRIABLE_ERRORS):
-                    print(f"      [경고] [{label}] '{model_name}' API 제한. 다른 모델 시도...")
+                except json.JSONDecodeError as je:
+                    print(f"      ❌ JSON 파싱 에러 ({model_name}): {je}")
+                    # JSON 에러는 다른 모델로 재시도
                     continue
-                else:
-                    print(f"      ❌ [{label}] API 에러: {e}")
-                    break  # 비재시도 에러는 모델 루프 탈출
+                except Exception as e:
+                    err_msg = str(e)
+                    if any(code in err_msg for code in self.RETRYABLE_ERRORS):
+                        print(f"      [경고] '{model_name}' API 제한. 다른 모델 시도...")
+                        continue
+                    else:
+                        print(f"      ❌ API 에러 ({model_name}): {e}")
+                        break  # 복구 불가능한 에러 → 다음 재시도 라운드로
 
-        print(f"      ❌ [{label}] 모든 모델 실패. {retry_delay}초 대기 후 재시도... ({attempt+1}/{max_retries})")
-        time.sleep(retry_delay)
+            print(f"      ⏳ 모든 모델 실패. {10 * (attempt + 1)}초 대기 후 재시도... ({attempt + 1}/{max_retries})")
+            time.sleep(10 * (attempt + 1))
 
-    print(f"      ❌ [{label}] 최대 재시도 초과. 포기합니다.")
-    return None
+        print("      ❌ 최종 실패: 모든 재시도 소진")
+        return None
 
+    # ── Writer + Reviewer 루프 ─────────────────────────────────
+    def call_with_review(
+        self,
+        prompt: str,
+        schema: dict,
+        reviewer_fn,
+        max_rounds: int = 2,
+        temperature: float = 0.3,
+    ) -> dict | None:
+        """
+        LLM 호출 → reviewer_fn으로 검증 → 실패 시 피드백 포함 재호출.
+        reviewer_fn(result_dict) → list[str] (이슈 목록, 빈 리스트면 통과)
+        """
+        current_prompt = prompt
+        for round_num in range(max_rounds):
+            result = self.call(current_prompt, schema=schema, temperature=temperature)
+            if result is None:
+                return None
 
-def call_llm_with_review(
-    prompt: str,
-    response_schema: dict,
-    reviewer_fn,
-    max_rounds: int = 2,
-    **kwargs,
-) -> dict | None:
-    """Writer + Reviewer 루프를 자동 실행합니다.
+            issues = reviewer_fn(result)
+            if not issues:
+                if round_num > 0:
+                    print(f"      ✅ Review 통과 (라운드 {round_num + 1})")
+                return result
 
-    Args:
-        prompt: 초기 프롬프트
-        response_schema: JSON 응답 스키마
-        reviewer_fn: 결과를 검증하는 함수. 문제가 있으면 list[str], 없으면 빈 리스트 반환.
-        max_rounds: 최대 재작성 횟수
-        **kwargs: call_llm에 전달할 추가 인자
+            print(f"      🔄 Review 실패 (라운드 {round_num + 1}): {len(issues)}개 이슈 발견")
+            # 피드백을 프롬프트에 추가하여 재호출
+            fix_instructions = "\n".join(f"- {issue}" for issue in issues)
+            current_prompt = (
+                f"{prompt}\n\n"
+                f"[이전 출력에서 발견된 오류 — 반드시 수정하세요]\n{fix_instructions}"
+            )
 
-    Returns:
-        검증을 통과한(또는 최선의) dict 결과
-    """
-    current_prompt = prompt
+        print(f"      ⚠️ 최대 라운드 도달. 최선의 결과 반환")
+        return result
 
-    for round_num in range(max_rounds):
-        result = call_llm(current_prompt, response_schema=response_schema, **kwargs)
-        if result is None:
-            return None
-
-        issues = reviewer_fn(result)
-        if not issues:
-            return result  # 통과!
-
-        print(f"      🔄 [{kwargs.get('label', 'LLM')}] Reviewer 이슈 {len(issues)}건 발견. 재작성 요청... (round {round_num+1}/{max_rounds})")
-
-        # 이슈를 프롬프트에 추가하여 재시도
-        fix_instructions = "\n".join(f"- {issue}" for issue in issues)
-        current_prompt = prompt + f"""
-
-[중요: 이전 출력에서 다음 문제가 발견되었습니다. 반드시 수정하세요]
-{fix_instructions}
-"""
-
-    return result  # 마지막 결과라도 반환
+    # ── 유틸리티 ───────────────────────────────────────────────
+    @staticmethod
+    def _clean_json(text: str) -> str:
+        """LLM 응답에서 ```json ... ``` 마커를 제거한다."""
+        text = text.strip()
+        if text.startswith("```json"):
+            text = text[len("```json"):].strip()
+        if text.startswith("```"):
+            text = text[len("```"):].strip()
+        if text.endswith("```"):
+            text = text[:-len("```")].strip()
+        return text

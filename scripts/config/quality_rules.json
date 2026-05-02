@@ -1,12 +1,44 @@
 {
   "format_checks": [
-    {"rule": "no_raw_urls", "description": "마크다운 링크 바깥에 원시 URL이 노출되면 안 됩니다", "severity": "error"},
-    {"rule": "heading_has_link", "description": "소제목(###)에 원문 링크가 [제목](URL) 형태로 걸려 있어야 합니다", "severity": "warning"},
-    {"rule": "no_h1_heading", "description": "포스트 본문에 H1(#) 헤딩이 포함되면 안 됩니다", "severity": "error"},
-    {"rule": "empty_line_after_heading", "description": "소제목(###) 다음 줄에 빈 줄이 있어야 합니다", "severity": "warning"}
+    {
+      "rule": "no_raw_urls",
+      "description": "본문 내 원시 URL(http...) 노출 금지",
+      "pattern": "(?<!\\()(?<!\\[)(?<!\\\")(?<!')(https?://\\S+)(?!\\))(?!\\])(?!\\\")(?!')",
+      "severity": "error",
+      "auto_fix": true
+    },
+    {
+      "rule": "heading_must_have_link",
+      "description": "### 소제목에 URL이 있으면 반드시 [제목](URL) 형식",
+      "pattern": "^###\\s+[^\\[\\n]+\\(https?://",
+      "severity": "error",
+      "auto_fix": true
+    },
+    {
+      "rule": "no_h1_heading",
+      "description": "본문에 H1(# 제목) 사용 금지",
+      "pattern": "^#\\s+[^#]",
+      "severity": "error",
+      "auto_fix": true
+    },
+    {
+      "rule": "empty_line_after_heading",
+      "description": "### 소제목 바로 다음 줄은 빈 줄이어야 함",
+      "pattern": "^###.*\\n[^\\n]",
+      "severity": "warning",
+      "auto_fix": true
+    }
   ],
   "content_checks": [
-    {"rule": "min_word_count", "min": 100, "description": "본문이 최소 100자 이상이어야 합니다"},
-    {"rule": "has_source_links", "min_links": 1, "description": "최소 1개 이상의 출처 링크가 있어야 합니다"}
+    {
+      "rule": "min_word_count",
+      "description": "본문 최소 100자 이상",
+      "min": 100
+    },
+    {
+      "rule": "has_source_links",
+      "description": "최소 1개 이상의 출처 링크 포함",
+      "min_links": 1
+    }
   ]
 }
