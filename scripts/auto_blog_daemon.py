@@ -41,6 +41,12 @@ def clean_json_response(text):
 def load_guidelines_and_feedback():
     rules_path = os.path.join(os.path.dirname(__file__), 'custom_eval_rules.txt')
     feedback_path = os.path.join(os.path.dirname(__file__), 'feedback.json')
+    prompts_path = os.path.join(os.path.dirname(__file__), 'prompts.json')
+    
+    prompts = {"rss_requirements": "", "gmail_requirements": ""}
+    if os.path.exists(prompts_path):
+        with open(prompts_path, 'r', encoding='utf-8') as f:
+            prompts = json.load(f)
     
     rules = "- 판단 기준이 누적 중입니다."
     if os.path.exists(rules_path):
@@ -63,7 +69,7 @@ def load_guidelines_and_feedback():
         except Exception:
             pass
             
-    return rules, feedback.strip()
+    return rules, feedback.strip(), prompts
 
 def create_markdown_post_file(filename_slug, post_title, content, category="AI News"):
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
@@ -158,7 +164,7 @@ def process_all_rss_feeds(feeds):
         articles_text += f"\n\n--- 기사 {idx} (출처: {item['feed_name']}) ---\n제목: {item['title']}\n링크: {item['link']}\n"
         articles_text += f"내용(HTML): {snippet}\n"
 
-    custom_rules, custom_feedback = load_guidelines_and_feedback()
+    custom_rules, custom_feedback, prompts = load_guidelines_and_feedback()
 
     prompt = f"""
 당신은 최고 수준의 AI 뉴스 에디터입니다.
@@ -174,16 +180,7 @@ def process_all_rss_feeds(feeds):
 {articles_text}
 
 [요구사항]
-1. AI, 머신러닝, LLM 비즈니스와 무관한 기사는 무시하세요.
-2. AI 기사가 하나라도 있으면 `has_ai_news`를 true로, 아니면 false로 응답하세요.
-3. 수집된 모든 기사에 대해 1~5점 척도로 중요도를 평가(`evaluations`)하세요. (5점: 핵심 트렌드, 1점: 아주 단순한 단신)
-4. 기사들을 병합해 가독성 좋은 마크다운 포스트 본문(`markdown_content`)을 구성하되, **최소 3점 이상인 고가치 기사들만 골라서 포함**하세요.
-5. 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 렌더링하지 마세요. 곧바로 첫 번째 소제목으로 시작하세요.
-6. 소제목은 반드시 마크다운 텍스트 링크 문법을 사용하여 `### [기사 제목](원문URL)` 형식으로 작성하세요. (예: `### [오픈AI, 새로운 모델 발표](https://...)`) 제목 문자열 뒤에 URL을 그대로 붙여 쓰지 마세요.
-7. 소제목 바로 아래 줄은 반드시 한 칸 띄우고(빈 줄 삽입) 본문을 시작하세요.
-8. **가독성을 위해 본문 내에 절대로 원시 URL(http...) 텍스트를 그대로 노출하지 마세요.** 링크가 필요할 경우 반드시 `[텍스트](URL)` 형식의 마크다운 링크로 깔끔하게 처리하세요.
-8. 접속 에러(404)가 발생하지 않도록 제공된 원문 링크를 임의로 조작하거나 축약하지 말고 반드시 원본 그대로 사용하세요.
-9. JSON 구조 응답 필수: {{"has_ai_news": bool, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
+{prompts.get('rss_requirements', '')}
 """
     client = genai.Client(api_key=GEMINI_API_KEY)
     
@@ -389,7 +386,7 @@ def process_gmail_newsletters():
         for idx, letter in enumerate(letters, 1):
             articles_text += f"\n\n[제목: {letter['subject']}]\n{letter['body']}\n"
             
-        custom_rules, custom_feedback = load_guidelines_and_feedback()
+        custom_rules, custom_feedback, prompts = load_guidelines_and_feedback()
             
         prompt = f"""
 당신은 '윤(Yoon)' 님을 위한 수석 뉴스레터 AI 에디터입니다.
@@ -405,13 +402,7 @@ def process_gmail_newsletters():
 {articles_text}
 
 [요구사항]
-1. 뉴스레터 내에서 소개된 각각의 주요 기사나 도구, 단신들에 대해 1~5점 척도로 퀄리티/중요도를 평가(`evaluations`)하세요. (5점: 핵심, 1점: 단순 가십)
-2. 블로그 포스트의 본문(`markdown_content`)에는 평가 점수가 **3점 이상인 핵심 내용만 필터링하여 포함**하세요.
-3. 각 기사나 소식에는 **반드시 마크다운 링크 문법을 사용해 원문 출처를 제공하세요.** (예: `[원문 보기](URL)`). **본문 내에 절대로 원시 URL(http...) 텍스트를 그대로 노출하지 마세요.**
-4. 뉴스레터 내용이 단신 나열 형태라면 원문을 최대한 유지하고 매끄럽게 교정하며, 긴 산문형이나 난잡하게 섞여있다면 개조식 리스트 형태로 깔끔히 요약하세요.
-5. 발신자(`{sender}`)가 전하는 핵심 메시지에 맞춰 소제목(`###`) 단위로만 구분하세요. 소제목에 링크를 걸 때는 `### [기사 제목](URL)` 형태로 작성하고, 포스트 최상단에 전체 제목(H1, `# 제목`)을 절대 쓰지 마세요.
-6. 전체 내용을 관통하는 **매력적이고 구체적인 블로그 포스트 제목(`post_title`)**을 작성하세요. 단순히 "[발신자] 뉴스레터" 같은 제목은 피하세요. (예: "애플의 Vision Pro 개발 중단과 하이퍼스케일러 AI 투자 동향")
-7. JSON 구조 응답 필수: {{"post_title": string, "evaluations": [{{"target": string, "score": number, "reasoning": string}}], "markdown_content": string}}
+{prompts.get('gmail_requirements', '')}
 """
         response = None
         models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
