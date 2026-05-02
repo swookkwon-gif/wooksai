@@ -50,9 +50,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           
-          # 새 마크다운 파일들 및 state.json 스테이징
+          # 새 마크다운 파일들 및 상태/설정 파일 스테이징
           git add content/posts/2.\ AI\ News/*.md
           git add scripts/state.json
+          git add scripts/config/
           
           # 변경사항이 있을 때만 푸시
           if git diff --staged --quiet; then

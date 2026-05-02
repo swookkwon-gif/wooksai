@@ -106,8 +106,8 @@ def generate_evaluations_report(days=7):
     return report
 
 def update_eval_rules():
-    feedback_path = os.path.join(os.path.dirname(__file__), 'feedback.json')
-    rules_path = os.path.join(os.path.dirname(__file__), 'custom_eval_rules.txt')
+    feedback_path = os.path.join(os.path.dirname(__file__), 'config', 'feedback.json')
+    rules_path = os.path.join(os.path.dirname(__file__), 'config', 'eval_rules.txt')
     
     if not os.path.exists(feedback_path): return
     

@@ -25,10 +25,18 @@ if not os.path.exists(POSTS_DIR):
 
 TARGET_LABEL_NAME = "AI News"
 
-FEEDS = [
-    {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
-    {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"]}
-]
+def load_feeds():
+    feeds_path = os.path.join(os.path.dirname(__file__), 'config', 'feeds.json')
+    if os.path.exists(feeds_path):
+        with open(feeds_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    # Fallback
+    return [
+        {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
+        {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"]}
+    ]
+
+FEEDS = load_feeds()
 
 def clean_json_response(text):
     text = text.strip()
@@ -39,9 +47,9 @@ def clean_json_response(text):
     return text
 
 def load_guidelines_and_feedback():
-    rules_path = os.path.join(os.path.dirname(__file__), 'custom_eval_rules.txt')
-    feedback_path = os.path.join(os.path.dirname(__file__), 'feedback.json')
-    prompts_path = os.path.join(os.path.dirname(__file__), 'prompts.json')
+    rules_path = os.path.join(os.path.dirname(__file__), 'config', 'eval_rules.txt')
+    feedback_path = os.path.join(os.path.dirname(__file__), 'config', 'feedback.json')
+    prompts_path = os.path.join(os.path.dirname(__file__), 'config', 'prompts.json')
     
     prompts = {"rss_requirements": "", "gmail_requirements": ""}
     if os.path.exists(prompts_path):
@@ -71,6 +79,36 @@ def load_guidelines_and_feedback():
             
     return rules, feedback.strip(), prompts
 
+def quick_review_and_fix(content):
+    """발행 전 최소한의 품질 검증 + 자동 수정 (Reviewer Quick Win)
+    
+    LLM이 프롬프트 지시를 무시하더라도, 코드 레벨에서 강제 교정합니다.
+    """
+    # 1. ### 제목(URL) → ### [제목](URL) 자동 수정
+    #    LLM이 대괄호를 빠뜨리고 ### 기사제목(https://...) 형태로 출력하는 패턴 교정
+    content = re.sub(
+        r'^(###\s+)([^\[\n]+?)\((https?://[^\)]+)\)\s*$',
+        r'\1[\2](\3)',
+        content, flags=re.MULTILINE
+    )
+    
+    # 2. 소제목 바로 다음 줄에 빈 줄이 없으면 삽입
+    content = re.sub(
+        r'^(###\s+.+)\n([^\n])',
+        r'\1\n\n\2',
+        content, flags=re.MULTILINE
+    )
+    
+    # 3. 본문 내 원시 URL을 [원문 보기](URL)로 래핑
+    #    이미 마크다운 링크 안에 있는 URL은 건드리지 않음
+    content = re.sub(
+        r'(?<![(\["\'=])(https?://\S+)(?![)\]"\'])',
+        r'[원문 보기](\1)',
+        content
+    )
+    
+    return content
+
 def create_markdown_post_file(filename_slug, post_title, content, category="AI News"):
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
     date_str = now_kst.strftime("%Y-%m-%d")
@@ -78,6 +116,9 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     # AI가 본문 최상단에 강제 생성하는 제목들(H1, H2) 중복 방지를 위해 삭제
     content = re.sub(r'^#\s+[^\n]+\n*', '', content.lstrip())
     content = re.sub(r'^##\s+[^\n]+\n*', '', content.lstrip())
+    
+    # 발행 전 자동 품질 검증 및 수정 (Reviewer)
+    content = quick_review_and_fix(content)
     
     # 본문 첫 부분을 바탕으로 excerpt(요약문) 자동 생성 (제목 반복 방지)
     clean_content = re.sub(r'<[^>]+>', '', content)
@@ -103,6 +144,7 @@ category: '{category.replace("'", "''")}'
         if mode == "w":
             f.write(frontmatter)
         f.write(content + "\n\n")
+
 
 # =============== RSS PROCESSING ===============
 
