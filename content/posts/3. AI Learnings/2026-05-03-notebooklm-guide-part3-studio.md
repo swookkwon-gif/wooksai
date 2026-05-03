@@ -22,7 +22,7 @@ reading_time: '10분'
 
 노트북 화면 우측에 **스튜디오** 패널이 있으며, 9개의 아티팩트 생성 버튼이 그리드 형태로 배치되어 있습니다:
 
-![Studio 패널 — 9가지 아티팩트 유형과 생성된 결과물 목록](/images/notebooklm-guide/nlm-studio-9types.png)
+![Studio 패널 — 9가지 아티팩트 유형과 생성된 결과물 목록](/wooksai/images/notebooklm-guide/nlm-studio-9types.png)
 
 ---
 
@@ -88,7 +88,7 @@ reading_time: '10분'
 
 ### 실제 생성 결과
 
-![NotebookLM이 자동 생성한 인포그래픽 — 보안 위협 진화 비교](/images/notebooklm-guide/nlm-infographic-preview.png)
+![NotebookLM이 자동 생성한 인포그래픽 — 보안 위협 진화 비교](/wooksai/images/notebooklm-guide/nlm-infographic-preview.png)
 
 위 인포그래픽은 **54개 소스**를 기반으로 AI가 자동 생성한 결과입니다. "2014년 개인정보 유출 사건"과 "2025년 AI 기반 지능형 공격"을 시각적으로 비교하고 있으며, 구체적인 수치(1억 4백만 건, 87% 증가 등)까지 포함되어 있습니다.
 
@@ -255,7 +255,7 @@ reading_time: '10분'
 
 생성된 아티팩트는 스튜디오 패널 하단에 리스트로 표시됩니다:
 
-![생성된 아티팩트 — 오디오 오버뷰와 슬라이드 결과](/images/notebooklm-guide/nlm-artifact-detail.png)
+![생성된 아티팩트 — 오디오 오버뷰와 슬라이드 결과](/wooksai/images/notebooklm-guide/nlm-artifact-detail.png)
 
 각 아티팩트에서 할 수 있는 작업:
 
@@ -310,7 +310,7 @@ reading_time: '10분'
 
 ## 📚 참고자료
 
-- [Google NotebookLM Studio 공식 가이드](https://support.google.com/notebooklm){:target="_blank"}
-- [NotebookLM Audio Overview 소개](https://blog.google/technology/ai/notebooklm-audio-overviews/){:target="_blank"}
-- [NotebookLM MCP CLI — Studio 기능](https://github.com/nicholasgriffintn/notebooklm-mcp){:target="_blank"}
-- [NotebookLM 인포그래픽 생성 사례](https://notebooklm.google.com){:target="_blank"}
+- [Google NotebookLM Studio 공식 가이드](https://support.google.com/notebooklm)
+- [NotebookLM Audio Overview 소개](https://blog.google/technology/ai/notebooklm-audio-overviews/)
+- [NotebookLM MCP CLI — Studio 기능](https://github.com/nicholasgriffintn/notebooklm-mcp)
+- [NotebookLM 인포그래픽 생성 사례](https://notebooklm.google.com)

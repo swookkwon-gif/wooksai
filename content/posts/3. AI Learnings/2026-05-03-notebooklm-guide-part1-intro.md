@@ -59,11 +59,11 @@ NotebookLM은 크게 **4가지 핵심 기능**을 제공합니다:
 
 ### 접속 방법
 
-1. 브라우저에서 [notebooklm.google.com](https://notebooklm.google.com){:target="_blank"}에 접속합니다.
+1. 브라우저에서 [notebooklm.google.com](https://notebooklm.google.com)에 접속합니다.
 2. Google 계정으로 로그인합니다.
 3. 아래와 같은 대시보드 화면이 표시됩니다.
 
-![NotebookLM 대시보드 — 추천 노트북과 최근 노트북 목록이 표시됩니다](/images/notebooklm-guide/nlm-dashboard.png)
+![NotebookLM 대시보드 — 추천 노트북과 최근 노트북 목록이 표시됩니다](/wooksai/images/notebooklm-guide/nlm-dashboard.png)
 
 대시보드에는 **추천 노트북**(Google이 제공하는 샘플)과 **내 노트북** 목록이 표시됩니다. 오른쪽 상단의 `+ 새로 만들기` 버튼으로 새 노트북을 생성할 수 있습니다.
 
@@ -81,7 +81,7 @@ NotebookLM의 핵심은 **소스(Sources)**입니다. AI가 분석할 자료를 
 
 ### 소스 추가 화면
 
-![소스 추가 다이얼로그 — 파일 업로드, 웹사이트, Drive, 복사된 텍스트 옵션](/images/notebooklm-guide/nlm-add-source.png)
+![소스 추가 다이얼로그 — 파일 업로드, 웹사이트, Drive, 복사된 텍스트 옵션](/wooksai/images/notebooklm-guide/nlm-add-source.png)
 
 소스 추가 방법은 크게 **5가지**입니다:
 
@@ -125,7 +125,7 @@ https://www.aitimes.com/news/articleView.html?idxno=210020
 
 소스를 추가한 후의 노트북 화면은 **3단 구조**로 나뉩니다:
 
-![NotebookLM 노트북 뷰 — 왼쪽: 출처, 가운데: 채팅, 오른쪽: 스튜디오](/images/notebooklm-guide/nlm-notebook-view.png)
+![NotebookLM 노트북 뷰 — 왼쪽: 출처, 가운데: 채팅, 오른쪽: 스튜디오](/wooksai/images/notebooklm-guide/nlm-notebook-view.png)
 
 ### 좌측: 출처 (Sources) 패널
 
@@ -143,7 +143,7 @@ https://www.aitimes.com/news/articleView.html?idxno=210020
 
 ### 우측: 스튜디오 (Studio) 패널
 
-![Studio 패널 — 9가지 아티팩트 생성 옵션](/images/notebooklm-guide/nlm-studio-panel.png)
+![Studio 패널 — 9가지 아티팩트 생성 옵션](/wooksai/images/notebooklm-guide/nlm-studio-panel.png)
 
 스튜디오는 소스를 기반으로 **9가지 유형의 콘텐츠**를 자동 생성하는 기능입니다:
 
@@ -227,7 +227,7 @@ NotebookLM에서 좋은 답변을 얻으려면 **구체적으로 질문**하는 
 
 ## 📚 참고자료
 
-- [Google NotebookLM 공식 사이트](https://notebooklm.google.com){:target="_blank"}
-- [Google NotebookLM 도움말](https://support.google.com/notebooklm){:target="_blank"}
-- [NotebookLM 소개 블로그 (Google)](https://blog.google/technology/ai/notebooklm-google/){:target="_blank"}
-- [NotebookLM MCP CLI](https://github.com/nicholasgriffintn/notebooklm-mcp){:target="_blank"}
+- [Google NotebookLM 공식 사이트](https://notebooklm.google.com)
+- [Google NotebookLM 도움말](https://support.google.com/notebooklm)
+- [NotebookLM 소개 블로그 (Google)](https://blog.google/technology/ai/notebooklm-google/)
+- [NotebookLM MCP CLI](https://github.com/nicholasgriffintn/notebooklm-mcp)

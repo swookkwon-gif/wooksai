@@ -429,7 +429,7 @@ jobs:
 
 ## 📚 참고자료
 
-- [NotebookLM MCP CLI GitHub](https://github.com/nicholasgriffintn/notebooklm-mcp){:target="_blank"}
-- [Model Context Protocol 공식 문서](https://modelcontextprotocol.io/){:target="_blank"}
-- [GitHub Actions 문서](https://docs.github.com/en/actions){:target="_blank"}
-- [NotebookLM API 참고](https://notebooklm.google.com){:target="_blank"}
+- [NotebookLM MCP CLI GitHub](https://github.com/nicholasgriffintn/notebooklm-mcp)
+- [Model Context Protocol 공식 문서](https://modelcontextprotocol.io/)
+- [GitHub Actions 문서](https://docs.github.com/en/actions)
+- [NotebookLM API 참고](https://notebooklm.google.com)

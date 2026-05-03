@@ -218,7 +218,7 @@ nlm studio create --notebook <BOOK_NB_ID> \
 
 ### 마크다운 → PDF 변환
 
-[Pandoc](https://pandoc.org/){:target="_blank"}을 사용하여 마크다운을 PDF로 변환합니다:
+[Pandoc](https://pandoc.org/)을 사용하여 마크다운을 PDF로 변환합니다:
 
 ```bash
 # pandoc 설치 (macOS)
@@ -360,8 +360,8 @@ NotebookLM은 단순한 AI 도구가 아닌, **연구에서 출판까지의 전 
 
 ## 📚 참고자료
 
-- [Pandoc 공식 문서](https://pandoc.org/MANUAL.html){:target="_blank"}
-- [Amazon KDP 출판 가이드](https://kdp.amazon.com/){:target="_blank"}
-- [NotebookLM MCP CLI GitHub](https://github.com/nicholasgriffintn/notebooklm-mcp){:target="_blank"}
-- [Google NotebookLM 공식 사이트](https://notebooklm.google.com){:target="_blank"}
-- [ePub 전자책 규격 (IDPF)](https://www.w3.org/publishing/epubcheck/){:target="_blank"}
+- [Pandoc 공식 문서](https://pandoc.org/MANUAL.html)
+- [Amazon KDP 출판 가이드](https://kdp.amazon.com/)
+- [NotebookLM MCP CLI GitHub](https://github.com/nicholasgriffintn/notebooklm-mcp)
+- [Google NotebookLM 공식 사이트](https://notebooklm.google.com)
+- [ePub 전자책 규격 (IDPF)](https://www.w3.org/publishing/epubcheck/)
