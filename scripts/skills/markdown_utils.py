@@ -73,6 +73,31 @@ def auto_fix_content(content: str) -> str:
     return content
 
 
+# ── 단어 수 / 글자 수 계산 ─────────────────────────────────────
+
+def count_words(content: str) -> int:
+    """마크다운 본문의 실제 단어 수를 계산한다 (마크다운 문법, URL 제거 후)."""
+    clean = re.sub(r'---\n.*?\n---', '', content, flags=re.DOTALL)  # frontmatter
+    clean = re.sub(r'https?://\S+', '', clean)       # URL 제거
+    clean = re.sub(r'[#*`\[\]\(\)\-|>!]', '', clean) # 마크다운 기호
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    return len(clean.split())
+
+
+def count_chars(content: str) -> int:
+    """마크다운 본문의 실제 글자 수를 계산한다."""
+    clean = re.sub(r'---\n.*?\n---', '', content, flags=re.DOTALL)
+    clean = re.sub(r'https?://\S+', '', clean)
+    clean = re.sub(r'[#*`\[\]\(\)\-|>!]', '', clean)
+    clean = re.sub(r'\s+', ' ', clean).strip()
+    return len(clean)
+
+
+def estimate_reading_time(word_count: int) -> int:
+    """예상 읽기 시간(분)을 계산한다. 한글 기준 분당 약 200단어."""
+    return max(1, round(word_count / 200))
+
+
 # ── 검증 함수 ─────────────────────────────────────────────────
 
 def validate_post(content: str, rules: dict | None = None) -> list[dict]:
@@ -111,16 +136,27 @@ def validate_post(content: str, rules: dict | None = None) -> list[dict]:
         rule = check.get("rule", "")
 
         if rule == "min_word_count":
-            clean = re.sub(r'[#*`\[\]\(\)\-]', '', content)
-            clean = re.sub(r'https?://\S+', '', clean)
-            word_count = len(clean.strip())
-            min_count = check.get("min", 100)
+            word_count = count_words(content)
+            min_count = check.get("min", 1000)
             if word_count < min_count:
                 issues.append({
                     "rule": rule,
                     "severity": "error",
-                    "detail": f"본문이 너무 짧음 ({word_count}자 < 최소 {min_count}자)",
+                    "detail": f"단어 수 부족 ({word_count}단어 < 최소 {min_count}단어). SEO 기준 미달.",
                     "auto_fixable": False,
+                    "word_count": word_count,
+                })
+
+        elif rule == "min_char_count":
+            char_count = count_chars(content)
+            min_count = check.get("min", 2000)
+            if char_count < min_count:
+                issues.append({
+                    "rule": rule,
+                    "severity": "error",
+                    "detail": f"글자 수 부족 ({char_count}자 < 최소 {min_count}자)",
+                    "auto_fixable": False,
+                    "char_count": char_count,
                 })
 
         elif rule == "has_source_links":
@@ -131,6 +167,16 @@ def validate_post(content: str, rules: dict | None = None) -> list[dict]:
                     "rule": rule,
                     "severity": "warning",
                     "detail": f"출처 링크 부족 ({link_count}개 < 최소 {min_links}개)",
+                    "auto_fixable": False,
+                })
+
+        elif rule == "has_references_section":
+            pattern = check.get("pattern", "## 📚 참고자료")
+            if not re.search(pattern, content):
+                issues.append({
+                    "rule": rule,
+                    "severity": "warning",
+                    "detail": "참고자료 섹션이 없습니다. '## 📚 참고자료'를 추가하세요.",
                     "auto_fixable": False,
                 })
 

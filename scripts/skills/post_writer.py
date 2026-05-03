@@ -7,15 +7,16 @@ import os
 import re
 from datetime import datetime, timezone, timedelta
 
-from skills.markdown_utils import generate_excerpt
+from skills.markdown_utils import generate_excerpt, count_words, estimate_reading_time
 
 POSTS_DIR = os.path.join(os.path.dirname(__file__), '..', '..', 'content', 'posts', '2. AI News')
 
 
-def ensure_posts_dir():
+def ensure_posts_dir(target_dir: str | None = None):
     """포스트 디렉토리가 존재하는지 확인하고 없으면 생성한다."""
-    if not os.path.exists(POSTS_DIR):
-        os.makedirs(POSTS_DIR)
+    d = target_dir or POSTS_DIR
+    if not os.path.exists(d):
+        os.makedirs(d)
 
 
 def create_post_file(
@@ -39,18 +40,24 @@ def create_post_file(
         생성된 파일의 절대 경로
     """
     target_dir = posts_dir or POSTS_DIR
-    ensure_posts_dir()
+    ensure_posts_dir(target_dir)
 
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
     date_str = now_kst.strftime("%Y-%m-%d")
 
     excerpt_text = generate_excerpt(content)
 
+    # SEO 메타데이터 자동 계산
+    word_count = count_words(content)
+    reading_time = estimate_reading_time(word_count)
+
     frontmatter = f"""---
 title: '{post_title.replace("'", "''")}'
 date: '{date_str}'
 excerpt: '{excerpt_text.replace("'", "''")}'
 category: '{category.replace("'", "''")}'
+word_count: {word_count}
+reading_time: {reading_time}
 ---
 
 """

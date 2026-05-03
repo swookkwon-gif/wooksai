@@ -31,14 +31,24 @@
   ],
   "content_checks": [
     {
+      "rule": "min_char_count",
+      "description": "본문 최소 2000자 이상 (SEO 1000단어 기준)",
+      "min": 2000
+    },
+    {
       "rule": "min_word_count",
-      "description": "본문 최소 100자 이상",
-      "min": 100
+      "description": "본문 최소 1000단어 이상",
+      "min": 1000
     },
     {
       "rule": "has_source_links",
       "description": "최소 1개 이상의 출처 링크 포함",
       "min_links": 1
+    },
+    {
+      "rule": "has_references_section",
+      "description": "참고자료 섹션 포함 필수",
+      "pattern": "## 📚 참고자료|\\[참고 문헌|References"
     }
   ]
 }
