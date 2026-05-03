@@ -83,26 +83,26 @@ reading_time: '8분'
 
 블로그 시리즈의 메타데이터를 체계적으로 관리하는 JSON 파일입니다. 각 시리즈의 편 수, 진행 상황, NotebookLM 노트북 ID를 추적합니다.
 
-```json
-{
-  "notebooklm-guide": {
-    "title": "NotebookLM 100% 활용하기",
-    "description": "Google NotebookLM의 모든 기능을 마스터하는 5편 시리즈",
-    "category": "AI Learnings",
-    "total_parts": 5,
-    "status": "completed",
-    "notebook_id": "c83636ab-678d-44c4-9971-0facba066cd0",
-    "parts": [
-      {"order": 1, "title": "소개 & 기본 세팅", "slug": "part1-intro", "status": "published"},
-      {"order": 2, "title": "Deep Research & AI 질의응답", "slug": "part2-research", "status": "published"},
-      {"order": 3, "title": "Studio 아티팩트 완전정복", "slug": "part3-studio", "status": "published"},
-      {"order": 4, "title": "블로그 자동화 파이프라인", "slug": "part4-automation", "status": "published"},
-      {"order": 5, "title": "책 출간 워크플로우", "slug": "part5-book", "status": "published"}
-    ],
-    "book_candidate": true
-  }
-}
-```
+**시리즈 예시: NotebookLM 100% 활용하기**
+
+| 항목 | 값 |
+|------|---|
+| **시리즈 ID** | `notebooklm-guide` |
+| **카테고리** | AI Learnings |
+| **총 편수** | 5편 |
+| **상태** | ✅ completed |
+| **NotebookLM 노트북** | `c83636ab-678d-...` |
+| **📖 책 출간 후보** | Yes |
+
+**챕터 구성:**
+
+| 편 | 제목 | 상태 |
+|----|------|------|
+| 1편 | 소개 & 기본 세팅 | ✅ published |
+| 2편 | Deep Research & AI 질의응답 | ✅ published |
+| 3편 | Studio 아티팩트 완전정복 | ✅ published |
+| 4편 | 블로그 자동화 파이프라인 | ✅ published |
+| 5편 | 책 출간 워크플로우 | ✅ published |
 
 ### 관리 규칙
 
