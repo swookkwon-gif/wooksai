@@ -3,7 +3,7 @@
     {
       "rule": "no_raw_urls",
       "description": "본문 내 원시 URL(http...) 노출 금지",
-      "pattern": "(?<!\\()(?<!\\[)(?<!\\\")(?<!')(https?://\\S+)(?!\\))(?!\\])(?!\\\")(?!')",
+      "pattern": "(?<!\\()(?<!\\[)(?!\\\")(?!')(https?://\\S+)(?!\\))(?!\\])(?!\\\")(?!')",
       "severity": "error",
       "auto_fix": true
     },
@@ -31,16 +31,6 @@
   ],
   "content_checks": [
     {
-      "rule": "min_char_count",
-      "description": "본문 최소 2000자 이상 (SEO 1000단어 기준)",
-      "min": 2000
-    },
-    {
-      "rule": "min_word_count",
-      "description": "본문 최소 1000단어 이상",
-      "min": 1000
-    },
-    {
       "rule": "has_source_links",
       "description": "최소 1개 이상의 출처 링크 포함",
       "min_links": 1
@@ -50,5 +40,38 @@
       "description": "참고자료 섹션 포함 필수",
       "pattern": "## 📚 참고자료|\\[참고 문헌|References"
     }
-  ]
+  ],
+  "category_word_limits": {
+    "_comment": "카테고리별 최소/권장 단어 수. 콘텐츠 성격에 따라 차등 적용한다.",
+    "default": {
+      "min_words": 500,
+      "target_words": 800,
+      "description": "기본 기준"
+    },
+    "AI News": {
+      "min_words": 400,
+      "target_words": 700,
+      "description": "뉴스 단신은 시의성이 중요. 억지로 늘리지 않는다."
+    },
+    "Tech": {
+      "min_words": 1000,
+      "target_words": 1500,
+      "description": "심층 분석. SEO 노출을 위해 충분한 깊이 필요."
+    },
+    "Data": {
+      "min_words": 1000,
+      "target_words": 1500,
+      "description": "교육 시리즈. 배경+사례+시사점 구조로 깊이 있게."
+    },
+    "AI Learnings": {
+      "min_words": 800,
+      "target_words": 1200,
+      "description": "학습 콘텐츠. 실무 적용 가능한 수준의 깊이."
+    },
+    "Marketing": {
+      "min_words": 800,
+      "target_words": 1200,
+      "description": "마케팅 분석. 데이터 기반 인사이트 포함."
+    }
+  }
 }

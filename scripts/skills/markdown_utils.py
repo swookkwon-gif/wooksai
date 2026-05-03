@@ -100,10 +100,15 @@ def estimate_reading_time(word_count: int) -> int:
 
 # ── 검증 함수 ─────────────────────────────────────────────────
 
-def validate_post(content: str, rules: dict | None = None) -> list[dict]:
+def validate_post(content: str, rules: dict | None = None, category: str | None = None) -> list[dict]:
     """
     마크다운 포스트의 품질을 검증하고 이슈 목록을 반환한다.
-    이슈가 없으면 빈 리스트를 반환한다.
+    카테고리별 차등 단어 수 기준을 적용한다.
+    
+    Args:
+        content: 마크다운 본문
+        rules: 품질 규칙 (없으면 자동 로드)
+        category: 포스트 카테고리 (없으면 기본 기준 적용)
     
     Returns:
         list[dict]: [{"rule": str, "severity": str, "detail": str}, ...]
@@ -131,35 +136,44 @@ def validate_post(content: str, rules: dict | None = None) -> list[dict]:
         except re.error:
             pass  # 잘못된 정규식은 무시
 
-    # ── 콘텐츠 검사 ──
+    # ── 카테고리별 단어 수 검사 ──
+    word_limits = rules.get("category_word_limits", {})
+    cat_config = word_limits.get(category, word_limits.get("default", {})) if category else word_limits.get("default", {})
+    min_words = cat_config.get("min_words", 400)
+    target_words = cat_config.get("target_words", 800)
+    cat_desc = cat_config.get("description", "")
+
+    word_count = count_words(content)
+    if word_count < min_words:
+        issues.append({
+            "rule": "min_word_count",
+            "severity": "error",
+            "detail": (
+                f"단어 수 부족 ({word_count}단어 < 최소 {min_words}단어). "
+                f"[{category or 'default'}] 기준. {cat_desc}"
+            ),
+            "auto_fixable": False,
+            "word_count": word_count,
+            "min_words": min_words,
+            "target_words": target_words,
+        })
+    elif word_count < target_words:
+        issues.append({
+            "rule": "below_target_words",
+            "severity": "warning",
+            "detail": (
+                f"권장 분량 미달 ({word_count}단어 / 권장 {target_words}단어). "
+                f"가능하면 심층 분석을 추가하세요."
+            ),
+            "auto_fixable": False,
+            "word_count": word_count,
+        })
+
+    # ── 콘텐츠 공통 검사 ──
     for check in rules.get("content_checks", []):
         rule = check.get("rule", "")
 
-        if rule == "min_word_count":
-            word_count = count_words(content)
-            min_count = check.get("min", 1000)
-            if word_count < min_count:
-                issues.append({
-                    "rule": rule,
-                    "severity": "error",
-                    "detail": f"단어 수 부족 ({word_count}단어 < 최소 {min_count}단어). SEO 기준 미달.",
-                    "auto_fixable": False,
-                    "word_count": word_count,
-                })
-
-        elif rule == "min_char_count":
-            char_count = count_chars(content)
-            min_count = check.get("min", 2000)
-            if char_count < min_count:
-                issues.append({
-                    "rule": rule,
-                    "severity": "error",
-                    "detail": f"글자 수 부족 ({char_count}자 < 최소 {min_count}자)",
-                    "auto_fixable": False,
-                    "char_count": char_count,
-                })
-
-        elif rule == "has_source_links":
+        if rule == "has_source_links":
             link_count = len(re.findall(r'\[.*?\]\(https?://.*?\)', content))
             min_links = check.get("min_links", 1)
             if link_count < min_links:
