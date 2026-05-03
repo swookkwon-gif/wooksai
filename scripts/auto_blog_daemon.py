@@ -25,18 +25,10 @@ if not os.path.exists(POSTS_DIR):
 
 TARGET_LABEL_NAME = "AI News"
 
-def load_feeds():
-    feeds_path = os.path.join(os.path.dirname(__file__), 'config', 'feeds.json')
-    if os.path.exists(feeds_path):
-        with open(feeds_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
-    # Fallback
-    return [
-        {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
-        {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"]}
-    ]
-
-FEEDS = load_feeds()
+FEEDS = [
+    {"name": "AITimes", "url": "https://www.aitimes.com/rss/allArticle.xml", "keywords": ["인공지능", "AI", "머신러닝", "LLM", "모델"]},
+    {"name": "Benzinga Korea", "url": "https://kr.benzinga.com/feed/", "keywords": ["AI", "인공지능", "엔비디아", "반도체"]}
+]
 
 def clean_json_response(text):
     text = text.strip()
@@ -47,14 +39,8 @@ def clean_json_response(text):
     return text
 
 def load_guidelines_and_feedback():
-    rules_path = os.path.join(os.path.dirname(__file__), 'config', 'eval_rules.txt')
-    feedback_path = os.path.join(os.path.dirname(__file__), 'config', 'feedback.json')
-    prompts_path = os.path.join(os.path.dirname(__file__), 'config', 'prompts.json')
-    
-    prompts = {"rss_requirements": "", "gmail_requirements": ""}
-    if os.path.exists(prompts_path):
-        with open(prompts_path, 'r', encoding='utf-8') as f:
-            prompts = json.load(f)
+    rules_path = os.path.join(os.path.dirname(__file__), 'custom_eval_rules.txt')
+    feedback_path = os.path.join(os.path.dirname(__file__), 'feedback.json')
     
     rules = "- 판단 기준이 누적 중입니다."
     if os.path.exists(rules_path):
@@ -77,37 +63,7 @@ def load_guidelines_and_feedback():
         except Exception:
             pass
             
-    return rules, feedback.strip(), prompts
-
-def quick_review_and_fix(content):
-    """발행 전 최소한의 품질 검증 + 자동 수정 (Reviewer Quick Win)
-    
-    LLM이 프롬프트 지시를 무시하더라도, 코드 레벨에서 강제 교정합니다.
-    """
-    # 1. ### 제목(URL) → ### [제목](URL) 자동 수정
-    #    LLM이 대괄호를 빠뜨리고 ### 기사제목(https://...) 형태로 출력하는 패턴 교정
-    content = re.sub(
-        r'^(###\s+)([^\[\n]+?)\((https?://[^\)]+)\)\s*$',
-        r'\1[\2](\3)',
-        content, flags=re.MULTILINE
-    )
-    
-    # 2. 소제목 바로 다음 줄에 빈 줄이 없으면 삽입
-    content = re.sub(
-        r'^(###\s+.+)\n([^\n])',
-        r'\1\n\n\2',
-        content, flags=re.MULTILINE
-    )
-    
-    # 3. 본문 내 원시 URL을 [원문 보기](URL)로 래핑
-    #    이미 마크다운 링크 안에 있는 URL은 건드리지 않음
-    content = re.sub(
-        r'(?<![(\["\'=])(https?://\S+)(?![)\]"\'])',
-        r'[원문 보기](\1)',
-        content
-    )
-    
-    return content
+    return rules, feedback.strip()
 
 def create_markdown_post_file(filename_slug, post_title, content, category="AI News"):
     now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
@@ -116,9 +72,6 @@ def create_markdown_post_file(filename_slug, post_title, content, category="AI N
     # AI가 본문 최상단에 강제 생성하는 제목들(H1, H2) 중복 방지를 위해 삭제
     content = re.sub(r'^#\s+[^\n]+\n*', '', content.lstrip())
     content = re.sub(r'^##\s+[^\n]+\n*', '', content.lstrip())
-    
-    # 발행 전 자동 품질 검증 및 수정 (Reviewer)
-    content = quick_review_and_fix(content)
     
     # 본문 첫 부분을 바탕으로 excerpt(요약문) 자동 생성 (제목 반복 방지)
     clean_content = re.sub(r'<[^>]+>', '', content)
@@ -145,11 +98,73 @@ category: '{category.replace("'", "''")}'
             f.write(frontmatter)
         f.write(content + "\n\n")
 
+# =============== SHARED LLM HELPER ===============
+
+ARTICLE_ANALYSIS_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "has_ai_news": {"type": "boolean"},
+        "articles": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "title": {"type": "string"},
+                    "summary": {"type": "string"},
+                    "source_urls": {"type": "array", "items": {"type": "string"}},
+                    "keywords": {"type": "array", "items": {"type": "string"}},
+                    "score": {"type": "number"},
+                    "has_numbers": {"type": "boolean"},
+                    "key_figures": {"type": "array", "items": {"type": "string"}}
+                },
+                "required": ["title", "summary", "source_urls", "keywords", "score"]
+            }
+        }
+    },
+    "required": ["has_ai_news", "articles"]
+}
+
+def call_llm_with_retry(prompt, schema, label="LLM"):
+    """공용 LLM 호출 헬퍼 (재시도 + 모델 폴백)"""
+    client = genai.Client(api_key=GEMINI_API_KEY)
+    models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
+    
+    for attempt in range(3):
+        for model_name in models_to_try:
+            try:
+                response = client.models.generate_content(
+                    model=model_name,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(
+                        temperature=0.3,
+                        response_mime_type="application/json",
+                        response_schema=schema
+                    )
+                )
+                raw_text = clean_json_response(response.text)
+                return json.loads(raw_text)
+            except json.JSONDecodeError as je:
+                print(f"      ❌ [{label}] JSON 에러. 10초 대기 후 재시도... ({je})")
+                time.sleep(10)
+                break
+            except Exception as e:
+                err_msg = str(e)
+                if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
+                    print(f"      [경고] [{label}] '{model_name}' API 제한. 다른 모델 시도...")
+                    continue
+                else:
+                    print(f"      ❌ [{label}] API 실패: {e}")
+                    return None
+        print(f"      ❌ [{label}] 모든 모델 할당량 초과: 30초 대기 후 재시도... ({attempt+1}/3)")
+        time.sleep(30)
+    return None
+
 
 # =============== RSS PROCESSING ===============
 
 
-def process_all_rss_feeds(feeds):
+def collect_rss_articles(feeds):
+    """RSS 피드를 수집하고 구조화된 기사 배열을 반환한다."""
     items_to_process = []
     
     for feed in feeds:
@@ -195,22 +210,21 @@ def process_all_rss_feeds(feeds):
 
     if not items_to_process:
         print(" └ 처리할 새로운 기사가 없습니다.")
-        return
+        return []
 
     print(f" └ 총 {len(items_to_process)}개의 새 기사 처리 중...")
     
-    # Process batch with LLM
     articles_text = ""
     for idx, item in enumerate(items_to_process, 1):
         snippet = item['content'][:5000]
         articles_text += f"\n\n--- 기사 {idx} (출처: {item['feed_name']}) ---\n제목: {item['title']}\n링크: {item['link']}\n"
         articles_text += f"내용(HTML): {snippet}\n"
 
-    custom_rules, custom_feedback, prompts = load_guidelines_and_feedback()
+    custom_rules, custom_feedback = load_guidelines_and_feedback()
 
     prompt = f"""
 당신은 최고 수준의 AI 뉴스 에디터입니다.
-아래 여러 RSS 소스에서 수집된 새 기사들을 바탕으로, 종합 AI 뉴스 마크다운 포스트 본문을 작성하세요.
+아래 여러 RSS 소스에서 수집된 기사들을 분석하여 구조화된 JSON 배열로 반환하세요.
 
 [사용자 맞춤형 평가 핵심 룰]
 {custom_rules}
@@ -222,89 +236,38 @@ def process_all_rss_feeds(feeds):
 {articles_text}
 
 [요구사항]
-{prompts.get('rss_requirements', '')}
+1. AI, 머신러닝, LLM 비즈니스와 무관한 기사는 무시하세요.
+2. AI 기사가 하나라도 있으면 has_ai_news=true, 아니면 false.
+3. 각 기사를 개별 article 객체로 반환:
+   - title: 한국어 제목
+   - summary: 2-4문장 핵심 요약. 구체적 수치/금액을 반드시 포함.
+   - source_urls: 원문 URL 배열 (절대 조작/축약 금지)
+   - keywords: 핵심 키워드 3-5개 (예: ["Meta", "로봇", "인수"])
+   - score: 1-5점 (5=핵심 트렌드, 1=단순 단신)
+   - has_numbers: 금액/수치 포함 여부
+   - key_figures: 핵심 수치 배열 (예: ["$150억", "20만 인스턴스"])
+4. score 3점 미만 기사도 포함하되, 정확한 점수를 매기세요.
 """
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    data = call_llm_with_retry(prompt, ARTICLE_ANALYSIS_SCHEMA, label="RSS")
+    if not data:
+        return []
     
-    response = None
-    models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
+    # Mark RSS items as processed
+    for item in items_to_process:
+        mark_processed("rss", item["id"])
     
-    for attempt in range(3):
-        for model_name in models_to_try:
-            try:
-                response = client.models.generate_content(
-                    model=model_name,
-                    contents=prompt,
-                    config=types.GenerateContentConfig(
-                        temperature=0.3, 
-                        response_mime_type="application/json",
-                        response_schema={
-                            "type": "object",
-                            "properties": {
-                                "has_ai_news": {"type": "boolean"},
-                                "evaluations": {
-                                    "type": "array",
-                                    "items": {
-                                        "type": "object",
-                                        "properties": {
-                                            "target": {"type": "string"},
-                                            "score": {"type": "number"},
-                                            "reasoning": {"type": "string"}
-                                        },
-                                        "required": ["target", "score", "reasoning"]
-                                    }
-                                },
-                                "markdown_content": {"type": "string"}
-                            },
-                            "required": ["has_ai_news", "evaluations", "markdown_content"]
-                        }
-                    )
-                )
-                break
-            except Exception as e:
-                err_msg = str(e)
-                if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                    print(f"      [경고] RSS 분석 '{model_name}' 모델 API 제한 발생. 다른 모델 시도...")
-                    continue
-                else:
-                    print(f"   [에러] {e}")
-                    break
-        
-        if response:
-            raw_text = clean_json_response(response.text)
-            try:
-                data = json.loads(raw_text)
-            except json.JSONDecodeError as je:
-                print(f"      ❌ API 실패: JSON 에러 발생. 10초 대기 후 재시도... ({je})")
-                time.sleep(10)
-                continue
-                
-            if data.get("has_ai_news"):
-                result_md = data.get("markdown_content", "")
-                evals = data.get("evaluations", [])
-                if evals:
-                    save_evaluations("Global AI News", evals)
-                
-                slug = "global-ai-news-summary"
-                now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                title = f"[{now_kst.strftime('%m월 %d일')}] AI times, Benzinga 뉴스 요약"
-                create_markdown_post_file(slug, title, result_md, category="AI News")
-                
-                for item in items_to_process:
-                    mark_processed("rss", item["id"])
-                    
-                print(f"      ✅ 포스트 완료 및 저장됨")
-            else:
-                for item in items_to_process:
-                    mark_processed("rss", item["id"])
-                print(f"      ✅ 중요 기사(3점 이상)가 없어 포스트 생략 (처리완료 마킹)")
-            return
-            
-        print(f"      ❌ 모든 모델 할당량 초과: 30초 대기 후 재시도... ({attempt+1}/3)")
-        time.sleep(30)
-                
-    # API Pacing
+    articles = data.get("articles", [])
+    # 소스 이름 태깅
+    for art in articles:
+        art["source_name"] = "RSS (AITimes/Benzinga)"
+    
+    evals = [{"target": a["title"], "score": a["score"], "reasoning": ", ".join(a.get("keywords", []))} for a in articles]
+    if evals:
+        save_evaluations("Global AI News", evals)
+    
+    print(f"      ✅ RSS에서 {len(articles)}개 기사 분석 완료")
     time.sleep(5)
+    return articles
 
 # =============== GMAIL PROCESSING ===============
 
@@ -373,21 +336,22 @@ def fetch_unprocessed_newsletters(service, label_id):
             
     return unprocessed
 
-def process_gmail_newsletters():
+def collect_gmail_articles():
+    """Gmail 뉴스레터를 수집하고 구조화된 기사 배열을 반환한다."""
     print("\n🔍 대상 Gmail: swookkwon@gmail AI News")
     service = get_gmail_service()
-    if not service: return
+    if not service: return []
     
     # Get Label ID
     res = service.users().labels().list(userId='me').execute()
     label_id = next((l['id'] for l in res.get('labels', []) if TARGET_LABEL_NAME.lower() in l['name'].lower()), None)
     
-    if not label_id: return
+    if not label_id: return []
     
     unprocessed_ids = fetch_unprocessed_newsletters(service, label_id)
     if not unprocessed_ids:
         print(" └ 처리할 새로운 이메일 뉴스레터가 없습니다.")
-        return
+        return []
         
     print(f" └ {len(unprocessed_ids)}개의 새 이메일 스크랩 중...")
     
@@ -402,7 +366,6 @@ def process_gmail_newsletters():
                 subject = next((h['value'] for h in headers if h['name'].lower() == 'subject'), "No Subject")
                 sender_full = next((h['value'] for h in headers if h['name'].lower() == 'from'), "Unknown Sender")
                 
-                # Extract clean sender name
                 sender_match = re.match(r'(.*?)\s*<.*?>', sender_full)
                 sender = sender_match.group(1).strip().replace('"', '') if sender_match else sender_full
                 
@@ -419,7 +382,8 @@ def process_gmail_newsletters():
                 
         time.sleep(0.5)
 
-    client = genai.Client(api_key=GEMINI_API_KEY)
+    all_gmail_articles = []
+    custom_rules, custom_feedback = load_guidelines_and_feedback()
 
     for sender, letters in emails_by_sender.items():
         print(f"\n   -> [{sender}] 보낸 뉴스레터 파싱 중 ({len(letters)}개)")
@@ -428,11 +392,9 @@ def process_gmail_newsletters():
         for idx, letter in enumerate(letters, 1):
             articles_text += f"\n\n[제목: {letter['subject']}]\n{letter['body']}\n"
             
-        custom_rules, custom_feedback, prompts = load_guidelines_and_feedback()
-            
         prompt = f"""
-당신은 '윤(Yoon)' 님을 위한 수석 뉴스레터 AI 에디터입니다.
-발신자 [{sender}](이)가 보낸 뉴스레터 데이터를 기반으로 블로그 포스트를 작성합니다.
+당신은 수석 뉴스레터 AI 에디터입니다.
+발신자 [{sender}]가 보낸 뉴스레터에서 개별 뉴스 기사를 추출하여 구조화된 JSON 배열로 반환하세요.
 
 [사용자 맞춤형 평가 핵심 룰]
 {custom_rules}
@@ -444,105 +406,157 @@ def process_gmail_newsletters():
 {articles_text}
 
 [요구사항]
-{prompts.get('gmail_requirements', '')}
+1. 뉴스레터 내 각각의 뉴스 기사/도구/소식을 개별 article 객체로 추출하세요.
+2. 각 article:
+   - title: 한국어 제목
+   - summary: 2-4문장 핵심 요약. 수치/금액을 반드시 포함.
+   - source_urls: 원문 URL 배열 (뉴스레터에 포함된 링크 그대로 사용)
+   - keywords: 핵심 키워드 3-5개
+   - score: 1-5점 (5=핵심, 1=가십)
+   - has_numbers: 금액/수치 포함 여부
+   - key_figures: 핵심 수치 배열
+3. AI/LLM과 무관한 기사도 추출하되 낮은 점수를 매기세요.
 """
-        response = None
-        models_to_try = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash-latest', 'gemini-1.5-flash-8b']
+        data = call_llm_with_retry(prompt, ARTICLE_ANALYSIS_SCHEMA, label=f"Gmail-{sender}")
+        if data:
+            articles = data.get("articles", [])
+            for art in articles:
+                art["source_name"] = sender
+            all_gmail_articles.extend(articles)
+            
+            evals = [{"target": a["title"], "score": a["score"], "reasoning": ", ".join(a.get("keywords", []))} for a in articles]
+            if evals:
+                save_evaluations(sender, evals)
+            
+            # Mark emails as processed
+            for letter in letters:
+                mark_processed("gmail", letter["id"])
+            print(f"      ✅ [{sender}] {len(articles)}개 기사 분석 완료")
+        else:
+            # LLM 실패 시에도 처리 완료 마킹 (무한 재시도 방지)
+            for letter in letters:
+                mark_processed("gmail", letter["id"])
         
-        for attempt in range(3):
-            for model_name in models_to_try:
-                try:
-                    response = client.models.generate_content(
-                        model=model_name,
-                        contents=prompt,
-                        config=types.GenerateContentConfig(
-                            temperature=0.3,
-                            response_mime_type="application/json",
-                            response_schema={
-                                "type": "object",
-                                "properties": {
-                                    "post_title": {"type": "string"},
-                                    "evaluations": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "object",
-                                            "properties": {
-                                                "target": {"type": "string"},
-                                                "score": {"type": "number"},
-                                                "reasoning": {"type": "string"}
-                                            },
-                                            "required": ["target", "score", "reasoning"]
-                                        }
-                                    },
-                                    "markdown_content": {"type": "string"}
-                                },
-                                "required": ["post_title", "evaluations", "markdown_content"]
-                            }
-                        )
-                    )
-                    break
-                except Exception as e:
-                    err_msg = str(e)
-                    if any(x in err_msg for x in ["429", "RESOURCE_EXHAUSTED", "503", "UNAVAILABLE", "500"]):
-                        print(f"      [경고] 뉴스레터 분석 '{model_name}' 모델 API 제한 발생. 다른 모델 시도...")
-                        continue
-                    else:
-                        print(f"      ❌ API 실패: {e}")
-                        break
-                        
-            if response:
-                raw_text = clean_json_response(response.text)
-                try:
-                    data = json.loads(raw_text)
-                except json.JSONDecodeError as je:
-                    print(f"      ❌ API 실패: JSON 에러 발생. 10초 대기 후 재시도... ({je})")
-                    time.sleep(10)
-                    response = None
-                    continue
-                
-                result_md = data.get("markdown_content", "")
-                post_title = data.get("post_title", f"최신 AI 뉴스레터 동향")
-                evals = data.get("evaluations", [])
-                if evals:
-                    save_evaluations(sender, evals)
-                    
-                if result_md:
-                    slug = slugify(sender) + "-newsletter"
-                    now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
-                    title = f"[{sender}] {post_title}"
-                    
-                    create_markdown_post_file(slug, title, result_md, category="AI News")
-                    
-                    for letter in letters:
-                        mark_processed("gmail", letter["id"])
-                        
-                    print(f"      ✅ 포스트 완료 및 저장됨")
-                else:
-                    for letter in letters:
-                        mark_processed("gmail", letter["id"])
-                    print(f"      ✅ 중요 기사(3점 이상)가 없어 포스트 생략 (처리완료 마킹)")
-                break
-                
-            print(f"      ❌ 모든 모델 할당량 초과: 30초 대기 후 재시도... ({attempt+1}/3)")
-            time.sleep(30)
-        
-        # 발신자 간 고정 API Pacing 
         print("      (발신자 간 기본 대기 10초...)")
         time.sleep(10)
+    
+    return all_gmail_articles
+
+
+# =============== PHASE 2: MERGE & CREATE DAILY DIGEST ===============
+
+DAILY_DIGEST_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "post_title": {"type": "string"},
+        "top_topics": {"type": "array", "items": {"type": "string"}},
+        "markdown_content": {"type": "string"}
+    },
+    "required": ["post_title", "top_topics", "markdown_content"]
+}
+
+def merge_and_create_daily_digest(all_articles):
+    """모든 소스의 분석 결과를 받아 하나의 통합 포스트 생성."""
+    if not all_articles:
+        print("\n⚠️ 통합할 기사가 없습니다.")
+        return
+    
+    # 3점 미만 기사 필터링
+    quality_articles = [a for a in all_articles if a.get("score", 0) >= 3]
+    low_articles = [a for a in all_articles if a.get("score", 0) < 3]
+    
+    if not quality_articles:
+        print("\n⚠️ 3점 이상 기사가 없어 포스트를 생략합니다.")
+        return
+    
+    # 소스 목록 집계
+    source_names = sorted(set(a.get("source_name", "Unknown") for a in all_articles))
+    
+    print(f"\n📝 통합 다이제스트 생성 중...")
+    print(f"   총 {len(all_articles)}개 기사 (3점 이상: {len(quality_articles)}개, 미만: {len(low_articles)}개)")
+    print(f"   소스: {', '.join(source_names)}")
+    
+    articles_json = json.dumps(quality_articles, ensure_ascii=False, indent=2)
+    low_json = json.dumps([{"title": a["title"], "source_name": a.get("source_name",""), "score": a["score"]} for a in low_articles], ensure_ascii=False) if low_articles else "[]"
+    
+    prompt = f"""
+당신은 AI 데일리 다이제스트 수석 편집장입니다.
+아래는 여러 소스에서 수집 + 분석한 AI 뉴스 기사 목록입니다.
+이를 하나의 통합 일간 뉴스 포스트(마크다운 본문)으로 재구성하세요.
+
+[3점 이상 주요 기사]
+{articles_json}
+
+[3점 미만 단신 (하단 테이블용)]
+{low_json}
+
+[통합 규칙]
+1. **중복 뉴스 병합**: 같은 사건/발표를 다루는 기사들(keywords가 유사)을 하나로 합침.
+   - 병합 시 모든 소스 이름을 "**소스:** A · B · C" 형태로 표기
+   - 가장 상세한 summary를 기준으로 작성
+2. **중요도 순 정렬** (위에서 아래로):
+   - 🔥🔥 S등급: 3개 이상 소스가 보도 AND 구체적 금액/수치 포함
+   - 🔥 A등급: 2개 이상 소스 보도 OR (빅테크 관련 + 금액)
+   - 📰 B등급: 1개 소스, 기술적 깊이 있음
+   - 📌 C등급: 단신 → 하단 "기타 뉴스 요약" 테이블
+3. **포맷**:
+   - 포스트 최상단에 전체 메인 제목(H1, `# 제목`)을 절대 쓰지 마세요.
+   - 각 뉴스: `## 등급아이콘 순번. 제목` (예: `## 🔥 1. 메타 로봇 스타트업 인수`)
+   - 뉴스 아래: `**소스:** 7min.ai · AITimes (2개 소스 보도)` 
+   - 본문 2-4문장 + 핵심 수치가 있으면 불릿으로 강조
+   - 원문 링크: `[원문: 사이트명](URL)` 형태 (원시 URL 절대 노출 금지)
+   - 뉴스 사이 `---` 구분선
+   - 하단에 C등급 단신은 `## 📌 기타 뉴스 요약` 마크다운 테이블
+4. **post_title**: 날짜 없이 핵심 토픽 2-3개 포함한 매력적 제목
+   (예: "메타 로봇 스타트업 인수, MCP 보안 취약점 발견, Grok 4.3 출시")
+5. **top_topics**: 상위 3개 토픽 키워드 배열 (태그용)
+"""
+    data = call_llm_with_retry(prompt, DAILY_DIGEST_SCHEMA, label="Daily Digest")
+    if not data:
+        print("      ❌ 통합 다이제스트 생성 실패")
+        return
+    
+    result_md = data.get("markdown_content", "")
+    post_title = data.get("post_title", "AI 데일리 다이제스트")
+    top_topics = data.get("top_topics", [])
+    
+    if not result_md:
+        print("      ❌ 생성된 본문이 비어 있습니다.")
+        return
+    
+    # 포스트 상단에 소스 요약 라인 추가
+    now_kst = datetime.now(timezone.utc) + timedelta(hours=9)
+    source_line = f"> 📊 오늘의 AI 뉴스: **{len(quality_articles)}건** | 소스: {', '.join(source_names)}\n\n---\n\n"
+    result_md = source_line + result_md
+    
+    slug = "daily-ai-digest"
+    title = f"[{now_kst.strftime('%m월 %d일')}] AI 데일리 다이제스트 — {post_title}"
+    
+    create_markdown_post_file(slug, title, result_md, category="AI News")
+    print(f"      ✅ 통합 다이제스트 포스트 완료: {title}")
+
 
 if __name__ == "__main__":
     print("=======================================================")
     print("🚀 [Auto Daemon] Booklog AI BlogPost Parser 봇 시작")
     print("=======================================================")
     
-    # 1. RSS 처리
-    process_all_rss_feeds(FEEDS)
+    all_articles = []
+    
+    # Phase 1: 소스별 수집 + 분석
+    print("\n--- Phase 1: 소스별 수집 + 분석 ---")
+    
+    rss_articles = collect_rss_articles(FEEDS)
+    all_articles.extend(rss_articles)
         
-
     print("\n-------------------------------------------------------")
     
-    # 2. Gmail 뉴스레터(Sender별) 처리
-    process_gmail_newsletters()
+    gmail_articles = collect_gmail_articles()
+    all_articles.extend(gmail_articles)
+    
+    # Phase 2: 통합 다이제스트 생성
+    print("\n--- Phase 2: 통합 다이제스트 생성 ---")
+    merge_and_create_daily_digest(all_articles)
     
     print("\n=======================================================")
     print("🎉 자동 파싱 작업이 성공적으로 종료되었습니다.")
