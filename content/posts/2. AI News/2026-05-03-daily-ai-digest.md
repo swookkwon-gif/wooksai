@@ -10,9 +10,9 @@ category: 'AI News'
 ---
 
 ## 🔥 1. 젠슨 황, AI 종말론 CEO들을 '신 콤플렉스'라 비난
-엔비디아 CEO 젠슨 황은 앤트로픽의 다리오 아모데이와 일론 머스크 같은 경쟁사 CEO들의 AI 종말론 예측을 "터무니없다"며 일축했다. 그는 AI가 최근 몇 년간 50만 개 이상의 일자리를 창출했으며, AI 기술 도입에도 불구하고 방사선 전문의 부족이 지속되는 것을 예로 들며 이들의 '신 콤플렉스'를 비판했다。
-*   화이트칼라 직업 50% 소멸 예측
-*   인류 20% 전멸 예측
+엔비디아 CEO 젠슨 황은 앤트로픽의 다리오 아모데이 같은 일부 경쟁사 CEO들의 AI 종말론 예측을 "터무니없다"며 일축했다. 그는 AI가 최근 몇 년간 50만 개 이상의 일자리를 창출했으며, AI 기술 도입에도 불구하고 전문 인력 부족이 지속되는 것을 예로 들며 이들의 '신 콤플렉스'를 비판했다。
+*   화이트칼라 직업 50% 소멸 예측 비판
+*   인류에 대한 실존적 위협 예측 비판
 *   AI가 50만 개 이상의 일자리 창출
 **소스:** 7min.ai
 [원문: fortune.com](https://fortune.com/2026/05/02/jensen-huang-nvdia-ceo-god-complex-ai-apocalypse-warnings-shortages-critical-jobs/?utm_source=7min&amp;utm_medium=email&amp;utm_campaign=ai-news-2026-05-03)
