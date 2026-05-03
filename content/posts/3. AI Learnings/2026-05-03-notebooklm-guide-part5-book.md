@@ -29,37 +29,51 @@ reading_time: '8분'
 
 ## 전체 워크플로우 개요
 
-```
-┌──────────────────────────────────────────────────┐
-│  Phase 1: 블로그 시리즈 작성 & 관리                    │
-│  • 시리즈 레지스트리로 편 관리                          │
-│  • 각 편을 NotebookLM 소스로 축적                     │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│  Phase 2: NotebookLM으로 책 구조 설계                 │
-│  • 전체 시리즈를 하나의 노트북에 통합                     │
-│  • AI에게 목차 & 챕터 구조 제안 요청                     │
-│  • 보고서(Study Guide) 형태로 초안 생성                  │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│  Phase 3: 챕터별 심화 & 편집                          │
-│  • 각 챕터를 개별 노트북으로 분리                        │
-│  • Deep Research로 추가 자료 보강                      │
-│  • AI Q&A로 부족한 부분 보완                           │
-└────────────────────┬─────────────────────────────┘
-                     │
-                     ▼
-┌──────────────────────────────────────────────────┐
-│  Phase 4: 컴파일 & 출판                              │
-│  • 마크다운 → PDF (pandoc/LaTeX)                     │
-│  • 인포그래픽/데이터 표 삽입                            │
-│  • 전자책(ePub) 또는 인쇄 출판                         │
-└──────────────────────────────────────────────────┘
-```
+<div class="workflow-timeline">
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-indigo">1</div>
+    <div class="workflow-step-content">
+      <h4>📝 Phase 1: 블로그 시리즈 작성 & 관리</h4>
+      <ul>
+        <li>시리즈 레지스트리로 편 관리</li>
+        <li>각 편을 NotebookLM 소스로 축적</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-violet">2</div>
+    <div class="workflow-step-content">
+      <h4>🏗️ Phase 2: NotebookLM으로 책 구조 설계</h4>
+      <ul>
+        <li>전체 시리즈를 하나의 노트북에 통합</li>
+        <li>AI에게 목차 & 챕터 구조 제안 요청</li>
+        <li>보고서(Study Guide) 형태로 초안 생성</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-purple">3</div>
+    <div class="workflow-step-content">
+      <h4>🔬 Phase 3: 챕터별 심화 & 편집</h4>
+      <ul>
+        <li>각 챕터를 개별 노트북으로 분리</li>
+        <li>Deep Research로 추가 자료 보강</li>
+        <li>AI Q&A로 부족한 부분 보완</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-fuchsia">4</div>
+    <div class="workflow-step-content">
+      <h4>📖 Phase 4: 컴파일 & 출판</h4>
+      <ul>
+        <li>마크다운 → PDF (pandoc/LaTeX)</li>
+        <li>인포그래픽/데이터 표 삽입</li>
+        <li>전자책(ePub) 또는 인쇄 출판</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 ---
 

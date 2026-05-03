@@ -216,42 +216,65 @@ nlm studio download --notebook <ID> \
 
 ### 파이프라인 아키텍처
 
-```
-┌─────────────────┐
-│  1. 주제 입력      │
-│  "AI 에이전트 보안"  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  2. Deep Research │ ← nlm research start --mode deep
-│  40+ 소스 자동 수집  │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  3. AI 분석       │ ← nlm query "핵심 주제 분석..."
-│  구조 설계 & 요약   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  4. 아티팩트 생성   │ ← nlm studio create --type report
-│  보고서 + 인포그래픽  │    nlm studio create --type infographic
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  5. 다운로드 & 변환  │ ← nlm studio download
-│  Markdown → 블로그   │
-└────────┬────────┘
-         │
-         ▼
-┌─────────────────┐
-│  6. Git Push      │ ← git add, commit, push
-│  블로그 자동 배포    │
-└─────────────────┘
-```
+<div class="workflow-timeline">
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-blue">1</div>
+    <div class="workflow-step-content">
+      <h4>💡 주제 입력</h4>
+      <ul><li>"AI 에이전트 보안 위협 분석 2026"</li></ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-indigo">2</div>
+    <div class="workflow-step-content">
+      <h4>🔍 Deep Research</h4>
+      <ul>
+        <li><code>nlm research start --mode deep</code></li>
+        <li>40+ 소스 자동 수집</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-violet">3</div>
+    <div class="workflow-step-content">
+      <h4>🧠 AI 분석</h4>
+      <ul>
+        <li><code>nlm query "핵심 주제 분석..."</code></li>
+        <li>구조 설계 & 요약</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-purple">4</div>
+    <div class="workflow-step-content">
+      <h4>🎨 아티팩트 생성</h4>
+      <ul>
+        <li><code>nlm studio create --type report</code></li>
+        <li><code>nlm studio create --type infographic</code></li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-fuchsia">5</div>
+    <div class="workflow-step-content">
+      <h4>📥 다운로드 & 변환</h4>
+      <ul>
+        <li><code>nlm studio download</code></li>
+        <li>Markdown → 블로그 포스트</li>
+      </ul>
+    </div>
+  </div>
+  <div class="workflow-step">
+    <div class="workflow-step-badge badge-teal">6</div>
+    <div class="workflow-step-content">
+      <h4>🚀 Git Push & 배포</h4>
+      <ul>
+        <li><code>git add, commit, push</code></li>
+        <li>블로그 자동 배포</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
 ### 자동화 스크립트 예시
 
