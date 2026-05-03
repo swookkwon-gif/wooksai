@@ -52,6 +52,45 @@ body {
   scrollbar-width: none;
 }
 
+/* ===== Code Block Styling ===== */
+/* Premium code block design for all blog posts */
+.prose pre {
+  background: #1e293b !important;
+  border-radius: 0.75rem !important;
+  padding: 1.25rem 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  border: 1px solid #334155 !important;
+  border-top: 3px solid #6366f1 !important;
+  overflow-x: auto;
+}
+
+.prose pre code {
+  background: transparent !important;
+  padding: 0 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.75 !important;
+  color: #e2e8f0 !important;
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Menlo', monospace !important;
+  border: none !important;
+  border-radius: 0 !important;
+}
+
+/* Scrollbar for code blocks */
+.prose pre::-webkit-scrollbar {
+  height: 6px;
+}
+.prose pre::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 3px;
+}
+.prose pre::-webkit-scrollbar-thumb {
+  background: #475569;
+  border-radius: 3px;
+}
+.prose pre::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
 /* ===== Workflow Timeline Component ===== */
 /* Reusable vertical pipeline/timeline for blog posts */
 .workflow-timeline {
