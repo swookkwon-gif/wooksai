@@ -424,7 +424,15 @@
         "https://kr.benzinga.com/news/usa/trading/%ED%8C%94%EB%9E%80%ED%8B%B0%EC%96%B4-5%EC%9B%94-4%EC%9D%BC-%EC%8B%A4%EC%A0%81-%EA%B3%B5%EA%B0%9C-%EC%95%9E%EB%91%90%EA%B3%A0-%EC%83%81%EC%8A%B9%EC%95%A0%EB%84%90%EB%A6%AC%EC%8A%A4/",
         "https://kr.benzinga.com/news/usa/trading/%EA%B8%B0%EB%8B%A4%EB%A6%B0-%EB%B3%B4%EB%9E%8C-%EC%9E%88%EC%97%88%EB%8B%A4-%EC%95%A0%ED%94%8C-%EA%B0%95%EC%84%B8%EB%A1%A0%EC%9E%90-%EA%B0%90%EB%8F%99%EC%8B%9C%ED%82%A8-%EC%97%AD%EB%8C%80/",
         "https://kr.benzinga.com/news/usa/indices/%EC%A3%BC%EA%B0%84-%EC%8B%9C%EC%9E%A5-%EB%8F%99%ED%96%A5-%EC%97%AD%EB%8C%80%EA%B8%89-%EB%AF%B8%EA%B5%AD-%EC%A6%9D%EC%8B%9C-%EB%9E%A0%EB%A6%AC-%EC%97%B0%EC%A4%80-%EB%82%B4-%EC%9D%98%EA%B2%AC/",
-        "https://kr.benzinga.com/news/usa/indices/2002%EB%85%84-%EC%9D%B4%ED%9B%84-%EC%9D%B4%EB%9F%B0-%EC%83%81%EC%8A%B9%EC%9D%80-%EC%97%86%EC%97%88%EB%8B%A4-%EB%82%98%EC%8A%A4%EB%8B%A5-100-%EC%A7%80%EC%88%98-%EC%97%AD%EB%8C%80%EA%B8%89-4/"
+        "https://kr.benzinga.com/news/usa/indices/2002%EB%85%84-%EC%9D%B4%ED%9B%84-%EC%9D%B4%EB%9F%B0-%EC%83%81%EC%8A%B9%EC%9D%80-%EC%97%86%EC%97%88%EB%8B%A4-%EB%82%98%EC%8A%A4%EB%8B%A5-100-%EC%A7%80%EC%88%98-%EC%97%AD%EB%8C%80%EA%B8%89-4/",
+        "https://www.aitimes.com/news/articleView.html?idxno=210039",
+        "https://www.aitimes.com/news/articleView.html?idxno=210028",
+        "https://www.aitimes.com/news/articleView.html?idxno=210038",
+        "https://www.aitimes.com/news/articleView.html?idxno=210036",
+        "https://www.aitimes.com/news/articleView.html?idxno=210034",
+        "https://www.aitimes.com/news/articleView.html?idxno=210033",
+        "https://www.aitimes.com/news/articleView.html?idxno=210035",
+        "https://www.aitimes.com/news/articleView.html?idxno=210032"
     ],
     "gmail": [
         "19dc9e95c340f362",
@@ -532,7 +540,9 @@
         "19de48bec6405958",
         "19de3c5b5e10fa67",
         "19de8b347086725e",
-        "19de804b08d6c43d"
+        "19de804b08d6c43d",
+        "19ded4cbda66b5d4",
+        "19ded22673b805bc"
     ],
     "evaluations": {
         "TestSender": [
@@ -1604,6 +1614,66 @@
                 "target": "Nuclear AI startup Fermi ousts cofounder after failing to sign a single client",
                 "score": 1,
                 "reasoning": "AI \uc2a4\ud0c0\ud2b8\uc5c5\uc758 \uacbd\uc601 \ubc0f \uace0\uac1d \uc720\uce58 \uc2e4\ud328\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc785\ub2c8\ub2e4. \uc624\ud508\uc18c\uc2a4 LLM \uae30\uc220 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \ubb34\uad00\ud55c \ub2e8\uc21c \uac00\uc2ed\uc131 \ub0b4\uc6a9\uc73c\ub85c \uac00\uc7a5 \ub0ae\uc740 \uc810\uc218\ub97c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Jensen Huang Calls Out AI CEO 'God Complex' as Musk Rues His $38M Gift",
+                "score": 2,
+                "reasoning": "AI \uc0b0\uc5c5 \ub9ac\ub354\ub4e4\uc758 \ubc1c\uc5b8\uacfc \ube44\uc988\ub2c8\uc2a4 \uac08\ub4f1\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uc5d0 \uc9c1\uc811\uc801\uc778 \uad00\ub828\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "ARC-AGI-3 analysis pinpoints three systematic flaws in frontier reasoning",
+                "score": 3,
+                "reasoning": "\ucd5c\uc2e0 \ub3c5\uc810 AI \ubaa8\ub378\uc758 \ucd94\ub860 \ub2a5\ub825 \ud55c\uacc4\ub97c \uae30\uc220\uc801\uc73c\ub85c \ubd84\uc11d\ud55c \ub0b4\uc6a9\uc774\uc9c0\ub9cc, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uc744 \ub2e4\ub8e8\ub294 \uae30\uc0ac\ub294 \uc544\ub2d9\ub2c8\ub2e4. AI \ubaa8\ub378\uc758 \uadfc\ubcf8\uc801\uc778 \ud55c\uacc4\ub97c \ubcf4\uc5ec\uc8fc\ub294 \uc911\uc694\ud55c \uae30\uc220\uc801 \ud1b5\ucc30\uc744 \uc81c\uacf5\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Chinese court bans firms from laying off workers to replace them with AI",
+                "score": 2,
+                "reasoning": "AI\uc758 \uc0ac\ud68c\uc801, \ubc95\uc801 \uc601\ud5a5\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uacfc\ub294 \uac70\ub9ac\uac00 \uc788\uc2b5\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Kimi K2.6 beats Claude, GPT-5.5, and Gemini in live coding contest",
+                "score": 5,
+                "reasoning": "\uc624\ud508\uc18c\uc2a4 \ubaa8\ub378\uc778 Kimi K2.6\uc774 \uc8fc\uc694 \ube45\ud14c\ud06c \ub3c5\uc810 \ubaa8\ub378\ub4e4\uc744 \ucf54\ub529 \ub300\ud68c\uc5d0\uc11c \ub2a5\uac00\ud588\ub2e4\ub294 \uc18c\uc2dd\uc740 \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804 \ub3d9\ud5a5\uc744 \uba85\ud655\ud788 \ubcf4\uc5ec\uc8fc\uba70, \uc0dd\ud0dc\uacc4\uc5d0 \uc911\ub300\ud55c \uc601\ud5a5\uc744 \ubbf8\uce60 \uc7a0\uc7ac\ub825\uc774 \uc788\uc2b5\ub2c8\ub2e4. \uc774\ub294 \uc624\ud508\uc18c\uc2a4 AI\uc758 \uae30\uc220\uc801 \uc6b0\uc704\ub97c \uc785\uc99d\ud558\ub294 \ud575\uc2ec \uc0ac\ub840\uc785\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "OpenAI plans GPT-5.5 launch on May 5 with invite-only celebration",
+                "score": 2,
+                "reasoning": "\ub3c5\uc810 \ubaa8\ub378\uc778 GPT-5.5\uc758 \ucd9c\uc2dc \uc18c\uc2dd\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \uad00\ub828\uc774 \uc801\uc2b5\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Musk: 'I was a fool' giving OpenAI $38M in free funding that became an $800B company",
+                "score": 1,
+                "reasoning": "OpenAI\uc758 \ube44\uc988\ub2c8\uc2a4 \ubc0f \ubc95\uc801 \ubd84\uc7c1\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, \uae30\uc220\uc801 \ubc1c\uc804\uacfc\ub294 \ubb34\uad00\ud558\uba70 \uc624\ud508\uc18c\uc2a4 LLM\uacfc\ub3c4 \uad00\ub828\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "ChatGPT turns on ad-tracking cookies by default for free users",
+                "score": 1,
+                "reasoning": "ChatGPT\uc758 \uc218\uc775\ud654 \ubc0f \uc0ac\uc6a9\uc790 \ub370\uc774\ud130 \uc815\ucc45\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uacfc\ub294 \uad00\ub828\uc774 \uc5c6\uc2b5\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "xAI launches Custom Voices: clone any voice from one minute of audio",
+                "score": 3,
+                "reasoning": "xAI\uc758 \uc74c\uc131 \ubcf5\uc81c \uae30\uc220 \ucd9c\uc2dc\ub294 \ud765\ubbf8\ub85c\uc6b4 AI \uc560\ud50c\ub9ac\ucf00\uc774\uc158 \ubc1c\uc804\uc774\uc9c0\ub9cc, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \ud575\uc2ec \uae30\uc220 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \uc9c1\uc811\uc801\uc778 \uad00\ub828\uc774 \uc801\uc2b5\ub2c8\ub2e4. \uadf8\ub7ec\ub098 AI \uae30\uc220\uc758 \uc751\uc6a9 \uce21\uba74\uc5d0\uc11c \uc911\uc694\ud55c \uc9c4\ubcf4\ub97c \ubcf4\uc5ec\uc90d\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Philosophy Bench: Claude refuses tasks, Grok complies, Gemini bends easily",
+                "score": 3,
+                "reasoning": "\ucd5c\uc2e0 \ub3c5\uc810 AI \ubaa8\ub378\ub4e4\uc758 \uc724\ub9ac\uc801 \ud310\ub2e8 \ubc0f \uac00\uce58 \uc2dc\uc2a4\ud15c\uc744 \ubd84\uc11d\ud55c \ub0b4\uc6a9\uc73c\ub85c, AI\uc758 \uc911\uc694\ud55c \uce21\uba74\uc744 \ub2e4\ub8e8\uc9c0\ub9cc \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uc744 \uc9c1\uc811\uc801\uc73c\ub85c \ub2e4\ub8e8\uc9c0\ub294 \uc54a\uc2b5\ub2c8\ub2e4. AI\uc758 \ud589\ub3d9 \uc591\uc2dd\uc5d0 \ub300\ud55c \uc911\uc694\ud55c \uae30\uc220\uc801 \ud1b5\ucc30\uc744 \uc81c\uacf5\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Academy bars AI-generated actors and screenplays from Oscars",
+                "score": 1,
+                "reasoning": "AI\uac00 \uc608\uc220 \ubc0f \ubb38\ud654 \uc0b0\uc5c5\uc5d0 \ubbf8\uce58\ub294 \uc601\ud5a5\uacfc \uad00\ub828\ub41c \uc815\ucc45 \uc18c\uc2dd\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uacfc\ub294 \uac70\ub9ac\uac00 \uc788\uc2b5\ub2c8\ub2e4.",
                 "date": "2026-05-03"
             }
         ],
@@ -7003,6 +7073,30 @@
                 "score": 3,
                 "reasoning": "\uc0c1\uc2dc \uc791\ub3d9\ud558\ub294 AI \uc5d0\uc774\uc804\ud2b8\ub97c \uc704\ud55c \ud074\ub77c\uc6b0\ub4dc \uc778\ud504\ub77c\ub85c, AI \uc5d0\uc774\uc804\ud2b8 \uc0dd\ud0dc\uacc4 \ubc1c\uc804\uc5d0 \uae30\uc5ec\ud569\ub2c8\ub2e4.",
                 "date": "2026-05-01"
+            },
+            {
+                "target": "Five years in: what's changed, what hasn't",
+                "score": 3,
+                "reasoning": "UiPath\uc758 RPA\uc5d0\uc11c AI \uc624\ucf00\uc2a4\ud2b8\ub808\uc774\uc158\uc73c\ub85c\uc758 \uc804\ud658\uacfc \uae30\uc5c5 AI \ub3c4\uc785\uc758 \ubcc0\ud654\ub97c \ub2e4\ub8e8\uace0 \uc788\uc2b5\ub2c8\ub2e4. \uc774\ub294 \uc77c\ubc18\uc801\uc778 \uae30\uc5c5 AI \uc804\ub7b5 \ubc0f \uc2dc\uc7a5 \ub3d9\ud5a5\uc5d0 \ub300\ud55c \ub0b4\uc6a9\uc73c\ub85c, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uc5d0 \ub300\ud55c \uc2ec\uce35 \ubd84\uc11d\uc774 \uc544\ub2c8\ubbc0\ub85c \uc911\uac04 \uc810\uc218\ub97c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "The wall most AI projects never get past",
+                "score": 3,
+                "reasoning": "AI \ud504\ub85c\uc81d\ud2b8\uc758 \uc2e4\ud328 \uc6d0\uc778\uacfc \uc131\uacf5\uc801\uc778 \ub3c4\uc785\uc744 \uc704\ud55c \uc870\uc815\uc758 \uc911\uc694\uc131\uc744 \uac15\uc870\ud569\ub2c8\ub2e4. \uc774\ub294 AI \ub3c4\uc785\uc758 \uc2e4\uc9c8\uc801\uc778 \uc5b4\ub824\uc6c0\uacfc \ud574\uacb0\ucc45\uc5d0 \ub300\ud55c \ud1b5\ucc30\uc744 \uc81c\uacf5\ud558\uc9c0\ub9cc, \uc624\ud508\uc18c\uc2a4 LLM \uae30\uc220 \uc790\uccb4\uc758 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \uac70\ub9ac\uac00 \uc788\uc5b4 \uc911\uac04 \uc810\uc218\ub97c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "AI's job anxiety is real, but so is the nuance",
+                "score": 3,
+                "reasoning": "AI\uac00 \uc77c\uc790\ub9ac\uc5d0 \ubbf8\uce58\ub294 \uc601\ud5a5\uacfc \uc9c1\ubb34 \ubcc0\ud654\uc5d0 \ub300\ud55c \ub17c\uc758\ub97c \ub2f4\uace0 \uc788\uc2b5\ub2c8\ub2e4. \uc774\ub294 AI\uc758 \uc0ac\ud68c\uc801, \uacbd\uc81c\uc801 \ud30c\uae09\ud6a8\uacfc\uc5d0 \ub300\ud55c \uc911\uc694\ud55c \uad00\uc810\uc744 \uc81c\uc2dc\ud558\uc9c0\ub9cc, \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \uc9c4\ubcf4\uc640\ub294 \uc9c1\uc811\uc801\uc778 \uad00\ub828\uc774 \uc5c6\uc5b4 \uc911\uac04 \uc810\uc218\ub97c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "Where AI takes over \u2014 and where it doesn't",
+                "score": 3,
+                "reasoning": "UiPath\uac00 AI \uc5d0\uc774\uc804\ud2b8\ub97c \uc2e4\uc81c \uc5c5\ubb34\uc5d0 \uc5b4\ub5bb\uac8c \uc801\uc6a9\ud558\uace0 \uc778\uac04\uc758 \uc5ed\ud560\uacfc AI\uc758 \uc5ed\ud560\uc744 \uad6c\ubd84\ud558\ub294\uc9c0\uc5d0 \ub300\ud55c \uc2e4\uc6a9\uc801\uc778 \uc811\uadfc \ubc29\uc2dd\uc744 \uc124\uba85\ud569\ub2c8\ub2e4. \uc774\ub294 \uae30\uc5c5\uc758 AI \ud65c\uc6a9 \uc804\ub7b5\uc5d0 \ub300\ud55c \uc88b\uc740 \uc0ac\ub840\ub97c \ubcf4\uc5ec\uc8fc\uc9c0\ub9cc, \uc624\ud508\uc18c\uc2a4 LLM \uae30\uc220 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \ubb34\uad00\ud558\uc5ec \uc911\uac04 \uc810\uc218\ub97c \ubd80\uc5ec\ud569\ub2c8\ub2e4.",
+                "date": "2026-05-03"
             }
         ],
         "Hugging Face Blog": [
@@ -10082,6 +10176,54 @@
                 "target": "\u201c2002\ub144 \uc774\ud6c4 \uc774\ub7f0 \uc0c1\uc2b9\uc740 \uc5c6\uc5c8\ub2e4\u201d \ub098\uc2a4\ub2e5 100 \uc9c0\uc218 \uc5ed\ub300\uae09 4\uc6d4\u00b7\u00b7\u00b7\uc9c0\uae08 \uc62c\ub77c\ud0c0\ub3c4 \ub420\uae4c?",
                 "score": 1,
                 "reasoning": "This article is about the historical performance of the Nasdaq 100 index and investment statistics, not directly related to AI technology or business.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "JAL, \ud558\ub124\ub2e4 \uacf5\ud56d\uc5d0 \uc720\ub2c8\ud2b8\ub9ac \ud734\uba38\ub178\uc774\ub4dc \ud22c\uc785...\uc778\ub825\ub09c \uc815\uba74 \ub3cc\ud30c",
+                "score": 2,
+                "reasoning": "\ud734\uba38\ub178\uc774\ub4dc \ub85c\ubd07\uc758 \uc2e4\uc81c \uc0b0\uc5c5 \uc801\uc6a9 \uc0ac\ub840\ub85c, AI \uae30\uc220\uc758 \ud65c\uc6a9\uc744 \ubcf4\uc5ec\uc8fc\uc9c0\ub9cc, AI \ud575\uc2ec \uae30\uc220 \ubc1c\uc804\uc774\ub098 LLM \ub3d9\ud5a5\uacfc\ub294 \uac70\ub9ac\uac00 \uba40\uc5b4 \uc911\uc694\ub3c4\uac00 \ub0ae\uc74c.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "'AI \uad50\uc721' \ud504\ub9ac\uc70c\ub9b0\uc774 \uc6b0\uac04\ub2e4\ub85c \uac04 \uc774\uc720\ub294...\"\uc9c4\uc815\uc131\uc5d0 \uae30\uc220\uc744 \ub354\ud558\ub2e4\"",
+                "score": 1,
+                "reasoning": "AI \uad50\uc721 \uc194\ub8e8\uc158 \uae30\uc5c5\uc758 \uc0ac\ud68c \uacf5\ud5cc \ubc0f \ud574\uc678 \uc9c4\ucd9c \uc18c\uc2dd\uc73c\ub85c, AI \uae30\uc220 \uc790\uccb4\uc758 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \ubb34\uad00\ud558\uc5ec \uc911\uc694\ub3c4\uac00 \ub9e4\uc6b0 \ub0ae\uc74c.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\"\ub531\ub531\ud55c \ub2f4\ub2f9\uc790 \uac19\ub358 \ub9d0\ud22c \ubc97\uc5b4\ub098\"... GPT-5.5, '4o'\uc758 \ub9e4\ub825 \ub418\ucc3e\ub098",
+                "score": 3,
+                "reasoning": "\uc624\ud508AI\uc758 \ub3c5\uc810 LLM\uc778 GPT-5.5\uc758 \uc0ac\uc6a9\uc790 \uacbd\ud5d8 \uac1c\uc120\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, LLM \uad00\ub828 \ub274\uc2a4\uc774\uae34 \ud558\ub098 \uc624\ud508\uc18c\uc2a4 LLM\uc758 \uae30\uc220\uc801 \ubc1c\uc804\uc5d0 \ub300\ud55c \ub0b4\uc6a9\uc740 \uc544\ub2c8\ubbc0\ub85c \uc911\uac04 \uc815\ub3c4\uc758 \uc911\uc694\ub3c4\ub97c \ubd80\uc5ec\ud568.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\uc911\uad6d \uc804\uae30\ucc28 \uc2dc\uc7a5, \uac00\uaca9 \uacbd\uc7c1 \ub118\uc5b4 \u2018AI \uacbd\uc7c1\u2019\uc73c\ub85c \ud655\ub300",
+                "score": 3,
+                "reasoning": "\uc911\uad6d \uc804\uae30\ucc28 \uc2dc\uc7a5\uc5d0\uc11c AI \uae30\ub2a5\uc774 \ud575\uc2ec \uacbd\uc7c1 \uc694\uc18c\ub85c \ubd80\uc0c1\ud558\uace0 \uc788\ub2e4\ub294 \uc2dc\uc7a5 \ub3d9\ud5a5 \ubd84\uc11d \uae30\uc0ac\ub85c, AI \uae30\uc220\uc758 \uad11\ubc94\uc704\ud55c \uc801\uc6a9\uc744 \ubcf4\uc5ec\uc8fc\ubbc0\ub85c \uc911\uac04 \uc815\ub3c4\uc758 \uc911\uc694\ub3c4\ub97c \uac00\uc9d0.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\uc624\ud508AI, \ucf54\ub371\uc2a4\uc5d0 \u2018AI \ud3ab\u2019 \uae5c\uc9dd \ub3c4\uc785...\u201c\ucf54\ub529\uc5d0 \uac10\uc131 UX \uc785\ud78c\ub2e4\u201d",
+                "score": 2,
+                "reasoning": "\uc624\ud508AI\uc758 \ucf54\ub529 AI \ub3c4\uad6c\uc778 \ucf54\ub371\uc2a4\uc5d0 \uac10\uc131\uc801\uc778 UX \uc694\uc18c\ub97c \ucd94\uac00\ud55c \uc18c\uc2dd\uc73c\ub85c, AI \uae30\uc220 \uc790\uccb4\uc758 \ubc1c\uc804\ubcf4\ub2e4\ub294 \uc0ac\uc6a9\uc790 \uacbd\ud5d8 \uac1c\uc120\uc5d0 \ucd08\uc810\uc744 \ub9de\ucd94\uace0 \uc788\uc5b4 \uc911\uc694\ub3c4\uac00 \ub0ae\uc74c.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\ucef4\ud4e8\ud305 \ud655\ubcf4 \ube44\uc0c1 \uac78\ub9b0 \uc564\ud2b8\ub85c\ud53d, \uc601\uad6d \uce69 \uc2e0\uc608\uc640 \ud30c\ud2b8\ub108\uc2ed \uac80\ud1a0",
+                "score": 4,
+                "reasoning": "\uc564\ud2b8\ub85c\ud53d\uc774 AI \uce69 \ud655\ubcf4\ub97c \uc704\ud574 \uc0c8\ub85c\uc6b4 \ud30c\ud2b8\ub108\uc2ed\uc744 \uac80\ud1a0\ud558\ub294 \uc18c\uc2dd\uc73c\ub85c, \ub300\uaddc\ubaa8 AI \ubaa8\ub378 \uc6b4\uc601\uc5d0 \ud544\uc218\uc801\uc778 \ucef4\ud4e8\ud305 \uc778\ud504\ub77c \ubc0f \ube44\uc6a9 \ud6a8\uc728\ud654\ub77c\ub294 \uc911\uc694\ud55c \uc0b0\uc5c5\uc801 \uc774\uc288\ub97c \ub2e4\ub8e8\uace0 \uc788\uc5b4 \ub192\uc740 \uc911\uc694\ub3c4\ub97c \ubd80\uc5ec\ud568.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\"\ube44\uc804\uc740 \uc54c\ud2b8\uba3c, \uc9c8\uc11c\ub294 \ud504\ub77c\uc774\uc5b4\"...IPO \uc55e\ub454 \uc624\ud508AI CFO\uac00 \ubd80\uac01\ub418\ub294 \uc774\uc720",
+                "score": 1,
+                "reasoning": "\uc624\ud508AI\uc758 \uae30\uc5c5\uacf5\uac1c(IPO)\uc640 \uad00\ub828\ub41c \ub0b4\ubd80 \uacbd\uc601 \ubc0f \uc7ac\ubb34 \uc804\ub7b5\uc5d0 \ub300\ud55c \uc18c\uc2dd\uc73c\ub85c, AI \uae30\uc220 \ubc1c\uc804 \ub3d9\ud5a5\uacfc\ub294 \uc9c1\uc811\uc801\uc778 \uad00\ub828\uc774 \uc5c6\uc5b4 \uc911\uc694\ub3c4\uac00 \ub9e4\uc6b0 \ub0ae\uc74c.",
+                "date": "2026-05-03"
+            },
+            {
+                "target": "\uc911\uad6d \ubc95\uc6d0, AI \ub3c4\uc785 \uc774\uc720\ub85c \uc9c1\uc6d0 \ud574\uace0\ud55c \uae30\uc5c5\uc5d0 '\uc704\ubc95' \ud310\uacb0",
+                "score": 3,
+                "reasoning": "AI \ub3c4\uc785\uc73c\ub85c \uc778\ud55c \uc9c1\uc6d0 \ud574\uace0\uc5d0 \ub300\ud55c \ubc95\uc6d0\uc758 \ud310\uacb0 \uc18c\uc2dd\uc73c\ub85c, AI \uae30\uc220\uc758 \uc0ac\ud68c\uc801 \uc601\ud5a5\uacfc \uace0\uc6a9 \uc548\uc815\uc131\uc774\ub77c\ub294 \uc911\uc694\ud55c \uc774\uc288\ub97c \ub2e4\ub8e8\uace0 \uc788\uc5b4 \uc911\uac04 \uc815\ub3c4\uc758 \uc911\uc694\ub3c4\ub97c \uac00\uc9d0.",
                 "date": "2026-05-03"
             }
         ],
