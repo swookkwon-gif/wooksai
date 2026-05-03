@@ -44,7 +44,10 @@ class LLMClient:
         - schema가 없으면 raw text 반환
         - 모든 모델 폴백 × 재시도를 자동 처리
         """
-        config_kwargs = {"temperature": temperature}
+        config_kwargs = {
+            "temperature": temperature,
+            "max_output_tokens": 65536,  # 잘림 방지: 충분한 출력 버퍼
+        }
         if schema:
             config_kwargs["response_mime_type"] = "application/json"
             config_kwargs["response_schema"] = schema
@@ -59,8 +62,24 @@ class LLMClient:
                     )
                     raw_text = self._clean_json(response.text)
 
+                    # 잘림 감지: finish_reason이 MAX_TOKENS이면 재시도
+                    if hasattr(response, 'candidates') and response.candidates:
+                        finish_reason = getattr(
+                            response.candidates[0], 'finish_reason', None
+                        )
+                        # finish_reason이 문자열 또는 enum일 수 있음
+                        fr_str = str(finish_reason).upper() if finish_reason else ""
+                        if "MAX_TOKENS" in fr_str or "LENGTH" in fr_str:
+                            print(f"      ⚠️ 출력 잘림 감지 ({model_name}): finish_reason={finish_reason}")
+                            continue  # 다른 모델로 재시도
+
                     if schema:
-                        return json.loads(raw_text)
+                        parsed = json.loads(raw_text)
+                        # JSON 내부 markdown_content 잘림 감지
+                        if self._is_truncated(parsed):
+                            print(f"      ⚠️ 콘텐츠 잘림 감지 ({model_name}): 문장이 미완성 상태")
+                            continue
+                        return parsed
                     return raw_text
 
                 except json.JSONDecodeError as je:
@@ -130,3 +149,21 @@ class LLMClient:
         if text.endswith("```"):
             text = text[:-len("```")].strip()
         return text
+
+    @staticmethod
+    def _is_truncated(parsed: dict) -> bool:
+        """
+        LLM의 JSON 응답 내 markdown_content가 잘렸는지 감지한다.
+        문장이 마침표/느낌표/물음표 없이 끝나면 잘린 것으로 판단.
+        """
+        md = parsed.get("markdown_content", "")
+        if not md:
+            return False
+        # 뒤에서 공백/개행 제거 후 마지막 실질 문자 확인
+        stripped = md.rstrip()
+        if not stripped:
+            return False
+        last_char = stripped[-1]
+        # 정상 종료 문자: 마침표, 느낌표, 물음표, 닫는 괄호, 파이프(테이블)
+        normal_endings = '.!?。)」】|\n'
+        return last_char not in normal_endings
